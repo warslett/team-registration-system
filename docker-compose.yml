@@ -13,7 +13,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
     ports:
-      - ${HTTP_PORT}:3306
+      - 32768:3306
     healthcheck:
       test: 'mysqladmin -u root -p$MYSQL_ROOT_PASSWORD ping --silent'
       interval: 2s
@@ -43,4 +43,4 @@ services:
     depends_on:
       - php
     ports:
-      - 39876:80
+      - ${HTTP_PORT}:80
