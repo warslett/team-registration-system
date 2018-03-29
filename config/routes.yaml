@@ -1,3 +1,18 @@
-index:
+root:
+   path: /
+   controller: App\Controller\DefaultController
+
+user_register:
     path: /user/register
-    controller: App\Controller\UserController::register
+    controller: App\Controller\User\RegisterController
+    
+user_login:
+    path: /user/login
+    controller: App\Controller\User\LoginController
+
+user_logout:
+    path: /user/logout
+
+team_list:
+    path: /team/list
+    controller: App\Controller\TeamController::list

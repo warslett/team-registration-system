@@ -9,7 +9,7 @@ security:
         user_provider:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
 
     firewalls:
 
@@ -18,7 +18,15 @@ security:
             security: false
 
         main:
-            anonymous: true
+            anonymous: ~
+            form_login:
+                login_path: user_login
+                check_path: user_login
+                default_target_path: root
+                csrf_token_generator: security.csrf.token_manager
+            logout:
+                path:   user_logout
+                target: user_login
 
     access_control:
-         - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/team, roles: ROLE_USER }

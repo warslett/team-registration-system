@@ -1,10 +1,11 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Register >> {{ parent() }}{% endblock %}
+{% block title %}Register &raquo; {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <h1>Register a new user</h1>
+        {% include 'includes/messages.html.twig' %}
         {{ form_start(form) }}
             {{ form_row(form.email) }}
             {{ form_row(form.plainPassword.first) }}
