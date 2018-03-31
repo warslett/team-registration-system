@@ -1,4 +1,8 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$brand-primary: darken(#f00, 20%);
+$brand-primary: #ED7703;
 
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+.alert {
+  padding: 6px 12px;
+}
