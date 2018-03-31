@@ -19,6 +19,18 @@ class MyMinkContext extends BehatMinkContext
     }
 
     /**
+     * @Given /^there is an alert with the message "([^"]*)"$/
+     */
+    public function thereIsAnAlertWithTheMessage(string $message)
+    {
+        $page = $this->getSession()->getPage();
+        $locator = sprintf('//*[contains(@class, "alert") and contains(text(), "%s")]', $message);
+        if (!$page->has('xpath', $locator)) {
+            throw new \Exception("Alert with text $message not found");
+        }
+    }
+
+    /**
      * @param string $css
      * @return NodeElement
      * @throws Exception

@@ -8,6 +8,7 @@
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
+        {% include 'includes/messages.html.twig' %}
 
         {% if app.user %}
             <p>You are already logged in as <strong>{{ app.user.email }}</strong>. Click <a href="{{ path('user_logout') }}">here</a> to logout.</p>

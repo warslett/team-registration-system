@@ -10,3 +10,20 @@ Feature:
     And I press "Log in"
     Then I should be on "/team/list"
     And I am logged in as "john@acme.co"
+
+  Scenario: I cannot login with an email that does not belong to a user in the system
+    When I go to "/user/login"
+    And I fill in "Email" with "john@acme.co"
+    And I fill in "Password" with "Password1!"
+    And I press "Log in"
+    Then I should be on "/user/login"
+    And there is an alert with the message "Invalid credentials."
+
+  Scenario: I cannot login with the wrong password
+    Given there is a User with email "john@acme.co" and password "Password1!"
+    When I go to "/user/login"
+    And I fill in "Email" with "john@acme.co"
+    And I fill in "Password" with "wRonGpASSwOrd"
+    And I press "Log in"
+    Then I should be on "/user/login"
+    And there is an alert with the message "Invalid credentials."

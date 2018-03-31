@@ -4,7 +4,7 @@
 namespace App\Controller\User;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -75,7 +75,7 @@ class RegisterController
     public function __invoke(Request $request): Response
     {
         $user = new User();
-        $form = $this->formFactory->create(UserType::class, $user);
+        $form = $this->formFactory->create(RegisterType::class, $user);
 
         $form->handleRequest($request);
 
@@ -91,7 +91,7 @@ class RegisterController
 
                 $this->flashBag->add('success', "Registration successful");
 
-                return new RedirectResponse($this->router->generate('user_register'));
+                return new RedirectResponse($this->router->generate('user_login'));
             }
 
             $this->flashBag->add('danger', "There were some problems with the information you provided");
