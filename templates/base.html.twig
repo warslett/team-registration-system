@@ -8,6 +8,17 @@
         {% endblock %}
     </head>
     <body>
+        {% block titlebar %}
+            <div class="title-bar">
+                <div class="container">
+                    {% if app.user %}
+                        <div class="title-bar__user">
+                            Welcome, <span id="current-user">{{ app.user.email }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
