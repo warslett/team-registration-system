@@ -21,7 +21,7 @@ services:
       retries: 15
 
   php:
-    image: php:7.2-fpm-pdo-mysql
+    image: php:7.2-fpm-pdo-mysql-zip
     build:
       context: docker
       dockerfile: PHPDockerfile

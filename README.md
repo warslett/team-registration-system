@@ -13,3 +13,6 @@
 ## Tests
 All features are tested by behat scenarios. To run behat use this command
 `docker-compose exec php vendor/bin/behat`
+
+Low level functionality is unit tested with PHPUnit. To run phpunit use this command
+`docker-compose exec php php vendor/bin/phpunit`
