@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-docker run -it --rm -v $PWD:/app composer install
-docker run -it --rm -v $PWD:/usr/src/app -w /usr/src/app node yarn install
-docker run -it --rm -v $PWD:/usr/src/app -w /usr/src/app node yarn run encore production
-docker-compose up -d
-docker-compose exec php bin/console doctrine:migrations:migrate -n
+docker run -it --rm -v $PWD:/app composer:1.6 install \
+&& docker run -it --rm -v $PWD:/usr/src/app -w /usr/src/app node:9.10 yarn install \
+&& docker run -it --rm -v $PWD:/usr/src/app -w /usr/src/app node:9.10 yarn run encore production \
+&& docker-compose up -d \
+&& docker-compose exec php bin/console doctrine:migrations:migrate -n
