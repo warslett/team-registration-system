@@ -32,6 +32,12 @@ class Team
     private $event;
 
     /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="teams")
+     */
+    private $user;
+
+    /**
      * @return string
      */
     public function getName(): ?string
@@ -77,5 +83,21 @@ class Team
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 }

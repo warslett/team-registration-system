@@ -48,6 +48,7 @@ class MyMinkContext extends BehatMinkContext
 
     /**
      * @Given /^that I have logged in with email "([^"]*)" and password "([^"]*)"$/
+     * @When /^I log in with email "([^"]*)" and password "([^"]*)"$/
      */
     public function thatIHaveLoggedInWithEmailAndPassword($email, $password)
     {

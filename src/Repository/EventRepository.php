@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Event;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping;
 
 class EventRepository extends EntityRepository
 {

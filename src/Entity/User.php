@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -37,6 +39,12 @@ class User implements UserInterface, \Serializable
     private $isActive;
 
     /**
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="user")
+     * @var Collection
+     */
+    private $teams;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
@@ -45,6 +53,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+        $this->teams = new ArrayCollection();
     }
 
     public function getUsername(): ?string
@@ -133,5 +142,13 @@ class User implements UserInterface, \Serializable
             $this->email,
             $this->password
             ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
     }
 }

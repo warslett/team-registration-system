@@ -6,6 +6,7 @@ namespace App\Controller\Team;
 
 use App\Entity\Team;
 use App\Form\Team\TeamCreateType;
+use App\Service\CurrentUserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,11 +42,24 @@ class TeamCreateController
      * @var FlashBagInterface
      */
     private $flashBag;
+    /**
+     * @var CurrentUserService
+     */
+    private $currentUserService;
 
+    /**
+     * @param \Twig_Environment $twig
+     * @param FormFactoryInterface $formFactory
+     * @param EntityManagerInterface $entityManager
+     * @param CurrentUserService $currentUserService
+     * @param RouterInterface $router
+     * @param FlashBagInterface $flashBag
+     */
     public function __construct(
         \Twig_Environment $twig,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
+        CurrentUserService $currentUserService,
         RouterInterface $router,
         FlashBagInterface $flashBag
     ) {
@@ -54,6 +68,7 @@ class TeamCreateController
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->flashBag = $flashBag;
+        $this->currentUserService = $currentUserService;
     }
 
     public function __invoke(Request $request)
@@ -66,6 +81,8 @@ class TeamCreateController
         if ($form->isSubmitted()){
 
             if ($form->isValid()) {
+
+                $team->setUser($this->currentUserService->getCurrentUser());
 
                 $this->entityManager->persist($team);
                 $this->entityManager->flush();

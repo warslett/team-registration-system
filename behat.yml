@@ -9,6 +9,7 @@ default:
                 - TeamContext:
                     teamFactory: '@App\Factory\TeamFactory'
                     eventRepository: '@App\Repository\EventRepository'
+                    userRepository: '@App\Repository\UserRepository'
                 - MyMinkContext
                 - CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'
