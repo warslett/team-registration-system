@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use ApiPlatform\Core\Annotation as ApiPlatform;
 
 /**
  * @ORM\Entity
  * @UniqueEntity(fields={"name","hike"}, message="Team name already taken for this hike")
+ * @ApiPlatform\ApiResource
  */
 class Team
 {
@@ -83,14 +85,6 @@ class Team
     public function setId(int $id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser(): ?User
-    {
-        return $this->user;
     }
 
     /**

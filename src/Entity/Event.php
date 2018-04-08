@@ -6,10 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use ApiPlatform\Core\Annotation as ApiPlatform;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  * @UniqueEntity(fields="name", message="Event name must be unique")
+ * @ApiPlatform\ApiResource
  */
 class Event
 {
