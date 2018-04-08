@@ -15,13 +15,17 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # Factories are for behat which needs them to be public so it can use them
+    # Factories and Repositories are used by behat which needs them to be public so it can use them
     App\Factory\:
         resource: '../src/Factory'
+        public: true
+
+    App\Repository\:
+        resource: '../src/Repository'
         public: true
 
     # Also used by behat so that database can be "purged" before each test run
     Doctrine\Common\DataFixtures\Purger\ORMPurger:
         class: 'Doctrine\Common\DataFixtures\Purger\ORMPurger'
-        arguments: ['@Doctrine\ORM\EntityManagerInterface']
+        autowire: true
         public: true

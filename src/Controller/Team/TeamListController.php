@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\Team;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TeamController
+class TeamListController
 {
 
     /**
@@ -23,7 +23,7 @@ class TeamController
         $this->twig = $twig;
     }
 
-    public function list(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         return new Response($this->twig->render('team/list.html.twig'));
     }

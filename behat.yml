@@ -4,6 +4,11 @@ default:
             contexts:
                 - UserContext:
                     userFactory: '@App\Factory\UserFactory'
+                - EventContext:
+                    eventFactory: '@App\Factory\EventFactory'
+                - TeamContext:
+                    teamFactory: '@App\Factory\TeamFactory'
+                    eventRepository: '@App\Repository\EventRepository'
                 - MyMinkContext
                 - CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'

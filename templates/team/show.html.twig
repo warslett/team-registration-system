@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ team.name }} &raquo; {{ team.event.name }} &raquo; {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ team.name }} &raquo; {{ team.event.name }}</h1>
+        {% include 'includes/messages.html.twig' %}
+
+    </div>
+{% endblock %}

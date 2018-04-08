@@ -15,4 +15,12 @@ user_logout:
 
 team_list:
     path: /team/list
-    controller: App\Controller\TeamController::list
+    controller: App\Controller\Team\TeamListController
+
+team_create:
+    path: /team/create
+    controller: App\Controller\Team\TeamCreateController
+
+team_show:
+    path: /team/{team_id}
+    controller: App\Controller\Team\TeamShowController
