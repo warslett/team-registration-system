@@ -17,6 +17,23 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        jwt_login:
+            pattern:  ^/api/login
+            stateless: true
+            anonymous: true
+            form_login:
+                check_path:               api_login
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         main:
             anonymous: ~
             form_login:
@@ -29,4 +46,6 @@ security:
                 target: user_login
 
     access_control:
-         - { path: ^/team, roles: ROLE_USER }
+        - { path: ^/team,      roles: ROLE_USER }
+        - { path: ^/jwt/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }

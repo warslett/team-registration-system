@@ -24,3 +24,6 @@ team_create:
 team_show:
     path: /team/{team_id}
     controller: App\Controller\Team\TeamShowController
+
+api_login:
+    path: /api/login.json
