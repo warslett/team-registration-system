@@ -47,5 +47,4 @@ security:
 
     access_control:
         - { path: ^/team,      roles: ROLE_USER }
-        - { path: ^/jwt/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api,       roles: ROLE_API_USER }

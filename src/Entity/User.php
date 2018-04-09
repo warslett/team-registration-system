@@ -40,9 +40,20 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\OneToMany(targetEntity="Team", mappedBy="user")
-     * @var Collection
+     * @var Collection|Team[]
      */
     private $teams;
+
+    /**
+     * @var Collection|UserGroup[]
+     * @ORM\ManyToMany(targetEntity="UserGroup", inversedBy="users")
+     * @ORM\JoinTable(
+     *     name="users_usergroups",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role", referencedColumnName="role")}
+     * )
+     */
+    private $userGroups;
 
     /**
      * @Assert\NotBlank()
@@ -54,6 +65,7 @@ class User implements UserInterface, \Serializable
     {
         $this->isActive = true;
         $this->teams = new ArrayCollection();
+        $this->userGroups = new ArrayCollection();
     }
 
     public function getUsername(): ?string
@@ -76,9 +88,16 @@ class User implements UserInterface, \Serializable
         return $this->password;
     }
 
+    /**
+     * @return array
+     */
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = ['ROLE_USER'];
+        foreach ($this->userGroups as $userGroup) {
+            $roles[] = $userGroup->getRole();
+        }
+        return $roles;
     }
 
     public function eraseCredentials()
@@ -150,5 +169,13 @@ class User implements UserInterface, \Serializable
     public function getTeams(): Collection
     {
         return $this->teams;
+    }
+
+    /**
+     * @return UserGroup[]|Collection
+     */
+    public function getUserGroups()
+    {
+        return $this->userGroups;
     }
 }
