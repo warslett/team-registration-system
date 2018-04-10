@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation as ApiPlatform;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
 
 /**
  * @ORM\Entity
  * @UniqueEntity(fields={"name","hike"}, message="Team name already taken for this hike")
  * @ApiPlatform\ApiResource
+ * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"hike": "exact"})
  */
 class Team
 {

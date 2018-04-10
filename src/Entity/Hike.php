@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: william
- * Date: 10/04/18
- * Time: 09:38
- */
 
 namespace App\Entity;
 
@@ -12,10 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use ApiPlatform\Core\Annotation as ApiPlatform;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HikeRepository")
  * @UniqueEntity(fields={"name", "event"}, message="Hike name must be unique for this event")
+ * @ApiPlatform\ApiResource
+ * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"event": "exact"})
  */
 class Hike
 {
