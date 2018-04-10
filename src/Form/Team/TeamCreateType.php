@@ -2,7 +2,7 @@
 
 namespace App\Form\Team;
 
-use App\Entity\Event;
+use App\Entity\Hike;
 use App\Entity\Team;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,8 +17,8 @@ class TeamCreateType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('event', EntityType::class, [
-                'class' => Event::class
+            ->add('hike', EntityType::class, [
+                'class' => Hike::class
             ])
         ;
     }

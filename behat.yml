@@ -6,8 +6,12 @@ default:
                     userFactory: '@App\Factory\UserFactory'
                 - EventContext:
                     eventFactory: '@App\Factory\EventFactory'
+                - HikeContext:
+                    eventRepository: '@App\Repository\EventRepository'
+                    hikeFactory: '@App\Factory\HikeFactory'
                 - TeamContext:
                     teamFactory: '@App\Factory\TeamFactory'
+                    hikeRepository: '@App\Repository\HikeRepository'
                     eventRepository: '@App\Repository\EventRepository'
                     userRepository: '@App\Repository\UserRepository'
                 - MyMinkContext

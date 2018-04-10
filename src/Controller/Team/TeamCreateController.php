@@ -88,9 +88,9 @@ class TeamCreateController
                 $this->entityManager->flush();
 
                 $this->flashBag->add('success', sprintf(
-                    "Team &quot;%s&quot; successfully created for &quot;%s&quot;",
+                    "Team \"%s\" successfully created for \"%s\"",
                     $team->getName(),
-                    $team->getEvent()->getName())
+                    $team->getHike()->__toString())
                 );
 
                 return new RedirectResponse($this->router->generate('team_show', ['team_id' => $team->getId()]));

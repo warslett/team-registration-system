@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @UniqueEntity(fields={"name","event"}, message="Team name already taken")
+ * @UniqueEntity(fields={"name","hike"}, message="Team name already taken for this hike")
  */
 class Team
 {
@@ -26,10 +26,10 @@ class Team
     private $name;
 
     /**
-     * @var Event
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="teams")
+     * @var Hike
+     * @ORM\ManyToOne(targetEntity="Hike", inversedBy="teams")
      */
-    private $event;
+    private $hike;
 
     /**
      * @var User
@@ -54,19 +54,19 @@ class Team
     }
 
     /**
-     * @return Event
+     * @return Hike
      */
-    public function getEvent(): ?Event
+    public function getHike(): ?Hike
     {
-        return $this->event;
+        return $this->hike;
     }
 
     /**
-     * @param Event $event
+     * @param Hike $hike
      */
-    public function setEvent(Event $event)
+    public function setHike(Hike $hike)
     {
-        $this->event = $event;
+        $this->hike = $hike;
     }
 
     /**

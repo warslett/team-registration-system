@@ -1,17 +1,22 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: william
+ * Date: 10/04/18
+ * Time: 09:38
+ */
 
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
- * @UniqueEntity(fields="name", message="Event name must be unique")
+ * @ORM\Entity(repositoryClass="App\Repository\HikeRepository")
+ * @UniqueEntity(fields={"name", "event"}, message="Hike name must be unique for this event")
  */
-class Event
+class Hike
 {
 
     /**
@@ -29,20 +34,20 @@ class Event
     private $name;
 
     /**
-     * @ORM\Column(type="date")
-     * @var \DateTime
+     * @var Event
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="hikes")
      */
-    private $date;
+    private $event;
 
     /**
-     * @ORM\OneToMany(targetEntity="Hike", mappedBy="event")
-     * @var Collection|Hike[]
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="hike")
+     * @var Collection
      */
-    private $hikes;
+    private $teams;
 
     public function __construct()
     {
-        $this->hikes = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     /**
@@ -50,7 +55,7 @@ class Event
      */
     public function __toString(): string
     {
-        return $this->name;
+        return $this->name . " » " . $this->event->__toString();
     }
 
     /**
@@ -78,26 +83,26 @@ class Event
     }
 
     /**
-     * @return Hike[]|Collection
+     * @return Collection|Team[]
      */
-    public function getHikes(): Collection
+    public function getTeams(): Collection
     {
-        return $this->hikes;
+        return $this->teams;
     }
 
     /**
-     * @return \DateTime
+     * @return Event|null
      */
-    public function getDate(): ?\DateTime
+    public function getEvent(): ?Event
     {
-        return $this->date;
+        return $this->event;
     }
 
     /**
-     * @param \DateTime $date
+     * @param Event $event
      */
-    public function setDate(\DateTime $date): void
+    public function setEvent(Event $event): void
     {
-        $this->date = $date;
+        $this->event = $event;
     }
 }

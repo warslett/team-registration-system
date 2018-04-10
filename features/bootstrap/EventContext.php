@@ -22,10 +22,14 @@ class EventContext implements Context
     }
 
     /**
-     * @Given /^that there is an Event called "([^"]*)"$/
+     * @Given that there is an Event called :eventName taking place :interval from now
+     * @param string $eventName
+     * @param string $interval
      */
-    public function thatThereIsAnEventCalled($eventName)
+    public function thatThereIsAnEventCalledTakingPlaceFromNow(string $eventName, string $interval)
     {
-        $this->event = $this->eventFactory->createEvent($eventName);
+        $date = new \DateTime();
+        $date->setTimestamp(strtotime($interval));
+        $this->event = $this->eventFactory->createEvent($eventName, $date);
     }
 }

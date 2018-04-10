@@ -25,9 +25,18 @@ class MyMinkContext extends BehatMinkContext
     public function thereIsAnAlertWithTheMessage(string $message)
     {
         $page = $this->getSession()->getPage();
-        $locator = sprintf('//*[contains(@class, "alert") and contains(text(), "%s")]', htmlentities($message));
+        $locator = sprintf("//*[contains(@class, 'alert') and contains(text(), '%s')]", $message);
         if (!$page->has('xpath', $locator)) {
-            throw new \Exception("Alert with text $message not found");
+            $message = "Could not find the following alert\n$message\n";
+            $alerts = $page->findAll('css', '.alert');
+            if (count($alerts) > 0) {
+                $message .= "The following alerts were found:\n";
+                foreach ($alerts as $alert) {
+                    /** @var NodeElement $alert */
+                    $message .= trim($alert->getHtml()) . "\n";
+                }
+            }
+            throw new \Exception($message);
         }
     }
 
@@ -47,7 +56,6 @@ class MyMinkContext extends BehatMinkContext
     }
 
     /**
-     * @Given /^that I have logged in with email "([^"]*)" and password "([^"]*)"$/
      * @When /^I log in with email "([^"]*)" and password "([^"]*)"$/
      */
     public function thatIHaveLoggedInWithEmailAndPassword($email, $password)
