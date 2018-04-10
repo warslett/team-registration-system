@@ -1,0 +1,68 @@
+App\Entity\UserGroup:
+
+    api_users:
+        __construct:
+          role: "ROLE_API_USER"
+        name: "API Users"
+
+App\Entity\User:
+
+    user_{1..100}:
+        email: "<email()>"
+        plainPassword: "development"
+
+    api_user:
+        email: "api@example.com"
+        plainPassword: "development"
+        userGroups:
+          - "@api_users"
+
+App\Entity\Event:
+
+    event_1:
+        name: "Previous Three Towers"
+        date: "<dateTimeBetween('-1 year', '-6 months')>"
+
+    event_2:
+        name: "Upcoming Three Towers"
+        date: "<dateTimeBetween('now', '+1 years')>"
+
+App\Entity\Hike:
+
+    scout_hike_{1..2}:
+        name: "Scout Hike"
+        event: "@event_<current()>"
+
+    junket_hike_{1..2}:
+        name: "Junket Hike"
+        event: "@event_<current()>"
+
+    explorer_hike_{1..2}:
+        name: "Explorer Hike"
+        event: "@event_<current()>"
+
+    classic_hike_{1..2}:
+        name: "Classic Hike"
+        event: "@event_<current()>"
+
+App\Entity\Team:
+
+    scout_team_{1..80}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@scout_hike_*"
+
+    junket_team_{1..30}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@junket_hike_*"
+
+    explorer_team_{1..25}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@explorer_hike_*"
+
+    classic_team_{1..12}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@classic_hike_*"

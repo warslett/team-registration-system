@@ -178,4 +178,12 @@ class User implements UserInterface, \Serializable
     {
         return $this->userGroups;
     }
+
+    /**
+     * @param UserGroup[]|Collection $userGroups
+     */
+    public function setUserGroups($userGroups): void
+    {
+        $this->userGroups = $userGroups;
+    }
 }

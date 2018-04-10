@@ -44,6 +44,11 @@ class Team
      */
     private $user;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @return string
      */

@@ -9,7 +9,8 @@
         <div id="teams">
             {% for team in teams %}
                 <div id="team-{{ team.id }}">
-                    <h3>{{ team.name }}</h3>
+                    <h3>{{ team }}</h3>
+                    Hike: {{ team.hike }}
                 </div>
             {% endfor %}
         </div>
