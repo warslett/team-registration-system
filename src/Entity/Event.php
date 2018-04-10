@@ -11,7 +11,10 @@ use ApiPlatform\Core\Annotation as ApiPlatform;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  * @UniqueEntity(fields="name", message="Event name must be unique")
- * @ApiPlatform\ApiResource
+ * @ApiPlatform\ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  */
 class Event
 {

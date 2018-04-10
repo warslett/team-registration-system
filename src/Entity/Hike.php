@@ -12,7 +12,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HikeRepository")
  * @UniqueEntity(fields={"name", "event"}, message="Hike name must be unique for this event")
- * @ApiPlatform\ApiResource
+ * @ApiPlatform\ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"event": "exact"})
  */
 class Hike

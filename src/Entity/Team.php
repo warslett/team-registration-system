@@ -10,7 +10,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
 /**
  * @ORM\Entity
  * @UniqueEntity(fields={"name","hike"}, message="Team name already taken for this hike")
- * @ApiPlatform\ApiResource
+ * @ApiPlatform\ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"hike": "exact"})
  */
 class Team
