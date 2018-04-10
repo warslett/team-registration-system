@@ -16,3 +16,8 @@ All features are tested by behat scenarios. To run behat use this command
 
 Low level functionality is unit tested with PHPUnit. To run phpunit use this command
 `docker-compose exec php vendor/bin/phpunit`
+
+## Dev Fixtures (Dummy Data)
+For development, you can populate the database with fake data by running this command 
+`docker-compose exec php bin/console hautelook:fixtures:load` All users created have the password "development"
+For testing the API, use the email address "api@example.com"
