@@ -26,4 +26,4 @@ team_show:
     controller: App\Controller\Team\TeamShowController
 
 api_login:
-    path: /api/login.json
+    path: /api/login
