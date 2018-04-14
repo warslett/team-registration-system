@@ -4,6 +4,9 @@ default:
             contexts:
                 - UserContext:
                     userFactory: '@App\Factory\UserFactory'
+                - UserGroupContext:
+                    userGroupFactory: '@App\Factory\UserGroupFactory'
+                    userRepository: '@App\Repository\UserRepository'
                 - EventContext:
                     eventFactory: '@App\Factory\EventFactory'
                 - HikeContext:
@@ -14,6 +17,8 @@ default:
                     hikeRepository: '@App\Repository\HikeRepository'
                     eventRepository: '@App\Repository\EventRepository'
                     userRepository: '@App\Repository\UserRepository'
+                - APIContext:
+                    guzzle: '@GuzzleHttp\Client'
                 - MyMinkContext
                 - CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'

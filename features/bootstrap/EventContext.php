@@ -23,6 +23,7 @@ class EventContext implements Context
 
     /**
      * @Given that there is an Event called :eventName taking place :interval from now
+     * @Given that there is an Event called :eventName taking place at :interval
      * @param string $eventName
      * @param string $interval
      */

@@ -77,4 +77,12 @@ class UserGroup
     {
         $this->name = $name;
     }
+
+    /**
+     * @param User[]|Collection $users
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+    }
 }

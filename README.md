@@ -25,16 +25,11 @@ For testing the API, use the email address "api@example.com"
 In order for the api to run from your environment you must first generate some SSL keys so that the user's access tokens
 can be securely encrypted. If you do not carry out this step the API will not work at all.
 ``` bash
-$ mkdir ssl/jwt
-$ openssl genrsa -out ssl/jwt/private.pem -aes256 4096
-$ openssl rsa -pubout -in ssl/jwt/private.pem -out ssl/jwt/public.pem
-```
-
-In case first ```openssl``` command forces you to input password use following to get the private key decrypted
-``` bash
-$ openssl rsa -in ssl/jwt/private.pem -out ssl/jwt/private2.pem
-$ mv ssl/jwt/private.pem ssl/jwt/private.pem-back
-$ mv ssl/jwt/private2.pem ssl/jwt/private.pem
+docker-compose exec php openssl genrsa -out ssl/jwt/private.enc.pem -aes256 4096
+docker-compose exec php openssl rsa -pubout -in ssl/jwt/private.enc.pem -out ssl/jwt/public.pem
+docker-compose exec php openssl rsa -in ssl/jwt/private.enc.pem -out ssl/jwt/private.pem
+docker-compose exec chgrp www-data ssl/jwt/private.enc.pem
+docker-compose exec chmod 750 ssl/jwt/private.enc.pem
 ```
 
 ### Basic usage

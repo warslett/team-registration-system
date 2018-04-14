@@ -1,0 +1,26 @@
+parameters:
+    locale: 'en'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    # Factories and Repositories are used by behat which needs them to be public so it can use them
+    App\Factory\:
+        resource: '../src/Factory'
+        public: true
+
+    App\Repository\:
+        resource: '../src/Repository'
+        public: true
+
+    # Also used by behat so that database can be "purged" before each test run
+    Doctrine\Common\DataFixtures\Purger\ORMPurger:
+        class: 'Doctrine\Common\DataFixtures\Purger\ORMPurger'
+        autowire: true
+        public: true
+
+    GuzzleHttp\Client:
+        class: 'GuzzleHttp\Client'
