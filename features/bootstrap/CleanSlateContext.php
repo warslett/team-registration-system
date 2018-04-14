@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Context;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;

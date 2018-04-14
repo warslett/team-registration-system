@@ -2,25 +2,25 @@ default:
     suites:
         default:
             contexts:
-                - UserContext:
+                - App\Context\UserContext:
                     userFactory: '@App\Factory\UserFactory'
-                - UserGroupContext:
+                - App\Context\UserGroupContext:
                     userGroupFactory: '@App\Factory\UserGroupFactory'
                     userRepository: '@App\Repository\UserRepository'
-                - EventContext:
+                - App\Context\EventContext:
                     eventFactory: '@App\Factory\EventFactory'
-                - HikeContext:
+                - App\Context\HikeContext:
                     eventRepository: '@App\Repository\EventRepository'
                     hikeFactory: '@App\Factory\HikeFactory'
-                - TeamContext:
+                - App\Context\TeamContext:
                     teamFactory: '@App\Factory\TeamFactory'
                     hikeRepository: '@App\Repository\HikeRepository'
                     eventRepository: '@App\Repository\EventRepository'
                     userRepository: '@App\Repository\UserRepository'
-                - APIContext:
-                    guzzle: '@GuzzleHttp\Client'
-                - MyMinkContext
-                - CleanSlateContext:
+                - App\Context\APIContext:
+                    guzzle: '@GuzzleHttp\ClientInterface'
+                - App\Context\MyMinkContext:
+                - App\Context\CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'
 
     extensions:

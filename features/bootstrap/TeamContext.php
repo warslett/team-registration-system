@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Context;
 
 use App\Entity\Team;
 use App\Factory\TeamFactory;
@@ -7,7 +8,6 @@ use App\Repository\EventRepository;
 use App\Repository\HikeRepository;
 use App\Repository\UserRepository;
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Assert;
 
 class TeamContext implements Context

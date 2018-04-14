@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Context;
+
 use App\Entity\Hike;
 use App\Factory\HikeFactory;
 use App\Repository\EventRepository;

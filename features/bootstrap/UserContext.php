@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Context;
+
 use App\Entity\User;
 use App\Factory\UserFactory;
 use Behat\Behat\Context\Context;

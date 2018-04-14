@@ -1,10 +1,11 @@
 <?php
 
+namespace App\Context;
+
 use App\Factory\UserGroupFactory;
 use App\Repository\UserRepository;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\Assert;
 
 class UserGroupContext implements Context

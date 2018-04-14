@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Context;
+
+use App\Entity\Event;
 use App\Factory\EventFactory;
 use Behat\Behat\Context\Context;
 

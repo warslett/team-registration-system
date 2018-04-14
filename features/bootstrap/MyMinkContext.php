@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Context;
+
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\MinkContext as BehatMinkContext;
 use PHPUnit\Framework\Assert;

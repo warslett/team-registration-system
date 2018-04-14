@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Context;
+
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use GuzzleHttp\ClientInterface;
