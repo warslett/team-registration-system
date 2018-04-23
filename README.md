@@ -28,8 +28,8 @@ can be securely encrypted. If you do not carry out this step the API will not wo
 docker-compose exec php openssl genrsa -out ssl/jwt/private.enc.pem -aes256 4096
 docker-compose exec php openssl rsa -pubout -in ssl/jwt/private.enc.pem -out ssl/jwt/public.pem
 docker-compose exec php openssl rsa -in ssl/jwt/private.enc.pem -out ssl/jwt/private.pem
-docker-compose exec chgrp www-data ssl/jwt/private.enc.pem
-docker-compose exec chmod 750 ssl/jwt/private.enc.pem
+docker-compose exec php chgrp www-data ssl/jwt/private.pem
+docker-compose exec php chmod 750 ssl/jwt/private.pem
 ```
 
 ### Basic usage
