@@ -12,12 +12,16 @@ jobs:
           command: "cp .env.dist .env"
 
       - run:
-          name: "Copy JWT certs"
-          command: "cp ssl/jwt.dist/* ssl/jwt && docker-compose exec php chgrp www-data ssl/jwt/private.pem && docker-compose exec php chmod 750 ssl/jwt/private.pem"
+          name: "Copy JWT certificate"
+          command: "cp ssl/jwt.dist/* ssl/jwt"
 
       - run:
           name: "Build"
           command: "bin/build"
+
+      -run:
+          name: "Correct JWT certificate permissions"
+          command: "docker-compose exec php chgrp www-data ssl/jwt/private.pem && docker-compose exec php chmod 750 ssl/jwt/private.pem"
 
       - run:
           name: "Run PHPUnit"
