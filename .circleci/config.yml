@@ -1,0 +1,24 @@
+version: 2
+
+jobs:
+  build:
+    machine: true
+    steps:
+
+      - checkout
+
+      - run:
+          name: "Copy .env"
+          command: "cp .env.dist .env"
+
+      - run:
+          name: "Build"
+          command: "bin/build"
+
+      - run:
+          name: "Run PHPUnit"
+          command: "docker-compose exec php php vendor/bin/phpunit"
+
+      - run:
+          name: "Run Behat"
+          command: "docker-compose exec php php vendor/bin/behat"
