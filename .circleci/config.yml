@@ -19,7 +19,7 @@ jobs:
           name: "Build"
           command: "bin/build"
 
-      -run:
+      - run:
           name: "Correct JWT certificate permissions"
           command: "docker-compose exec php chgrp www-data ssl/jwt/private.pem && docker-compose exec php chmod 750 ssl/jwt/private.pem"
 
