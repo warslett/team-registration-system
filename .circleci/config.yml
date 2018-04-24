@@ -17,8 +17,11 @@ jobs:
 
       - run:
           name: "Run PHPUnit"
-          command: "docker-compose exec php php vendor/bin/phpunit"
+          command: "docker-compose exec php vendor/bin/phpunit --log-junit .circleci/test-results/phpunit/results.xml"
 
       - run:
           name: "Run Behat"
-          command: "docker-compose exec php php vendor/bin/behat"
+          command: "docker-compose exec php vendor/bin/behat --format junit --out .circleci/test-results/behat --format pretty --out std"
+
+      - store_test_results:
+          path: ".circleci/test-results"

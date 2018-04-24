@@ -1,5 +1,4 @@
-# Team Registration System
-
+# Team Registration System [![Build Status](https://circleci.com/gh/warslett/team-registration-system.png?style=shield)](https://circleci.com/gh/warslett/team-registration-system)
 ## Prerequisites
 * Docker
 * Docker Compose
@@ -16,4 +15,4 @@ All features are tested by behat scenarios. To run behat use this command
 `docker-compose exec php vendor/bin/behat`
 
 Low level functionality is unit tested with PHPUnit. To run phpunit use this command
-`docker-compose exec php php vendor/bin/phpunit`
+`docker-compose exec php vendor/bin/phpunit`
