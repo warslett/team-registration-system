@@ -3,7 +3,6 @@
 
 namespace App\Controller\Team;
 
-
 use App\Entity\Team;
 use App\Form\Team\TeamCreateType;
 use App\Service\CurrentUserService;
@@ -78,10 +77,8 @@ class TeamCreateController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()){
-
+        if ($form->isSubmitted()) {
             if ($form->isValid()) {
-
                 $team->setUser($this->currentUserService->getCurrentUser());
 
                 $this->entityManager->persist($team);
@@ -90,8 +87,8 @@ class TeamCreateController
                 $this->flashBag->add('success', sprintf(
                     "Team \"%s\" successfully created for \"%s\"",
                     $team->getName(),
-                    $team->getHike()->__toString())
-                );
+                    $team->getHike()->__toString()
+                ));
 
                 return new RedirectResponse($this->router->generate('team_show', ['team_id' => $team->getId()]));
             }

@@ -79,10 +79,8 @@ class RegisterController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()){
-
+        if ($form->isSubmitted()) {
             if ($form->isValid()) {
-
                 $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password);
 

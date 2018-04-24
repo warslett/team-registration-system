@@ -3,7 +3,6 @@
 
 namespace App\Factory;
 
-
 use App\Entity\Event;
 use App\Entity\Hike;
 use Doctrine\ORM\EntityManagerInterface;
