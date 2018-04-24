@@ -23,5 +23,9 @@ jobs:
           name: "Run Behat"
           command: "docker-compose exec php vendor/bin/behat --format junit --out .circleci/test-results/behat --format pretty --out std"
 
+      - run:
+          name: "Code Sniffer (PSR-2 Coding Standards)"
+          command: "docker-compose exec php vendor/bin/phpcs --standard=PSR2 --ignore=/Migrations/ src"
+
       - store_test_results:
           path: ".circleci/test-results"
