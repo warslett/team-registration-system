@@ -3,7 +3,6 @@
 
 namespace App\DataFixtures\Processor;
 
-
 use App\Entity\User;
 use Fidry\AliceDataFixtures\ProcessorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -43,5 +42,7 @@ class UserProcessor implements ProcessorInterface
      * @param object $object
      * @return void
      */
-    public function postProcess(string $id, $object): void {}
+    public function postProcess(string $id, $object): void
+    {
+    }
 }
