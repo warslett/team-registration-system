@@ -19,6 +19,15 @@ Feature: GET Hike
       | name | Scout Hike |
     And the JSON node "event" is a link to the Event called "Three Towers"
 
+  Scenario: Hike exists with Teams
+    Given there is a User with email "john@acme.co" and password "Password1!"
+    And that there is an Event called "Three Towers" taking place at "31st March 2999"
+    And that there is a Hike called "Scout Hike" for the Event "Three Towers"
+    And that there is a Team called "Alpha Team" for the Hike "Scout Hike" on the Event "Three Towers" registered by "john@acme.co"
+    When I authenticate with the api using email "api@example.com" and password "development"
+    And I send a get request to the URI for the Hike called "Scout Hike" on the Event "Three Towers"
+    Then the JSON node "teams" is an array containing a link to the Team called "Alpha Team" for the Hike "Scout Hike" on the Event "Three Towers"
+
   Scenario: Hike does not exist
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to "/api/hikes/1"

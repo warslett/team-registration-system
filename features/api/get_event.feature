@@ -18,6 +18,13 @@ Feature: GET Event
       | name | Three Towers              |
       | date | 2999-03-31T00:00:00+00:00 |
 
+  Scenario: Event exists with Hikes
+    Given that there is an Event called "Three Towers" taking place at "31st March 2999"
+    And that there is a Hike called "Scout Hike" for the Event "Three Towers"
+    When I authenticate with the api using email "api@example.com" and password "development"
+    And I send a get request to the URI for the Event called "Three Towers"
+    Then the JSON node "hikes" is an array containing a link to the Hike called "Scout Hike" on the Event "Three Towers"
+
   Scenario: Event does not exist
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to "/api/events/1"

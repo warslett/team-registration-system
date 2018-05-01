@@ -211,6 +211,33 @@ class APIContext implements Context
     }
 
     /**
+     * @Then /^the JSON node "([^"]*)" is an array containing a link to the Team called "([^"]*)" for the Hike "([^"]*)" on the Event "([^"]*)"$/
+     */
+    public function theJSONNodeIsAnArrayContainingALinkToTheTeamCalledForTheHikeOnTheEvent($node, $teamName, $hikeName, $eventName)
+    {
+        $event = $this->eventRepository->findOneByName($eventName);
+        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        $team = $this->teamRepository->findOneByNameAndHike($teamName, $hike);
+        $expected = sprintf("/api/teams/%d", $team->getId());
+        $data = $this->responseData();
+        $array = $data[$node];
+        Assert::assertContains($expected, $array);
+    }
+
+    /**
+     * @Then /^the JSON node "([^"]*)" is an array containing a link to the Hike called "([^"]*)" on the Event "([^"]*)"$/
+     */
+    public function theJSONNodeIsAnArrayContainingALinkToTheHikeCalledOnTheEvent($node, $hikeName, $eventName)
+    {
+        $event = $this->eventRepository->findOneByName($eventName);
+        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        $expected = sprintf("/api/hikes/%d", $hike->getId());
+        $data = $this->responseData();
+        $array = $data[$node];
+        Assert::assertContains($expected, $array);
+    }
+
+    /**
      * @param TableNode $table
      * @param array $item
      */
