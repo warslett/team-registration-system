@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Event;
 use App\Entity\Hike;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -15,11 +16,11 @@ class HikeRepository extends EntityRepository
     }
 
     /**
-     * @param $hikeName
-     * @param $event
+     * @param string $hikeName
+     * @param Event $event
      * @return Hike|null
      */
-    public function findOneByNameAndEvent($hikeName, $event): ?Hike
+    public function findOneByNameAndEvent(string $hikeName, Event $event): ?Hike
     {
         return $this->findOneBy(['name' => $hikeName, 'event' => $event]);
     }

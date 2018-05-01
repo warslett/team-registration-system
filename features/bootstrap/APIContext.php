@@ -2,9 +2,14 @@
 
 namespace App\Context;
 
+use App\Repository\EventRepository;
+use App\Repository\HikeRepository;
+use App\Repository\TeamRepository;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\Assert;
 
@@ -26,9 +31,37 @@ class APIContext implements Context
      */
     private $response;
 
-    public function __construct(ClientInterface $guzzle)
-    {
+    /**
+     * @var EventRepository
+     */
+    private $eventRepository;
+    /**
+     * @var HikeRepository
+     */
+    private $hikeRepository;
+
+    /**
+     * @var TeamRepository
+     */
+    private $teamRepository;
+
+    /**
+     * APIContext constructor.
+     * @param ClientInterface $guzzle
+     * @param EventRepository $eventRepository
+     * @param HikeRepository $hikeRepository
+     * @param TeamRepository $teamRepository
+     */
+    public function __construct(
+        ClientInterface $guzzle,
+        EventRepository $eventRepository,
+        HikeRepository $hikeRepository,
+        TeamRepository $teamRepository
+    ) {
         $this->guzzle = $guzzle;
+        $this->eventRepository = $eventRepository;
+        $this->hikeRepository = $hikeRepository;
+        $this->teamRepository = $teamRepository;
     }
 
     /**
@@ -51,11 +84,15 @@ class APIContext implements Context
      */
     public function iSendAGetRequestTo($uri)
     {
-        $this->response = $this->guzzle->request('GET', 'http://nginx' . $uri, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $this->token
-            ]
-        ]);
+        try {
+            $this->response = $this->guzzle->request('GET', 'http://nginx' . $uri, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token
+                ]
+            ]);
+        } catch (ClientException $exception) {
+            $this->response = $exception->getResponse();
+        }
     }
 
     /**
@@ -85,6 +122,106 @@ class APIContext implements Context
     }
 
     /**
+     * @Given /^the JSON node "([^"]*)" from the API response should be an array of size (\d+)$/
+     */
+    public function theJSONNodeFromTheAPIResponseShouldBeAnArrayOfSize($node, $size)
+    {
+        $data = $this->responseData();
+        Assert::assertEquals($size, count($data[$node]));
+    }
+
+    /**
+     * @Then /^item (\d+) in the array at JSON node "([^"]*)" should contain the following data:$/
+     * @param $index
+     * @param $node
+     * @param TableNode $table
+     */
+    public function itemInTheArrayAtJSONNodeShouldContainTheFollowingData($index, $node, TableNode $table)
+    {
+        $data = $this->responseData();
+        $array = $data[$node];
+        $item = $array[$index];
+        Assert::assertNotNull($item, sprintf("No item at index %d", $index));
+        $this->assertTableDataInAssocArray($table, $item);
+    }
+
+    /**
+     * @When /^I send a get request to the URI for the Event called "([^"]*)"$/
+     */
+    public function iSendAGetRequestToTheURIForTheEventCalled($eventName)
+    {
+        $event = $this->eventRepository->findOneByName($eventName);
+        $this->iSendAGetRequestTo(sprintf("/api/events/%d", $event->getId()));
+    }
+
+    /**
+     * @When /^I send a get request to the URI for the Hike called "([^"]*)" on the Event "([^"]*)"$/
+     * @param string $hikeName
+     * @param string $eventName
+     */
+    public function iSendAGetRequestToTheURIForTheHikeCalledOnTheEvent(string $hikeName, string $eventName)
+    {
+        $event = $this->eventRepository->findOneByName($eventName);
+        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        $this->iSendAGetRequestTo(sprintf("/api/hikes/%d", $hike->getId()));
+    }
+
+    /**
+     * @Given /^I send a get request to the URI for the Team called "([^"]*)" for the Hike "([^"]*)" on the Event "([^"]*)"$/
+     */
+    public function iSendAGetRequestToTheURIForTheTeamCalledForTheHikeOnTheEvent($teamName, $hikeName, $eventName)
+    {
+        $event = $this->eventRepository->findOneByName($eventName);
+        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        $team = $this->teamRepository->findOneByNameAndHike($teamName, $hike);
+        $this->iSendAGetRequestTo(sprintf("/api/teams/%d", $team->getId()));
+    }
+
+    /**
+     * @Then /^JSON response should contain the following data:$/
+     */
+    public function jsonResponseShouldContainTheFollowingData(TableNode $table)
+    {
+        $this->assertTableDataInAssocArray($table, $this->responseData());
+    }
+
+    /**
+     * @Then /^the JSON node "([^"]*)" is a link to the Event called "([^"]*)"$/
+     */
+    public function theJSONNodeIsALinkToTheEventCalled($node, $eventName)
+    {
+        $event = $this->eventRepository->findOneByName($eventName);
+        $expected = sprintf("/api/events/%d", $event->getId());
+        $data = $this->responseData();
+        $actual = $data[$node];
+        Assert::assertEquals($expected, $actual);
+    }
+
+    /**
+     * @Given /^the JSON node "([^"]*)" is a link to the Hike called "([^"]*)" on the Event "([^"]*)"$/
+     */
+    public function theJSONNodeIsALinkToTheHikeCalledOnTheEvent($node, $hikeName, $eventName)
+    {
+        $event = $this->eventRepository->findOneByName($eventName);
+        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        $expected = sprintf("/api/hikes/%d", $hike->getId());
+        $data = $this->responseData();
+        $actual = $data[$node];
+        Assert::assertEquals($expected, $actual);
+    }
+
+    /**
+     * @param TableNode $table
+     * @param array $item
+     */
+    private function assertTableDataInAssocArray(TableNode $table, array $item): void
+    {
+        foreach ($table->getColumnsHash() as $property) {
+            Assert::assertEquals($property['Value'], $item[$property['Key']]);
+        }
+    }
+
+    /**
      * @return array
      */
     private function responseData(): array
@@ -99,31 +236,5 @@ class APIContext implements Context
     private function responseStatusCode(): int
     {
         return $this->response->getStatusCode();
-    }
-
-    /**
-     * @Given /^the JSON node "([^"]*)" from the API response should be an array of size (\d+)$/
-     */
-    public function theJSONNodeFromTheAPIResponseShouldBeAnArrayOfSize($node, $size)
-    {
-        $data = $this->responseData();
-        Assert::assertEquals($size, count($data[$node]));
-    }
-
-    /**
-     * @Given /^item (\d+) in the array at JSON node "([^"]*)" should contain the following data:$/
-     * @param $index
-     * @param $node
-     * @param TableNode $table
-     */
-    public function itemInTheArrayAtJSONNodeShouldContainTheFollowingData($index, $node, TableNode $table)
-    {
-        $data = $this->responseData();
-        $array = $data[$node];
-        $item = $array[$index];
-        Assert::assertNotNull($item, sprintf("No item at index %d", $index));
-        foreach ($table->getColumnsHash() as $property) {
-            Assert::assertEquals($property['Value'], $item[$property['Key']]);
-        }
     }
 }

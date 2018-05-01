@@ -19,6 +19,9 @@ default:
                     userRepository: '@App\Repository\UserRepository'
                 - App\Context\APIContext:
                     guzzle: '@GuzzleHttp\ClientInterface'
+                    eventRepository: '@App\Repository\EventRepository'
+                    hikeRepository: '@App\Repository\HikeRepository'
+                    teamRepository: '@App\Repository\TeamRepository'
                 - App\Context\MyMinkContext:
                 - App\Context\CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'

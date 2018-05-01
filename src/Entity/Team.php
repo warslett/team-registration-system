@@ -8,7 +8,7 @@ use ApiPlatform\Core\Annotation as ApiPlatform;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
  * @UniqueEntity(fields={"name","hike"}, message="Team name already taken for this hike")
  * @ApiPlatform\ApiResource(
  *     collectionOperations={"get"},
