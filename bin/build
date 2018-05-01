@@ -3,4 +3,6 @@ docker run -it --rm -v $PWD:/app composer:1.6.4 install \
 && docker run -it --rm -v $PWD:/usr/src/app -w /usr/src/app node:9.11.1 yarn install \
 && docker run -it --rm -v $PWD:/usr/src/app -w /usr/src/app node:9.11.1 yarn run encore production \
 && docker-compose up -d \
-&& docker-compose exec php bin/console doctrine:migrations:migrate -n
+&& docker-compose exec php bin/console doctrine:migrations:migrate -n \
+&& docker-compose exec php chgrp www-data ssl/jwt/private.pem \
+&& docker-compose exec php chmod 750 ssl/jwt/private.pem

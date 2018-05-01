@@ -20,10 +20,6 @@ jobs:
           command: "bin/build"
 
       - run:
-          name: "Correct JWT certificate permissions"
-          command: "docker-compose exec php chgrp www-data ssl/jwt/private.pem && docker-compose exec php chmod 750 ssl/jwt/private.pem"
-
-      - run:
           name: "Run PHPUnit"
           command: "docker-compose exec php vendor/bin/phpunit --log-junit .circleci/test-results/phpunit/results.xml"
 

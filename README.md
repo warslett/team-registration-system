@@ -5,8 +5,8 @@
 
 ## Setup
 1. Clone this repo `git clone https://github.com/warslett/team-registration-system.git && cd team-registration-system`
-2. Create your environment file `cp .env.dist .env`
-3. If you are setting up a production environment, update the values in .env
+2. Create your environment file `cp .env.dist .env`. If you are setting up a production environment, update the values in .env
+3. Create a pair of SSL keys for the API. For development you can copy the distributed keys by running `cp ssl/jwt.dist/* ssl/jwt`. If you are setting up a production environment you should [generate your own keys](#generating-ssl-keys).
 4. Run `bin/build`
 5. Visit in your browser (with default port the address would be `http://127.0.0.1:39876`)
 
@@ -22,6 +22,8 @@ For development, you can populate the database with fake data by running this co
 For testing the API, use the email address "api@example.com"
 
 ## API
+
+### Generating SSL keys
 In order for the api to run from your environment you must first generate some SSL keys so that the user's access tokens
 can be securely encrypted. If you do not carry out this step the API will not work at all. In a development environment
 it is acceptable to use the distributed keys by just running `cp ssl/jwt.dist/* ssl/jwt`. In a production environment
@@ -30,12 +32,6 @@ you should create your own keys by running the following commands.
 docker-compose exec php openssl genrsa -out ssl/jwt/private.enc.pem -aes256 4096
 docker-compose exec php openssl rsa -pubout -in ssl/jwt/private.enc.pem -out ssl/jwt/public.pem
 docker-compose exec php openssl rsa -in ssl/jwt/private.enc.pem -out ssl/jwt/private.pem
-```
-
-Once you have your keys you should ensure the permissions are correct by running these two commands:
-```bash
-docker-compose exec php chgrp www-data ssl/jwt/private.pem
-docker-compose exec php chmod 750 ssl/jwt/private.pem
 ```
 
 ### Basic usage
