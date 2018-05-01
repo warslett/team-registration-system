@@ -12,7 +12,7 @@ jobs:
           command: "cp .env.dist .env"
 
       - run:
-          name: "Copy JWT certificate"
+          name: "Copy JWT certificates"
           command: "cp ssl/jwt.dist/* ssl/jwt"
 
       - run:
@@ -20,11 +20,11 @@ jobs:
           command: "bin/build"
 
       - run:
-          name: "Run PHPUnit"
+          name: "PHPUnit"
           command: "docker-compose exec php vendor/bin/phpunit --log-junit .circleci/test-results/phpunit/results.xml"
 
       - run:
-          name: "Run Behat"
+          name: "Behat"
           command: "docker-compose exec php vendor/bin/behat --format junit --out .circleci/test-results/behat --format pretty --out std"
 
       - run:
