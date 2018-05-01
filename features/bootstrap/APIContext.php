@@ -6,7 +6,6 @@ use App\Repository\EventRepository;
 use App\Repository\HikeRepository;
 use App\Repository\TeamRepository;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
@@ -127,7 +126,10 @@ class APIContext implements Context
     public function theJSONNodeFromTheAPIResponseShouldBeAnArrayOfSize($node, $size)
     {
         $data = $this->responseData();
-        Assert::assertEquals($size, count($data[$node]));
+        $array = $data[$node];
+        Assert::assertNotNull($array, sprintf("No node with key %s found in response", $node));
+
+        Assert::assertEquals($size, count($array));
     }
 
     /**
@@ -140,7 +142,10 @@ class APIContext implements Context
     {
         $data = $this->responseData();
         $array = $data[$node];
+        Assert::assertNotNull($array, sprintf("No node with key %s found in response", $node));
+
         $item = $array[$index];
+
         Assert::assertNotNull($item, sprintf("No item at index %d", $index));
         $this->assertTableDataInAssocArray($table, $item);
     }
@@ -151,6 +156,8 @@ class APIContext implements Context
     public function iSendAGetRequestToTheURIForTheEventCalled($eventName)
     {
         $event = $this->eventRepository->findOneByName($eventName);
+        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $this->iSendAGetRequestTo(sprintf("/api/events/%d", $event->getId()));
     }
 
@@ -162,7 +169,11 @@ class APIContext implements Context
     public function iSendAGetRequestToTheURIForTheHikeCalledOnTheEvent(string $hikeName, string $eventName)
     {
         $event = $this->eventRepository->findOneByName($eventName);
+        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+
         $this->iSendAGetRequestTo(sprintf("/api/hikes/%d", $hike->getId()));
     }
 
@@ -172,8 +183,14 @@ class APIContext implements Context
     public function iSendAGetRequestToTheURIForTheTeamCalledForTheHikeOnTheEvent($teamName, $hikeName, $eventName)
     {
         $event = $this->eventRepository->findOneByName($eventName);
+        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+
         $team = $this->teamRepository->findOneByNameAndHike($teamName, $hike);
+        Assert::assertNotNull($team, sprintf("No team found with name %s for hike %s on event %s", $teamName, $hike->getName(), $event->getName()));
+
         $this->iSendAGetRequestTo(sprintf("/api/teams/%d", $team->getId()));
     }
 
@@ -191,9 +208,13 @@ class APIContext implements Context
     public function theJSONNodeIsALinkToTheEventCalled($node, $eventName)
     {
         $event = $this->eventRepository->findOneByName($eventName);
+        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $expected = sprintf("/api/events/%d", $event->getId());
         $data = $this->responseData();
         $actual = $data[$node];
+        Assert::assertNotNull($actual, sprintf("No node with key %s found in response", $node));
+
         Assert::assertEquals($expected, $actual);
     }
 
@@ -203,10 +224,16 @@ class APIContext implements Context
     public function theJSONNodeIsALinkToTheHikeCalledOnTheEvent($node, $hikeName, $eventName)
     {
         $event = $this->eventRepository->findOneByName($eventName);
+        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        $expected = sprintf("/api/hikes/%d", $hike->getId());
+        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+
         $data = $this->responseData();
         $actual = $data[$node];
+        Assert::assertNotNull($actual, sprintf("No node with key %s found in response", $node));
+
+        $expected = sprintf("/api/hikes/%d", $hike->getId());
         Assert::assertEquals($expected, $actual);
     }
 
@@ -216,11 +243,19 @@ class APIContext implements Context
     public function theJSONNodeIsAnArrayContainingALinkToTheTeamCalledForTheHikeOnTheEvent($node, $teamName, $hikeName, $eventName)
     {
         $event = $this->eventRepository->findOneByName($eventName);
+        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
+        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+
         $team = $this->teamRepository->findOneByNameAndHike($teamName, $hike);
-        $expected = sprintf("/api/teams/%d", $team->getId());
+        Assert::assertNotNull($team, sprintf("No team found with name %s for hike %s on event %s", $teamName, $hike->getName(), $event->getName()));
+
         $data = $this->responseData();
         $array = $data[$node];
+        Assert::assertNotNull($array, sprintf("No node with key %s found in response", $node));
+
+        $expected = sprintf("/api/teams/%d", $team->getId());
         Assert::assertContains($expected, $array);
     }
 
@@ -230,10 +265,16 @@ class APIContext implements Context
     public function theJSONNodeIsAnArrayContainingALinkToTheHikeCalledOnTheEvent($node, $hikeName, $eventName)
     {
         $event = $this->eventRepository->findOneByName($eventName);
+        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        $expected = sprintf("/api/hikes/%d", $hike->getId());
+        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+
         $data = $this->responseData();
         $array = $data[$node];
+        Assert::assertNotNull($array, sprintf("No node with key %s found in response", $node));
+
+        $expected = sprintf("/api/hikes/%d", $hike->getId());
         Assert::assertContains($expected, $array);
     }
 

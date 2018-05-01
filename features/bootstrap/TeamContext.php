@@ -63,10 +63,13 @@ class TeamContext implements Context
     {
         $event = $this->eventRepository->findOneByName($eventName);
         Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+
         $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        Assert::assertNotNull($event, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+
         $user = $this->userRepository->findOneByEmail($userEmail);
         Assert::assertNotNull($user, sprintf("No user found with email %s", $userEmail));
+
         $this->team = $this->teamFactory->createTeam($teamName, $hike, $user);
     }
 }
