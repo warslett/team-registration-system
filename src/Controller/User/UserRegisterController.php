@@ -3,34 +3,15 @@
 
 namespace App\Controller\User;
 
-use App\Entity\User;
-use App\Form\RegisterType;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use App\FormManager\User\UserRegisterFormManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class RegisterController
+class UserRegisterController
 {
-
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $passwordEncoder;
-
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
 
     /**
      * @var \Twig_Environment
@@ -48,45 +29,43 @@ class RegisterController
     private $flashBag;
 
     /**
-     * UserController constructor.
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param FormFactoryInterface $formFactory
-     * @param EntityManagerInterface $entityManager
+     * @var UserRegisterFormManager
+     */
+    private $formManager;
+
+    /**
      * @param \Twig_Environment $twig
      * @param RouterInterface $router
      * @param FlashBagInterface $flashBag
+     * @param UserRegisterFormManager $formManager
      */
     public function __construct(
-        UserPasswordEncoderInterface $passwordEncoder,
-        FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager,
         \Twig_Environment $twig,
         RouterInterface $router,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
+        UserRegisterFormManager $formManager
     ) {
-        $this->passwordEncoder = $passwordEncoder;
-        $this->formFactory = $formFactory;
-        $this->entityManager = $entityManager;
         $this->twig = $twig;
         $this->router = $router;
         $this->flashBag = $flashBag;
+        $this->formManager = $formManager;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke(Request $request): Response
     {
-        $user = new User();
-        $form = $this->formFactory->create(RegisterType::class, $user);
-
+        $form = $this->formManager->createForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
-                $user->setPassword($password);
-
-                $this->entityManager->persist($user);
-                $this->entityManager->flush();
-
+                $this->formManager->processForm($form);
                 $this->flashBag->add('success', "Registration successful");
 
                 return new RedirectResponse($this->router->generate('user_login'));

@@ -41,6 +41,7 @@ class TeamCreateController
      * @var FlashBagInterface
      */
     private $flashBag;
+
     /**
      * @var CurrentUserService
      */
@@ -70,6 +71,13 @@ class TeamCreateController
         $this->currentUserService = $currentUserService;
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke(Request $request)
     {
         $team = new Team();

@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class LoginController
+class UserLoginController
 {
 
     /**
@@ -21,7 +21,6 @@ class LoginController
     private $authenticationUtils;
 
     /**
-     * LoginController constructor.
      * @param \Twig_Environment $twig
      * @param AuthenticationUtils $authenticationUtils
      */
@@ -31,14 +30,21 @@ class LoginController
         $this->authenticationUtils = $authenticationUtils;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke(Request $request): Response
     {
         $error = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        return new Response($this->twig->render('user/login.html.twig', array(
+        return new Response($this->twig->render('user/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
-        )));
+        ]));
     }
 }

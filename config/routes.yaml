@@ -4,11 +4,11 @@ root:
 
 user_register:
     path: /user/register
-    controller: App\Controller\User\RegisterController
+    controller: App\Controller\User\UserRegisterController
     
 user_login:
     path: /user/login
-    controller: App\Controller\User\LoginController
+    controller: App\Controller\User\UserLoginController
 
 user_logout:
     path: /user/logout
