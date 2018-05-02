@@ -3,7 +3,7 @@
 namespace App\Context;
 
 use App\Entity\Event;
-use App\Factory\EventFactory;
+use App\Factory\Entity\EventFactory;
 use Behat\Behat\Context\Context;
 
 class EventContext implements Context

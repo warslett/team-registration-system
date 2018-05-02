@@ -2,7 +2,7 @@
 
 namespace App\Context;
 
-use App\Factory\UserGroupFactory;
+use App\Factory\Entity\UserGroupFactory;
 use App\Repository\UserRepository;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;

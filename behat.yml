@@ -3,17 +3,17 @@ default:
         default:
             contexts:
                 - App\Context\UserContext:
-                    userFactory: '@App\Factory\UserFactory'
+                    userFactory: '@App\Factory\Entity\UserFactory'
                 - App\Context\UserGroupContext:
-                    userGroupFactory: '@App\Factory\UserGroupFactory'
+                    userGroupFactory: '@App\Factory\Entity\UserGroupFactory'
                     userRepository: '@App\Repository\UserRepository'
                 - App\Context\EventContext:
-                    eventFactory: '@App\Factory\EventFactory'
+                    eventFactory: '@App\Factory\Entity\EventFactory'
                 - App\Context\HikeContext:
                     eventRepository: '@App\Repository\EventRepository'
-                    hikeFactory: '@App\Factory\HikeFactory'
+                    hikeFactory: '@App\Factory\Entity\HikeFactory'
                 - App\Context\TeamContext:
-                    teamFactory: '@App\Factory\TeamFactory'
+                    teamFactory: '@App\Factory\Entity\TeamFactory'
                     hikeRepository: '@App\Repository\HikeRepository'
                     eventRepository: '@App\Repository\EventRepository'
                     userRepository: '@App\Repository\UserRepository'

@@ -3,7 +3,7 @@
 namespace App\Context;
 
 use App\Entity\Hike;
-use App\Factory\HikeFactory;
+use App\Factory\Entity\HikeFactory;
 use App\Repository\EventRepository;
 use Behat\Behat\Context\Context;
 use PHPUnit\Framework\Assert;

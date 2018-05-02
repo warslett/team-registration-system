@@ -2,23 +2,13 @@
 
 namespace App\Controller\Team;
 
-use App\Entity\Team;
-use App\Repository\TeamRepository;
+use App\Factory\ResponseFactory;
 use App\Resolver\TeamResolver;
-use App\Service\CurrentUserService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TeamShowController
 {
-
-    /**
-     * @var \Twig_Environment
-     */
-    private $twig;
 
     /**
      * @var TeamResolver
@@ -26,15 +16,20 @@ class TeamShowController
     private $teamResolver;
 
     /**
-     * @param \Twig_Environment $twig
+     * @var ResponseFactory
+     */
+    private $responseFactory;
+
+    /**
      * @param TeamResolver $teamResolver
+     * @param ResponseFactory $responseFactory
      */
     public function __construct(
-        \Twig_Environment $twig,
-        TeamResolver $teamResolver
+        TeamResolver $teamResolver,
+        ResponseFactory $responseFactory
     ) {
-        $this->twig = $twig;
         $this->teamResolver = $teamResolver;
+        $this->responseFactory = $responseFactory;
     }
 
     /**
@@ -45,6 +40,6 @@ class TeamShowController
     public function __invoke(Request $request)
     {
         $team = $this->teamResolver->resolveById($request->get('team_id'));
-        return new Response($this->twig->render('team/show.html.twig', ['team' => $team]));
+        return $this->responseFactory->createTemplateResponse('team/show.html.twig', ['team' => $team]);
     }
 }

@@ -1,13 +1,11 @@
 <?php
 
-
-namespace App\Factory;
+namespace App\Factory\Entity;
 
 use App\Entity\Event;
-use App\Entity\Hike;
 use Doctrine\ORM\EntityManagerInterface;
 
-class HikeFactory
+class EventFactory
 {
 
     /**
@@ -16,6 +14,7 @@ class HikeFactory
     private $entityManager;
 
     /**
+     * UserFactory constructor.
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
@@ -23,13 +22,13 @@ class HikeFactory
         $this->entityManager = $entityManager;
     }
 
-    public function createHike(string $hikeName, Event $event): Hike
+    public function createEvent(string $eventName, \DateTime $dateTime): Event
     {
-        $hike = new Hike();
-        $hike->setName($hikeName);
-        $hike->setEvent($event);
-        $this->entityManager->persist($hike);
+        $event = new Event();
+        $event->setName($eventName);
+        $event->setDate($dateTime);
+        $this->entityManager->persist($event);
         $this->entityManager->flush();
-        return $hike;
+        return $event;
     }
 }

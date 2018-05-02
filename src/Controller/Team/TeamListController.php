@@ -1,8 +1,8 @@
 <?php
 
-
 namespace App\Controller\Team;
 
+use App\Factory\ResponseFactory;
 use App\Service\CurrentUserService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,30 +11,34 @@ class TeamListController
 {
 
     /**
-     * @var \Twig_Environment
-     */
-    private $twig;
-
-    /**
      * @var CurrentUserService
      */
     private $currentUserService;
 
     /**
-     * TeamController constructor.
-     * @param \Twig_Environment $twig
-     * @param CurrentUserService $currentUserService
+     * @var ResponseFactory
      */
-    public function __construct(\Twig_Environment $twig, CurrentUserService $currentUserService)
+    private $responseFactory;
+
+    /**
+     * @param CurrentUserService $currentUserService
+     * @param ResponseFactory $responseFactory
+     */
+    public function __construct(CurrentUserService $currentUserService, ResponseFactory $responseFactory)
     {
-        $this->twig = $twig;
         $this->currentUserService = $currentUserService;
+        $this->responseFactory = $responseFactory;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Twig_Error
+     */
     public function __invoke(Request $request): Response
     {
-        return new Response($this->twig->render('team/list.html.twig', [
+        return $this->responseFactory->createTemplateResponse('team/list.html.twig', [
             'teams' => $this->currentUserService->getCurrentUser()->getTeams()
-        ]));
+        ]);
     }
 }

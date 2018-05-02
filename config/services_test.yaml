@@ -8,8 +8,8 @@ services:
         public: true
 
     # Factories and Repositories are used by behat which needs them to be public so it can use them
-    App\Factory\:
-        resource: '../src/Factory'
+    App\Factory\Entity\:
+        resource: '../src/Factory/Entity'
         public: true
 
     App\Repository\:

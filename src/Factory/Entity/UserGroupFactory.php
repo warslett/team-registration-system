@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Factory;
+namespace App\Factory\Entity;
 
 use App\Entity\User;
 use App\Entity\UserGroup;

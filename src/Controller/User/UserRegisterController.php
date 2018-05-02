@@ -2,25 +2,14 @@
 
 namespace App\Controller\User;
 
+use App\Factory\ResponseFactory;
 use App\FormManager\User\UserRegisterFormManager;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 class UserRegisterController
 {
-
-    /**
-     * @var \Twig_Environment
-     */
-    private $twig;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
 
     /**
      * @var FlashBagInterface
@@ -33,29 +22,29 @@ class UserRegisterController
     private $userRegisterFormManager;
 
     /**
-     * @param \Twig_Environment $twig
-     * @param RouterInterface $router
+     * @var ResponseFactory
+     */
+    private $responseFactory;
+
+    /**
      * @param FlashBagInterface $flashBag
      * @param UserRegisterFormManager $userRegisterFormManager
+     * @param ResponseFactory $responseFactory
      */
     public function __construct(
-        \Twig_Environment $twig,
-        RouterInterface $router,
         FlashBagInterface $flashBag,
-        UserRegisterFormManager $userRegisterFormManager
+        UserRegisterFormManager $userRegisterFormManager,
+        ResponseFactory $responseFactory
     ) {
-        $this->twig = $twig;
-        $this->router = $router;
         $this->flashBag = $flashBag;
         $this->userRegisterFormManager = $userRegisterFormManager;
+        $this->responseFactory = $responseFactory;
     }
 
     /**
      * @param Request $request
      * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws \Twig_Error
      */
     public function __invoke(Request $request): Response
     {
@@ -67,15 +56,15 @@ class UserRegisterController
                 $user = $this->userRegisterFormManager->processForm($form);
                 $this->flashBag->add('success', sprintf("Successfully registered %s", $user->getEmail()));
 
-                return new RedirectResponse($this->router->generate('user_login'));
+                return $this->responseFactory->createRedirectResponse('user_login');
             }
 
             $this->flashBag->add('danger', "There were some problems with the information you provided");
         }
 
-        return new Response($this->twig->render(
+        return $this->responseFactory->createTemplateResponse(
             'user/register.html.twig',
             ['form' => $form->createView()]
-        ));
+        );
     }
 }

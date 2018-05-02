@@ -3,7 +3,7 @@
 namespace App\Context;
 
 use App\Entity\Team;
-use App\Factory\TeamFactory;
+use App\Factory\Entity\TeamFactory;
 use App\Repository\EventRepository;
 use App\Repository\HikeRepository;
 use App\Repository\UserRepository;

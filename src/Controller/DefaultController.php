@@ -2,19 +2,13 @@
 
 namespace App\Controller;
 
+use App\Factory\ResponseFactory;
 use App\Service\CurrentUserService;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
 
 class DefaultController
 {
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
 
     /**
      * @var CurrentUserService
@@ -22,21 +16,25 @@ class DefaultController
     private $currentUserService;
 
     /**
-     * DefaultController constructor.
-     * @param RouterInterface $router
-     * @param CurrentUserService $currentUserService
+     * @var ResponseFactory
      */
-    public function __construct(RouterInterface $router, CurrentUserService $currentUserService)
+    private $responseFactory;
+
+    /**
+     * @param CurrentUserService $currentUserService
+     * @param ResponseFactory $responseFactory
+     */
+    public function __construct(CurrentUserService $currentUserService, ResponseFactory $responseFactory)
     {
-        $this->router = $router;
         $this->currentUserService = $currentUserService;
+        $this->responseFactory = $responseFactory;
     }
 
     public function __invoke(Request $request): Response
     {
         if (is_null($this->currentUserService->getCurrentUser())) {
-            return new RedirectResponse($this->router->generate('user_login'));
+            return $this->responseFactory->createRedirectResponse('user_login');
         }
-        return new RedirectResponse($this->router->generate('team_list'));
+        return $this->responseFactory->createRedirectResponse('team_list');
     }
 }
