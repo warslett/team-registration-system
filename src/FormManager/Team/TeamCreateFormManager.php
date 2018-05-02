@@ -8,7 +8,6 @@ use App\Service\CurrentUserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class TeamCreateFormManager
 {
