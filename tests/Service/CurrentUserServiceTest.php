@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Tests\Service;
+
 use App\Entity\User;
 use App\Service\CurrentUserService;
-use PHPUnit\Framework\TestCase;
+use App\Tests\TestCase;
 use Mockery as m;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
