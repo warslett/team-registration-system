@@ -9,7 +9,7 @@ Feature:
     And I fill in "Repeat Password" with "Password1!"
     And I press "Register"
     Then I should be on "/user/login"
-    And there is an alert with the message "Registration successful"
+    And there is an alert with the message "Successfully registered john@acme.co"
     When I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
     And I press "Log in"

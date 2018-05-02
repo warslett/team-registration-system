@@ -5,6 +5,7 @@ namespace App\Controller\Team;
 
 use App\Entity\Team;
 use App\Form\Team\TeamCreateType;
+use App\FormManager\Team\TeamCreateFormManager;
 use App\Service\CurrentUserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -23,16 +24,6 @@ class TeamCreateController
     private $twig;
 
     /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
      * @var RouterInterface
      */
     private $router;
@@ -43,54 +34,42 @@ class TeamCreateController
     private $flashBag;
 
     /**
-     * @var CurrentUserService
+     * @var TeamCreateFormManager
      */
-    private $currentUserService;
+    private $userCreateFormManager;
 
     /**
      * @param \Twig_Environment $twig
-     * @param FormFactoryInterface $formFactory
-     * @param EntityManagerInterface $entityManager
-     * @param CurrentUserService $currentUserService
      * @param RouterInterface $router
      * @param FlashBagInterface $flashBag
+     * @param TeamCreateFormManager $userCreateFormManager
      */
     public function __construct(
         \Twig_Environment $twig,
-        FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager,
-        CurrentUserService $currentUserService,
         RouterInterface $router,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
+        TeamCreateFormManager $userCreateFormManager
     ) {
         $this->twig = $twig;
-        $this->formFactory = $formFactory;
-        $this->entityManager = $entityManager;
         $this->router = $router;
         $this->flashBag = $flashBag;
-        $this->currentUserService = $currentUserService;
+        $this->userCreateFormManager = $userCreateFormManager;
     }
 
     /**
      * @param Request $request
      * @return RedirectResponse|Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws \Twig_Error
      */
     public function __invoke(Request $request)
     {
-        $team = new Team();
-        $form = $this->formFactory->create(TeamCreateType::class, $team);
+        $form = $this->userCreateFormManager->createForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $team->setUser($this->currentUserService->getCurrentUser());
-
-                $this->entityManager->persist($team);
-                $this->entityManager->flush();
+                $team = $this->userCreateFormManager->processForm($form);
 
                 $this->flashBag->add('success', sprintf(
                     "Team \"%s\" successfully created for \"%s\"",

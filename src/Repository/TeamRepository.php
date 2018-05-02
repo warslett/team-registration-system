@@ -16,6 +16,17 @@ class TeamRepository extends EntityRepository
     }
 
     /**
+     * @param int $id
+     * @param null $lockMode
+     * @param null $lockVersion
+     * @return Team|null
+     */
+    public function find($id, $lockMode = null, $lockVersion = null): ?Team
+    {
+        return parent::find($id, $lockMode, $lockVersion);
+    }
+
+    /**
      * @param string $teamName
      * @param Hike $hike
      * @return Team|null

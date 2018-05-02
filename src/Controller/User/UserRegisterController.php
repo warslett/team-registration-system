@@ -30,24 +30,24 @@ class UserRegisterController
     /**
      * @var UserRegisterFormManager
      */
-    private $formManager;
+    private $userRegisterFormManager;
 
     /**
      * @param \Twig_Environment $twig
      * @param RouterInterface $router
      * @param FlashBagInterface $flashBag
-     * @param UserRegisterFormManager $formManager
+     * @param UserRegisterFormManager $userRegisterFormManager
      */
     public function __construct(
         \Twig_Environment $twig,
         RouterInterface $router,
         FlashBagInterface $flashBag,
-        UserRegisterFormManager $formManager
+        UserRegisterFormManager $userRegisterFormManager
     ) {
         $this->twig = $twig;
         $this->router = $router;
         $this->flashBag = $flashBag;
-        $this->formManager = $formManager;
+        $this->userRegisterFormManager = $userRegisterFormManager;
     }
 
     /**
@@ -59,13 +59,13 @@ class UserRegisterController
      */
     public function __invoke(Request $request): Response
     {
-        $form = $this->formManager->createForm();
+        $form = $this->userRegisterFormManager->createForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->formManager->processForm($form);
-                $this->flashBag->add('success', "Registration successful");
+                $user = $this->userRegisterFormManager->processForm($form);
+                $this->flashBag->add('success', sprintf("Successfully registered %s", $user->getEmail()));
 
                 return new RedirectResponse($this->router->generate('user_login'));
             }

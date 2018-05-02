@@ -34,6 +34,7 @@ class APIContext implements Context
      * @var EventRepository
      */
     private $eventRepository;
+
     /**
      * @var HikeRepository
      */

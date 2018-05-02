@@ -1,15 +1,16 @@
 <?php
 
-namespace App\FormManager\User;
+namespace App\FormManager\Team;
 
-use App\Entity\User;
-use App\Form\User\UserRegisterType;
+use App\Entity\Team;
+use App\Form\Team\TeamCreateType;
+use App\Service\CurrentUserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
-class UserRegisterFormManager
+class TeamCreateFormManager
 {
 
     /**
@@ -23,23 +24,23 @@ class UserRegisterFormManager
     private $formFactory;
 
     /**
-     * @var UserPasswordEncoderInterface
+     * @var CurrentUserService
      */
-    private $passwordEncoder;
+    private $currentUserService;
 
     /**
      * @param EntityManagerInterface $entityManager
      * @param FormFactoryInterface $formFactory
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param CurrentUserService $currentUserService
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         FormFactoryInterface $formFactory,
-        UserPasswordEncoderInterface $passwordEncoder
+        CurrentUserService $currentUserService
     ) {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
-        $this->passwordEncoder = $passwordEncoder;
+        $this->currentUserService = $currentUserService;
     }
 
     /**
@@ -47,23 +48,22 @@ class UserRegisterFormManager
      */
     public function createForm(): FormInterface
     {
-        return $this->formFactory->create(UserRegisterType::class, new User());
+        return $this->formFactory->create(TeamCreateType::class, new Team());
     }
 
     /**
      * @param FormInterface $form
-     * @return User
+     * @return Team
      */
-    public function processForm(FormInterface $form): User
+    public function processForm(FormInterface $form): Team
     {
-        /** @var User $user */
-        $user = $form->getData();
-        $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
-        $user->setPassword($password);
+        /** @var Team $team */
+        $team = $form->getData();
+        $team->setUser($this->currentUserService->getCurrentUser());
 
-        $this->entityManager->persist($user);
+        $this->entityManager->persist($team);
         $this->entityManager->flush();
 
-        return $user;
+        return $team;
     }
 }
