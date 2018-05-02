@@ -9,7 +9,7 @@ Feature:
     And I fill in "Password" with "Password1!"
     And I press "Log in"
     Then I should be on "/team/list"
-    And I am logged in as "john@acme.co"
+    And I should see "Welcome, john@acme.co"
 
   Scenario: I cannot login with an email that does not belong to a user in the system
     When I go to "/user/login"

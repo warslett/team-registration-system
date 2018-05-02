@@ -10,6 +10,11 @@ Feature:
     And I press "Register"
     Then I should be on "/user/login"
     And there is an alert with the message "Registration successful"
+    When I fill in "Email" with "john@acme.co"
+    And I fill in "Password" with "Password1!"
+    And I press "Log in"
+    Then I should be on "/team/list"
+    And I should see "Welcome, john@acme.co"
 
   Scenario: I cannot register an account with an invalid email
     When I go to "/user/register"

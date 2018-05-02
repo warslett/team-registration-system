@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller\User;
 
 use App\FormManager\User\UserRegisterFormManager;
