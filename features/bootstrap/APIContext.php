@@ -2,9 +2,10 @@
 
 namespace App\Context;
 
-use App\Repository\EventRepository;
-use App\Repository\HikeRepository;
-use App\Repository\TeamRepository;
+use App\Entity\Event;
+use App\Entity\Hike;
+use App\Entity\Team;
+use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use GuzzleHttp\ClientInterface;
@@ -31,37 +32,21 @@ class APIContext implements Context
     private $response;
 
     /**
-     * @var EventRepository
+     * @var FixtureStorageService
      */
-    private $eventRepository;
-
-    /**
-     * @var HikeRepository
-     */
-    private $hikeRepository;
-
-    /**
-     * @var TeamRepository
-     */
-    private $teamRepository;
+    private $fixtureStorage;
 
     /**
      * APIContext constructor.
      * @param ClientInterface $guzzle
-     * @param EventRepository $eventRepository
-     * @param HikeRepository $hikeRepository
-     * @param TeamRepository $teamRepository
+     * @param FixtureStorageService $fixtureStorage
      */
     public function __construct(
         ClientInterface $guzzle,
-        EventRepository $eventRepository,
-        HikeRepository $hikeRepository,
-        TeamRepository $teamRepository
+        FixtureStorageService $fixtureStorage
     ) {
         $this->guzzle = $guzzle;
-        $this->eventRepository = $eventRepository;
-        $this->hikeRepository = $hikeRepository;
-        $this->teamRepository = $teamRepository;
+        $this->fixtureStorage = $fixtureStorage;
     }
 
     /**
@@ -152,46 +137,34 @@ class APIContext implements Context
     }
 
     /**
-     * @When /^I send a get request to the URI for the Event called "([^"]*)"$/
+     * @When /^I send a get request to the Event URI for "([^"]*)"$/
+     * @param $eventReference
+     * @throws \Exception
      */
-    public function iSendAGetRequestToTheURIForTheEventCalled($eventName)
+    public function iSendAGetRequestToTheEventURIFor($eventReference)
     {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-
+        $event = $this->fixtureStorage->get(Event::class, $eventReference);
         $this->iSendAGetRequestTo(sprintf("/api/events/%d", $event->getId()));
     }
 
     /**
-     * @When /^I send a get request to the URI for the Hike called "([^"]*)" on the Event "([^"]*)"$/
-     * @param string $hikeName
-     * @param string $eventName
+     * @When /^I send a get request to the Hike URI for "([^"]*)"$/
+     * @param string $hikeReference
+     * @throws \Exception
      */
-    public function iSendAGetRequestToTheURIForTheHikeCalledOnTheEvent(string $hikeName, string $eventName)
+    public function iSendAGetRequestToTheHikeURIFor(string $hikeReference)
     {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-
-        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
-
+        $hike = $this->fixtureStorage->get(Hike::class, $hikeReference);
         $this->iSendAGetRequestTo(sprintf("/api/hikes/%d", $hike->getId()));
     }
 
     /**
-     * @Given /^I send a get request to the URI for the Team called "([^"]*)" for the Hike "([^"]*)" on the Event "([^"]*)"$/
+     * @When /^I send a get request to the Team URI for "([^"]*)"$/
+     * @throws \Exception
      */
-    public function iSendAGetRequestToTheURIForTheTeamCalledForTheHikeOnTheEvent($teamName, $hikeName, $eventName)
+    public function iSendAGetRequestToTheTeamURIFor($teamReference)
     {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-
-        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
-
-        $team = $this->teamRepository->findOneByNameAndHike($teamName, $hike);
-        Assert::assertNotNull($team, sprintf("No team found with name %s for hike %s on event %s", $teamName, $hike->getName(), $event->getName()));
-
+        $team = $this->fixtureStorage->get(Team::class, $teamReference);
         $this->iSendAGetRequestTo(sprintf("/api/teams/%d", $team->getId()));
     }
 
@@ -220,15 +193,28 @@ class APIContext implements Context
     }
 
     /**
-     * @Given /^the JSON node "([^"]*)" is a link to the Hike called "([^"]*)" on the Event "([^"]*)"$/
+     * @Then /^the JSON node "([^"]*)" is an Event link to "([^"]*)"$/
+     * @throws \Exception
      */
-    public function theJSONNodeIsALinkToTheHikeCalledOnTheEvent($node, $hikeName, $eventName)
+    public function theJSONNodeIsAnEventLinkTo($node, $eventReference)
     {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
+        $event = $this->fixtureStorage->get(Event::class, $eventReference);
 
-        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
+        $expected = sprintf("/api/events/%d", $event->getId());
+        $data = $this->responseData();
+        $actual = $data[$node];
+        Assert::assertNotNull($actual, sprintf("No node with key %s found in response", $node));
+
+        Assert::assertEquals($expected, $actual);
+    }
+
+    /**
+     * @Then /^the JSON node "([^"]*)" is a Hike link to "([^"]*)"$/
+     * @throws \Exception
+     */
+    public function theJSONNodeIsAHikeLinkTo($node, $hikeReference)
+    {
+        $hike = $this->fixtureStorage->get(Hike::class, $hikeReference);
 
         $data = $this->responseData();
         $actual = $data[$node];
@@ -239,18 +225,12 @@ class APIContext implements Context
     }
 
     /**
-     * @Then /^the JSON node "([^"]*)" is an array containing a link to the Team called "([^"]*)" for the Hike "([^"]*)" on the Event "([^"]*)"$/
+     * @Then /^the JSON node "([^"]*)" is an array containing a Team link to "([^"]*)"$/
+     * @throws \Exception
      */
-    public function theJSONNodeIsAnArrayContainingALinkToTheTeamCalledForTheHikeOnTheEvent($node, $teamName, $hikeName, $eventName)
+    public function theJSONNodeIsAnArrayContainingATeamLinkTo(string $node, string $teamReference)
     {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-
-        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
-
-        $team = $this->teamRepository->findOneByNameAndHike($teamName, $hike);
-        Assert::assertNotNull($team, sprintf("No team found with name %s for hike %s on event %s", $teamName, $hike->getName(), $event->getName()));
+        $team = $this->fixtureStorage->get(Team::class, $teamReference);
 
         $data = $this->responseData();
         $array = $data[$node];
@@ -261,16 +241,12 @@ class APIContext implements Context
     }
 
     /**
-     * @Then /^the JSON node "([^"]*)" is an array containing a link to the Hike called "([^"]*)" on the Event "([^"]*)"$/
+     * @Then /^the JSON node "([^"]*)" is an array containing a Hike link to "([^"]*)"$/
+     * @throws \Exception
      */
-    public function theJSONNodeIsAnArrayContainingALinkToTheHikeCalledOnTheEvent($node, $hikeName, $eventName)
+    public function theJSONNodeIsAnArrayContainingAHikeLinkTo(string $node, string $hikeReference)
     {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-
-        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
-
+        $hike = $this->fixtureStorage->get(Hike::class, $hikeReference);
         $data = $this->responseData();
         $array = $data[$node];
         Assert::assertNotNull($array, sprintf("No node with key %s found in response", $node));

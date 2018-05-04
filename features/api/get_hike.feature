@@ -3,30 +3,30 @@ Feature: GET Hike
   As an API User I need to be able to fetch a single Hike in a structured format
 
   Background:
-    Given there is a User with email "api@example.com" and password "development"
+    Given that "the api user" is a User with email "api@example.com" and password "development"
     And that there is a User Group with the role "ROLE_API_USER" with the following members:
-      | Email           |
-      | api@example.com |
+      | Reference       |
+      | the api user    |
 
   Scenario: Hike exists
-    Given that there is an Event called "Three Towers" taking place at "31st March 2999"
-    And that there is a Hike called "Scout Hike" for the Event "Three Towers"
+    Given that "the event" is an Event called "Three Towers" taking place on "31st March 2999"
+    And that "the hike" is a Hike called "Scout Hike" for "the event"
     When I authenticate with the api using email "api@example.com" and password "development"
-    And I send a get request to the URI for the Hike called "Scout Hike" on the Event "Three Towers"
+    And I send a get request to the Hike URI for "the hike"
     Then the response code from the API response should be 200
     And JSON response should contain the following data:
       | Key  | Value      |
       | name | Scout Hike |
-    And the JSON node "event" is a link to the Event called "Three Towers"
+    And the JSON node "event" is an Event link to "the event"
 
   Scenario: Hike exists with Teams
-    Given there is a User with email "john@acme.co" and password "Password1!"
-    And that there is an Event called "Three Towers" taking place at "31st March 2999"
-    And that there is a Hike called "Scout Hike" for the Event "Three Towers"
-    And that there is a Team called "Alpha Team" for the Hike "Scout Hike" on the Event "Three Towers" registered by "john@acme.co"
+    Given that "the user" is a User with email "john@acme.co" and password "Password1!"
+    And that "the event" is an Event called "Three Towers" taking place on "31st March 2999"
+    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
     When I authenticate with the api using email "api@example.com" and password "development"
-    And I send a get request to the URI for the Hike called "Scout Hike" on the Event "Three Towers"
-    Then the JSON node "teams" is an array containing a link to the Team called "Alpha Team" for the Hike "Scout Hike" on the Event "Three Towers"
+    And I send a get request to the Hike URI for "the hike"
+    Then the JSON node "teams" is an array containing a Team link to "the team"
 
   Scenario: Hike does not exist
     When I authenticate with the api using email "api@example.com" and password "development"

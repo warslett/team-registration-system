@@ -2,19 +2,14 @@
 
 namespace App\Context;
 
+use App\Entity\Event;
 use App\Entity\Hike;
 use App\Factory\Entity\HikeFactory;
-use App\Repository\EventRepository;
+use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
-use PHPUnit\Framework\Assert;
 
 class HikeContext implements Context
 {
-
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
 
     /**
      * @var HikeFactory
@@ -22,25 +17,29 @@ class HikeContext implements Context
     private $hikeFactory;
 
     /**
-     * @var Hike
+     * @var FixtureStorageService
      */
-    private $hike;
+    private $fixtureStorage;
 
-    public function __construct(EventRepository $eventRepository, HikeFactory $hikeFactory)
-    {
-        $this->eventRepository = $eventRepository;
+    public function __construct(
+        HikeFactory $hikeFactory,
+        FixtureStorageService $fixtureStorage
+    ) {
         $this->hikeFactory = $hikeFactory;
+        $this->fixtureStorage = $fixtureStorage;
     }
 
     /**
-     * @Given /^that there is a Hike called "([^"]*)" for the Event "([^"]*)"$/
+     * @Given /^that "([^"]*)" is a Hike called "([^"]*)" for "([^"]*)"$/
+     * @param string $hikeReference
      * @param string $hikeName
-     * @param string $eventName
+     * @param string $eventReference
+     * @throws \Exception
      */
-    public function thatThereIsAHikeCalledForTheEvent(string $hikeName, string $eventName)
+    public function thatIsAHikeCalledFor(string $hikeReference, string $hikeName, string $eventReference)
     {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-        $this->hike = $this->hikeFactory->createHike($hikeName, $event);
+        $event = $this->fixtureStorage->get(Event::class, $eventReference);
+        $hike = $this->hikeFactory->createHike($hikeName, $event);
+        $this->fixtureStorage->set(Hike::class, $hikeReference, $hike);
     }
 }

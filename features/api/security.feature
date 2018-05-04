@@ -4,9 +4,9 @@ Feature: API Security
 
 
   Background:
-    Given that there is an Event called "Upcoming Three Towers" taking place "+6 months" from now
-    And that there is a Hike called "Scout Hike" for the Event "Upcoming Three Towers"
-    And there is a User with email "api@example.com" and password "development"
+    Given that "the event" is an Event called "Upcoming Three Towers" taking place "+6 months" from now
+    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the api user" is a User with email "api@example.com" and password "development"
 
   Scenario: Authenticating
     When I authenticate with the api using email "api@example.com" and password "development"

@@ -4,6 +4,7 @@ namespace App\Context;
 
 use App\Entity\User;
 use App\Factory\Entity\UserFactory;
+use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 
 class UserContext implements Context
@@ -15,24 +16,28 @@ class UserContext implements Context
     private $userFactory;
 
     /**
-     * @var null|User
+     * @var FixtureStorageService
      */
-    private $user = null;
+    private $fixtureStorage;
 
     /**
      * UserContext constructor.
      * @param UserFactory $userFactory
+     * @param FixtureStorageService $fixtureStorage
      */
-    public function __construct(UserFactory $userFactory)
+    public function __construct(UserFactory $userFactory, FixtureStorageService $fixtureStorage)
     {
         $this->userFactory = $userFactory;
+        $this->fixtureStorage = $fixtureStorage;
     }
 
     /**
-     * @Given /^there is a User with email "([^"]*)" and password "([^"]*)"$/
+     * @Given /^that "([^"]*)" is a User with email "([^"]*)" and password "([^"]*)"$/
+     * @throws \Exception
      */
-    public function thereIsAUserWithEmailAndPassword($email, $password)
+    public function thatIsAUserWithEmailAndPassword($userReference, $email, $password)
     {
-        $this->user = $this->userFactory->createUser($email, $password);
+        $user = $this->userFactory->createUser($email, $password);
+        $this->fixtureStorage->set(User::class, $userReference, $user);
     }
 }

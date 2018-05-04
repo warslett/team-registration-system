@@ -2,11 +2,12 @@
 
 namespace App\Context;
 
+use App\Entity\User;
 use App\Factory\Entity\UserGroupFactory;
 use App\Repository\UserRepository;
+use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use PHPUnit\Framework\Assert;
 
 class UserGroupContext implements Context
 {
@@ -17,27 +18,33 @@ class UserGroupContext implements Context
     private $userGroupFactory;
 
     /**
-     * @var UserRepository
+     * @var FixtureStorageService
      */
-    private $userRepository;
+    private $fixtureStorage;
 
-    public function __construct(UserGroupFactory $userGroupFactory, UserRepository $userRepository)
-    {
+    /**
+     * @param UserGroupFactory $userGroupFactory
+     * @param FixtureStorageService $fixtureStorage
+     */
+    public function __construct(
+        UserGroupFactory $userGroupFactory,
+        FixtureStorageService $fixtureStorage
+    ) {
         $this->userGroupFactory = $userGroupFactory;
-        $this->userRepository = $userRepository;
+        $this->fixtureStorage = $fixtureStorage;
     }
 
     /**
      * @Given /^that there is a User Group with the role "([^"]*)" with the following members:$/
      * @param $role
      * @param TableNode $table
+     * @throws \Exception
      */
     public function thatThereIsAUserGroupCalledWithTheRoleWithTheFollowingMembers($role, TableNode $table)
     {
         $users = [];
         foreach ($table->getColumnsHash() as $row) {
-            $user = $this->userRepository->findOneByEmail($row['Email']);
-            Assert::assertNotNull($user, sprintf("User with email %s not found", $row['Email']));
+            $user = $this->fixtureStorage->get(User::class, $row['Reference']);
             $users[] = $user;
         }
         $this->userGroupFactory->createUserGroup($role, $users);

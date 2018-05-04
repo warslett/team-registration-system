@@ -2,13 +2,12 @@
 
 namespace App\Context;
 
+use App\Entity\Hike;
 use App\Entity\Team;
+use App\Entity\User;
 use App\Factory\Entity\TeamFactory;
-use App\Repository\EventRepository;
-use App\Repository\HikeRepository;
-use App\Repository\UserRepository;
+use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
-use PHPUnit\Framework\Assert;
 
 class TeamContext implements Context
 {
@@ -19,57 +18,39 @@ class TeamContext implements Context
     private $teamFactory;
 
     /**
-     * @var null|Team
+     * @var FixtureStorageService
      */
-    private $team = null;
-
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
-
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-
-    /**
-     * @var HikeRepository
-     */
-    private $hikeRepository;
+    private $fixtureStorage;
 
     /**
      * @param TeamFactory $teamFactory
-     * @param HikeRepository $hikeRepository
-     * @param EventRepository $eventRepository
-     * @param UserRepository $userRepository
+     * @param FixtureStorageService $fixtureStorage
      */
     public function __construct(
         TeamFactory $teamFactory,
-        HikeRepository $hikeRepository,
-        EventRepository $eventRepository,
-        UserRepository $userRepository
+        FixtureStorageService $fixtureStorage
     ) {
         $this->teamFactory = $teamFactory;
-        $this->eventRepository = $eventRepository;
-        $this->userRepository = $userRepository;
-        $this->hikeRepository = $hikeRepository;
+        $this->fixtureStorage = $fixtureStorage;
     }
 
     /**
-     * @Given /^that there is a Team called "([^"]*)" for the Hike "([^"]*)" on the Event "([^"]*)" registered by "([^"]*)"$/
+     * @Given /^that "([^"]*)" is a Team called "([^"]*)" for "([^"]*)" registered by "([^"]*)"$/
+     * @param string $teamReference
+     * @param string $teamName
+     * @param string $hikeReference
+     * @param string $userReference
+     * @throws \Exception
      */
-    public function thatThereIsATeamCalledForTheHikeOnTheEventRegisteredBy($teamName, $hikeName, $eventName, $userEmail)
-    {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-
-        $hike = $this->hikeRepository->findOneByNameAndEvent($hikeName, $event);
-        Assert::assertNotNull($hike, sprintf("No hike found with name %s for event %s", $hikeName, $event->getName()));
-
-        $user = $this->userRepository->findOneByEmail($userEmail);
-        Assert::assertNotNull($user, sprintf("No user found with email %s", $userEmail));
-
-        $this->team = $this->teamFactory->createTeam($teamName, $hike, $user);
+    public function thatIsATeamCalledForRegisteredBy(
+        string $teamReference,
+        string $teamName,
+        string $hikeReference,
+        string $userReference
+    ) {
+        $hike = $this->fixtureStorage->get(Hike::class, $hikeReference);
+        $user = $this->fixtureStorage->get(User::class, $userReference);
+        $team = $this->teamFactory->createTeam($teamName, $hike, $user);
+        $this->fixtureStorage->set(Team::class, $teamReference, $team);
     }
 }

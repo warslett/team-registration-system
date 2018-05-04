@@ -4,24 +4,22 @@ default:
             contexts:
                 - App\Context\UserContext:
                     userFactory: '@App\Factory\Entity\UserFactory'
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\UserGroupContext:
                     userGroupFactory: '@App\Factory\Entity\UserGroupFactory'
-                    userRepository: '@App\Repository\UserRepository'
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\EventContext:
                     eventFactory: '@App\Factory\Entity\EventFactory'
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\HikeContext:
-                    eventRepository: '@App\Repository\EventRepository'
                     hikeFactory: '@App\Factory\Entity\HikeFactory'
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\TeamContext:
                     teamFactory: '@App\Factory\Entity\TeamFactory'
-                    hikeRepository: '@App\Repository\HikeRepository'
-                    eventRepository: '@App\Repository\EventRepository'
-                    userRepository: '@App\Repository\UserRepository'
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\APIContext:
                     guzzle: '@GuzzleHttp\ClientInterface'
-                    eventRepository: '@App\Repository\EventRepository'
-                    hikeRepository: '@App\Repository\HikeRepository'
-                    teamRepository: '@App\Repository\TeamRepository'
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\MyMinkContext:
                 - App\Context\CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'
