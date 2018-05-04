@@ -5,7 +5,8 @@
 {% block body %}
     <div class="container">
         <h1>Your Teams</h1>
-        <a class="btn btn-success" href="{{ path('team_create') }}">Add Team</a>
+        {% include 'includes/messages.html.twig' %}
+        <a class="btn btn-success" href="{{ path('team_create') }}">Register Team</a>
         <div id="teams">
             {% for team in teams %}
                 <div id="team-{{ team.id }}">

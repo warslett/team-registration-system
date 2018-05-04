@@ -8,12 +8,12 @@ Feature:
     And I fill in "Password" with "Password1!"
     And I fill in "Repeat Password" with "Password1!"
     And I press "Register"
-    Then I should be on "/user/login"
+    Then the title should be "Login » Team Registration System"
     And there is an alert with the message "Successfully registered john@acme.co"
     When I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
     And I press "Log in"
-    Then I should be on "/teams/list"
+    Then the title should be "Teams » Team Registration System"
     And I should see "Welcome, john@acme.co"
 
   Scenario: I cannot register an account with an invalid email
@@ -22,7 +22,7 @@ Feature:
     And I fill in "Password" with "Password1!"
     And I fill in "Repeat Password" with "Password1!"
     And I press "Register"
-    Then I should be on "/user/register"
+    Then the title should be "Register » Team Registration System"
     And there is an alert with the message "There were some problems with the information you provided"
 
   Scenario: I cannot register an account with an email that already exists in the system
@@ -32,7 +32,7 @@ Feature:
     And I fill in "Password" with "Password1!"
     And I fill in "Repeat Password" with "Password1!"
     And I press "Register"
-    Then I should be on "/user/register"
+    Then the title should be "Register » Team Registration System"
     And there is an alert with the message "There were some problems with the information you provided"
 
   Scenario: I cannot register an account if my passwords don't match
@@ -41,5 +41,5 @@ Feature:
     And I fill in "Password" with "Password1!"
     And I fill in "Repeat Password" with "Password2!"
     And I press "Register"
-    Then I should be on "/user/register"
+    Then the title should be "Register » Team Registration System"
     And there is an alert with the message "There were some problems with the information you provided"

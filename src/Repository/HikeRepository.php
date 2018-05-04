@@ -24,4 +24,20 @@ class HikeRepository extends EntityRepository
     {
         return $this->findOneBy(['name' => $hikeName, 'event' => $event]);
     }
+
+    public function hasHikesOpenToRegistration(): bool
+    {
+        $now = new \DateTime();
+
+        return $this->createQueryBuilder('h')
+            ->select('count(h)')
+            ->leftJoin('h.event', 'e')
+            ->where('e.registrationOpens < :minRegistrationOpen')
+            ->setParameter(':minRegistrationOpen', $now)
+            ->andWhere('e.registrationCloses > :maxRegistrationCloses')
+            ->setParameter(':maxRegistrationCloses', $now)
+            ->getQuery()
+            ->getSingleScalarResult() > 0
+        ;
+    }
 }

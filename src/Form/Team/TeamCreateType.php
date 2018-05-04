@@ -4,6 +4,7 @@ namespace App\Form\Team;
 
 use App\Entity\Hike;
 use App\Entity\Team;
+use App\Repository\HikeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +19,18 @@ class TeamCreateType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('hike', EntityType::class, [
-                'class' => Hike::class
+                'class' => Hike::class,
+                'query_builder' => function (HikeRepository $repo) {
+                    $now = new \DateTime();
+
+                    return $repo->createQueryBuilder('h')
+                        ->leftJoin('h.event', 'e')
+                        ->where('e.registrationOpens < :minRegistrationOpen')
+                        ->setParameter(':minRegistrationOpen', $now)
+                        ->andWhere('e.registrationCloses > :maxRegistrationCloses')
+                        ->setParameter(':maxRegistrationCloses', $now)
+                    ;
+                }
             ])
         ;
     }

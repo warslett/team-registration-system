@@ -44,6 +44,18 @@ class Event
     private $date;
 
     /**
+     * @ORM\Column(type="date")
+     * @var \DateTime
+     */
+    private $registrationOpens;
+
+    /**
+     * @ORM\Column(type="date")
+     * @var \DateTime
+     */
+    private $registrationCloses;
+
+    /**
      * @ORM\OneToMany(targetEntity="Hike", mappedBy="event")
      * @var Collection|Hike[]
      */
@@ -112,5 +124,37 @@ class Event
     public function setDate(\DateTime $date): void
     {
         $this->date = $date;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistrationOpens(): \DateTime
+    {
+        return $this->registrationOpens;
+    }
+
+    /**
+     * @param \DateTime $registrationOpens
+     */
+    public function setRegistrationOpens(\DateTime $registrationOpens): void
+    {
+        $this->registrationOpens = $registrationOpens;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistrationCloses(): \DateTime
+    {
+        return $this->registrationCloses;
+    }
+
+    /**
+     * @param \DateTime $registrationCloses
+     */
+    public function setRegistrationCloses(\DateTime $registrationCloses): void
+    {
+        $this->registrationCloses = $registrationCloses;
     }
 }

@@ -8,7 +8,7 @@ Feature:
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
     And I press "Log in"
-    Then I should be on "/teams/list"
+    Then the title should be "Teams » Team Registration System"
     And I should see "Welcome, john@acme.co"
 
   Scenario: I cannot login with an email that does not belong to a user in the system
@@ -16,7 +16,7 @@ Feature:
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
     And I press "Log in"
-    Then I should be on "/user/login"
+    Then the title should be "Login » Team Registration System"
     And there is an alert with the message "Invalid credentials."
 
   Scenario: I cannot login with the wrong password
@@ -25,5 +25,5 @@ Feature:
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "wRonGpASSwOrd"
     And I press "Log in"
-    Then I should be on "/user/login"
+    Then the title should be "Login » Team Registration System"
     And there is an alert with the message "Invalid credentials."

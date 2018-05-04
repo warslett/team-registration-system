@@ -14,7 +14,6 @@ class EventFactory
     private $entityManager;
 
     /**
-     * UserFactory constructor.
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
@@ -22,11 +21,24 @@ class EventFactory
         $this->entityManager = $entityManager;
     }
 
-    public function createEvent(string $eventName, \DateTime $dateTime): Event
-    {
+    /**
+     * @param string $eventName
+     * @param \DateTime $dateTime
+     * @param \DateTime $registrationOpenDate
+     * @param \DateTime $registrationCloseDate
+     * @return Event
+     */
+    public function createEvent(
+        string $eventName,
+        \DateTime $dateTime,
+        \DateTime $registrationOpenDate,
+        \DateTime $registrationCloseDate
+    ): Event {
         $event = new Event();
         $event->setName($eventName);
         $event->setDate($dateTime);
+        $event->setRegistrationOpens($registrationOpenDate);
+        $event->setRegistrationCloses($registrationCloseDate);
         $this->entityManager->persist($event);
         $this->entityManager->flush();
         return $event;

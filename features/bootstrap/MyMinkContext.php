@@ -27,6 +27,7 @@ class MyMinkContext extends BehatMinkContext
 
     /**
      * @Then there is an alert with the message :message
+     * @throws \Exception
      */
     public function thereIsAnAlertWithTheMessage(string $message)
     {
@@ -90,5 +91,39 @@ class MyMinkContext extends BehatMinkContext
     {
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
         $this->visit(sprintf('/teams/%d', $team->getId()));
+    }
+
+    /**
+     * @Then /^the drop down "([^"]*)" includes the option "([^"]*)"$/
+     * @param string $dropDownLocator
+     * @param string $optionLocator
+     */
+    public function theDropdownIncludesTheOption(string $dropDownLocator, string $optionLocator)
+    {
+        $option = $this->findDropDownOption($dropDownLocator, $optionLocator);
+        Assert::assertNotNull($option);
+    }
+
+    /**
+     * @Then /^the drop down "([^"]*)" does not include the option "([^"]*)"$/
+     * @param string $dropDownLocator
+     * @param string $optionLocator
+     */
+    public function theDropdownDoesNotIncludeTheOption(string $dropDownLocator, string $optionLocator)
+    {
+        $option = $this->findDropDownOption($dropDownLocator, $optionLocator);
+        Assert::assertNull($option);
+    }
+
+    /**
+     * @param string $dropDownLocator
+     * @param string $optionLocator
+     * @return NodeElement|mixed|null
+     */
+    private function findDropDownOption(string $dropDownLocator, string $optionLocator)
+    {
+        $dropDown = $this->getSession()->getPage()->findField($dropDownLocator);
+        $option = $dropDown->find('named', ['option', $optionLocator]);
+        return $option;
     }
 }
