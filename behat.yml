@@ -21,6 +21,7 @@ default:
                     guzzle: '@GuzzleHttp\ClientInterface'
                     fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\MyMinkContext:
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'
 

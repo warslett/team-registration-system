@@ -14,15 +14,15 @@ user_logout:
     path: /user/logout
 
 team_list:
-    path: /team/list
+    path: /teams/list
     controller: App\Controller\Team\TeamListController
 
 team_create:
-    path: /team/create
+    path: /teams/create
     controller: App\Controller\Team\TeamCreateController
 
 team_show:
-    path: /team/{team_id}
+    path: /teams/{team_id}
     controller: App\Controller\Team\TeamShowController
 
 api_login:

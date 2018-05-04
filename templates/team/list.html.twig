@@ -9,7 +9,7 @@
         <div id="teams">
             {% for team in teams %}
                 <div id="team-{{ team.id }}">
-                    <h3>{{ team }}</h3>
+                    <h3><a href="{{ path('team_show', {'team_id': team.id}) }}">{{ team }}</a></h3>
                     Hike: {{ team.hike }}
                 </div>
             {% endfor %}

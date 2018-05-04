@@ -2,12 +2,28 @@
 
 namespace App\Context;
 
+use App\Entity\Team;
+use App\Service\FixtureStorageService;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\MinkContext as BehatMinkContext;
 use PHPUnit\Framework\Assert;
 
 class MyMinkContext extends BehatMinkContext
 {
+
+    /**
+     * @var FixtureStorageService
+     */
+    private $fixtureStorage;
+
+    /**
+     * @param FixtureStorageService $fixtureStorage
+     */
+    public function __construct(FixtureStorageService $fixtureStorage)
+    {
+        $this->fixtureStorage = $fixtureStorage;
+    }
 
     /**
      * @Then there is an alert with the message :message
@@ -64,5 +80,15 @@ class MyMinkContext extends BehatMinkContext
     public function theTitleShouldBe($title)
     {
         Assert::assertEquals($title, $this->getSession()->getPage()->find('css', 'title')->getText());
+    }
+
+    /**
+     * @Given /^I go to the Team page for "([^"]*)"$/
+     * @throws \Exception
+     */
+    public function iGoToTheTeamPageFor($teamReference)
+    {
+        $team = $this->fixtureStorage->get(Team::class, $teamReference);
+        $this->visit(sprintf('/teams/%d', $team->getId()));
     }
 }
