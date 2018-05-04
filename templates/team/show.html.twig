@@ -5,8 +5,70 @@
 {% block body %}
     <div class="container">
         <h1>{{ team.name }}</h1>
-        <h2>{{ team.hike }}</h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ team }}</li>
+            </ol>
+        </nav>
         {% include 'includes/messages.html.twig' %}
-
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic info</h5>
+                        <div class="card-text">
+                            <dl class="dl">
+                                <dt>Team Name</dt>
+                                <dd>{{ team.name }}</dd>
+                                <dt>Team Number</dt>
+                                <dd>#{{ team.id }}</dd>
+                                <dt>Hike</dt>
+                                <dd>{{ team.hike.name }}</dd>
+                                <dt>Event</dt>
+                                <dd>{{ team.hike.event.name }} ({{ team.hike.event.date.format('F jS, Y') }})</dd>
+                            </dl>
+                        </div>
+                        <a href="#" class="text-primary text-uppercase mr-3">Edit basic info</a>
+                        <a href="#" class="text-danger text-uppercase">Drop team</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Team Members</h5>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Contact</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>#{{ team.id }}A</td>
+                                <td>Mark Otto</td>
+                                <td>07792058629</td>
+                            </tr>
+                            <tr>
+                                <td>#{{ team.id }}B</td>
+                                <td>Jacob Thornton</td>
+                                <td>07792058629</td>
+                            </tr>
+                            <tr>
+                                <td>#{{ team.id }}C</td>
+                                <td>Larry the Bird</td>
+                                <td>07792058629</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="text-success text-uppercase">Add team member</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

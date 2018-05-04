@@ -1,8 +1,37 @@
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$brand-primary: #ED7703;
+@import "colors";
+@import '~bootstrap-material-design/scss/bootstrap-material-design';
 
-@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+body {
+  color: $gray-dark;
+}
+
+h1 {
+  line-height: 80px;
+}
+
+a:hover {
+  text-decoration: none;
+}
 
 .alert {
   padding: 6px 12px;
+}
+
+.btn-add {
+  float:right;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.title-bar__user {
+  color: white;
+}
+
+.logout-link {
+  color: white;
+  transition: color 200ms ease;
+
+  &:hover {
+    color: darken(white, 20%);
+  }
 }

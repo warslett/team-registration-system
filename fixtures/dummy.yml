@@ -25,7 +25,7 @@ App\Entity\Event:
 
     event_2:
         name: "Upcoming Three Towers"
-        date: "<dateTimeBetween('now', '+1 years')>"
+        date: "<dateTimeBetween('+1 month', '+6 months')>"
 
 App\Entity\Hike:
 

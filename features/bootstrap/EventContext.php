@@ -34,42 +34,56 @@ class EventContext implements Context
     }
 
     /**
-     * @Given /^that "([^"]*)" is an Event called "([^"]*)" taking place at "([^"]*)"$/
      * @Given /^that "([^"]*)" is an Event called "([^"]*)" taking place on "([^"]*)"$/
      * @Given /^that "([^"]*)" is an Event called "([^"]*)" taking place "([^"]*)" from now$/
-     * @Given that :eventReference is an Event called :eventName taking place :dateString from now and taking registrations from :registrationOpenDateString from now until :registrationCloseDateString from now
      * @param string $eventReference
      * @param string $eventName
      * @param string $dateString
-     * @param null|string $registrationOpenDateString
-     * @param null|string $registrationCloseDate
      * @throws \Exception
      */
-    public function thatIsAnEventCalledTakingPlaceAt(
+    public function thatIsAnEventCalledTakingPlaceOn(
         string $eventReference,
         string $eventName,
-        string $dateString,
-        ?string $registrationOpenDateString = null,
-        ?string $registrationCloseDateString = null
+        string $dateString
     ) {
         $date = new \DateTime();
         $date->setTimestamp(strtotime($dateString));
 
-        if (is_null($registrationOpenDateString)) {
-            $registrationOpenDate = clone $date;
-            $registrationOpenDate->sub(\DateInterval::createFromDateString("6 months"));
-        } else {
-            $registrationOpenDate = new \DateTime();
-            $registrationOpenDate->setTimestamp(strtotime($registrationOpenDateString));
-        }
+        $registrationOpenDate = clone $date;
+        $registrationOpenDate->sub(\DateInterval::createFromDateString("6 months"));
 
-        if (is_null($registrationCloseDateString)) {
-            $registrationCloseDate = clone $date;
-            $registrationCloseDate->sub(\DateInterval::createFromDateString("1 months"));
-        } else {
-            $registrationCloseDate = new \DateTime();
-            $registrationCloseDate->setTimestamp(strtotime($registrationCloseDateString));
-        }
+        $registrationCloseDate = clone $date;
+        $registrationCloseDate->sub(\DateInterval::createFromDateString("1 months"));
+
+        $event = $this->eventFactory->createEvent($eventName, $date, $registrationOpenDate, $registrationCloseDate);
+        $this->fixtureStorage->set(Event::class, $eventReference, $event);
+    }
+
+    /**
+     * @Given that :eventReference is an Event called :eventName taking place on :dateString and taking registrations from :registrationOpenDateString until :registrationCloseDateString
+     * @Given that :eventReference is an Event called :eventName taking place :dateString from now and taking registrations from :registrationOpenDateString from now until :registrationCloseDateString from now
+     * @param string $eventReference
+     * @param string $eventName
+     * @param string $dateString
+     * @param string $registrationOpenDateString
+     * @param string $registrationCloseDateString
+     * @throws \Exception
+     */
+    public function thatIsAnEventCalledTakingPlaceOnAndTakingRegistrationsFromUntil(
+        string $eventReference,
+        string $eventName,
+        string $dateString,
+        string $registrationOpenDateString,
+        string $registrationCloseDateString
+    ) {
+        $date = new \DateTime();
+        $date->setTimestamp(strtotime($dateString));
+
+        $registrationOpenDate = new \DateTime();
+        $registrationOpenDate->setTimestamp(strtotime($registrationOpenDateString));
+
+        $registrationCloseDate = new \DateTime();
+        $registrationCloseDate->setTimestamp(strtotime($registrationCloseDateString));
 
         $event = $this->eventFactory->createEvent($eventName, $date, $registrationOpenDate, $registrationCloseDate);
         $this->fixtureStorage->set(Event::class, $eventReference, $event);
