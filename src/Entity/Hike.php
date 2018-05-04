@@ -8,13 +8,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation as ApiPlatform;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HikeRepository")
  * @UniqueEntity(fields={"name", "event"}, message="Hike name must be unique for this event")
  * @ApiPlatform\ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     attributes={
+ *         "normalization_context"={"groups"={"hike"}}
+ *     }
  * )
  * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"event": "exact"})
  */
@@ -61,6 +66,7 @@ class Hike
     }
 
     /**
+     * @Groups({"hike"})
      * @return null|int
      */
     public function getId(): ?int
@@ -69,6 +75,7 @@ class Hike
     }
 
     /**
+     * @Groups({"hike"})
      * @return string
      */
     public function getName(): ?string
@@ -85,6 +92,8 @@ class Hike
     }
 
     /**
+     * @ApiProperty()
+     * @Groups({"hike"})
      * @return Collection|Team[]
      */
     public function getTeams(): Collection
@@ -93,6 +102,7 @@ class Hike
     }
 
     /**
+     * @Groups({"hike"})
      * @return Event|null
      */
     public function getEvent(): ?Event

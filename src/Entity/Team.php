@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
  *     attributes={
- *         "normalization_context"={"groups"={"api"}}
+ *         "normalization_context"={"groups"={"team"}}
  *     }
  * )
  * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"hike": "exact"})
@@ -49,7 +49,7 @@ class Team
     private $user;
 
     /**
-     * @Groups({"api"})
+     * @Groups({"team"})
      * @return int|null
      */
     public function getId(): ?int
@@ -66,7 +66,7 @@ class Team
     }
 
     /**
-     * @Groups({"api"})
+     * @Groups({"team"})
      * @return string
      */
     public function getName(): ?string
@@ -83,7 +83,7 @@ class Team
     }
 
     /**
-     * @Groups({"api"})
+     * @Groups({"team"})
      * @return Hike
      */
     public function getHike(): ?Hike

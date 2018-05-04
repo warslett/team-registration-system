@@ -7,13 +7,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation as ApiPlatform;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  * @UniqueEntity(fields="name", message="Event name must be unique")
  * @ApiPlatform\ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     attributes={
+ *         "normalization_context"={"groups"={"event"}}
+ *     }
  * )
  */
 class Event
@@ -59,6 +63,7 @@ class Event
     }
 
     /**
+     * @Groups({"event"})
      * @return null|int
      */
     public function getId(): ?int
@@ -67,6 +72,7 @@ class Event
     }
 
     /**
+     * @Groups({"event"})
      * @return string
      */
     public function getName(): ?string
@@ -83,6 +89,7 @@ class Event
     }
 
     /**
+     * @Groups({"event"})
      * @return Hike[]|Collection
      */
     public function getHikes(): Collection
@@ -91,6 +98,7 @@ class Event
     }
 
     /**
+     * @Groups({"event"})
      * @return \DateTime
      */
     public function getDate(): ?\DateTime
