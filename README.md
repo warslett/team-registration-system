@@ -44,44 +44,26 @@ You can do this with curl like this:
 This will return you a JSON Web Token (JWT) that you can pass to every subsequent request in the Authorization header to
 prove who you are. So for example, to get a list of events from the system you can do this:
 
-`curl http://127.0.0.1:39876/api/events -H "Authorization: Bearer YOUR_TOKEN_GOES_HERE"`
+`curl http://127.0.0.1:39876/api/events/1 -H "Authorization: Bearer YOUR_TOKEN_GOES_HERE"`
 
 which will return something that looks like this:
 
 ```json
-{  
-   "@context":"/api/contexts/Event",
-   "@id":"/api/events",
-   "@type":"hydra:Collection",
-   "hydra:member":[  
-      {  
-         "@id":"/api/events/12",
-         "@type":"Event",
-         "id":12,
-         "name":"Previous Three Towers",
-         "hikes":[  
-            "/api/hikes/18",
-            "/api/hikes/20",
-            "/api/hikes/22",
-            "/api/hikes/24"
-         ],
-         "date":"2017-07-22T00:00:00+00:00"
-      },
-      {  
-         "@id":"/api/events/13",
-         "@type":"Event",
-         "id":13,
-         "name":"Upcoming Three Towers",
-         "hikes":[  
-            "/api/hikes/19",
-            "/api/hikes/21",
-            "/api/hikes/23",
-            "/api/hikes/25"
-         ],
-         "date":"2018-05-23T00:00:00+00:00"
-      }
-   ],
-   "hydra:totalItems":2
+{
+    "@context": "/api/contexts/Event",
+    "@id": "/api/events/1",
+    "@type": "Event",
+    "id": 1,
+    "name": "Three Towers 2017",
+    "date": "2017-04-30T00:00:00+00:00",
+    "registrationOpens": "2016-10-30T00:00:00+00:00",
+    "registrationCloses": "2017-03-30T00:00:00+00:00",
+    "hikes": [
+        "/api/hikes/1",
+        "/api/hikes/2",
+        "/api/hikes/3",
+        "/api/hikes/4"
+    ]
 }
 ```
 
@@ -119,36 +101,9 @@ Collections like these paginate up to 30 items in a single response. Pagination 
       "hydra:first":"/api/teams?page=1",
       "hydra:last":"/api/teams?page=5",
       "hydra:next":"/api/teams?page=2"
-   },
-   "hydra:search":{  
-      "@type":"hydra:IriTemplate",
-      "hydra:template":"/api/teams{?hike,hike[]}",
-      "hydra:variableRepresentation":"BasicRepresentation",
-      "hydra:mapping":[  
-         {  
-            "@type":"IriTemplateMapping",
-            "variable":"hike",
-            "property":"hike",
-            "required":false
-         },
-         {  
-            "@type":"IriTemplateMapping",
-            "variable":"hike[]",
-            "property":"hike",
-            "required":false
-         }
-      ]
    }
 }
 ```
 
 Accessing the subsequent page can be achieved using the the page parameter in the query string eg.
 `curl http://127.0.0.1:39876/api/teams?page=2 -H "Authorization: Bearer YOUR_TOKEN_GOES_HERE"`
-
-Results can also be filtered using the query string. For example, to find only the teams for hike with id the 18, you
-would do the following:
-`curl http://127.0.0.1:39876/api/teams?hike=18 -H "Authorization: Bearer YOUR_TOKEN_GOES_HERE"`
-
-You can provide multiple values for the same argument like this:
-`curl http://127.0.0.1:39876/api/teams?hike[]=18&hike[]=19 -H "Authorization: Bearer YOUR_TOKEN_GOES_HERE"`
-which would return all teams for either hike 18 or hike 19.

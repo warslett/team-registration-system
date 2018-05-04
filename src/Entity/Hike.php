@@ -7,9 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation as ApiPlatform;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HikeRepository")
@@ -21,7 +19,6 @@ use ApiPlatform\Core\Annotation\ApiProperty;
  *         "normalization_context"={"groups"={"hike"}}
  *     }
  * )
- * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"event": "exact"})
  */
 class Hike
 {
@@ -92,7 +89,6 @@ class Hike
     }
 
     /**
-     * @ApiProperty()
      * @Groups({"hike"})
      * @return Collection|Team[]
      */

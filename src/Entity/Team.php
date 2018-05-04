@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation as ApiPlatform;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter as ORMFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -18,7 +17,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "normalization_context"={"groups"={"team"}}
  *     }
  * )
- * @ApiPlatform\ApiFilter(ORMFilter\SearchFilter::class, properties={"hike": "exact"})
  */
 class Team
 {

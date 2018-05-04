@@ -127,6 +127,7 @@ class Event
     }
 
     /**
+     * @Groups({"event"})
      * @return \DateTime
      */
     public function getRegistrationOpens(): \DateTime
@@ -143,6 +144,7 @@ class Event
     }
 
     /**
+     * @Groups({"event"})
      * @return \DateTime
      */
     public function getRegistrationCloses(): \DateTime

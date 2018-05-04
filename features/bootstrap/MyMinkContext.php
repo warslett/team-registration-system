@@ -4,7 +4,6 @@ namespace App\Context;
 
 use App\Entity\Team;
 use App\Service\FixtureStorageService;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\MinkContext as BehatMinkContext;
 use PHPUnit\Framework\Assert;
