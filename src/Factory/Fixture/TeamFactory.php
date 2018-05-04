@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Factory\Entity;
+namespace App\Factory\Fixture;
 
 use App\Entity\Hike;
 use App\Entity\Team;

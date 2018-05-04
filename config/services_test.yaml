@@ -8,10 +8,11 @@ services:
         public: true
 
     # Factories are used by behat which needs them to be public so it can use them
-    App\Factory\Entity\:
-        resource: '../src/Factory/Entity'
+    App\Factory\Fixture\:
+        resource: '../src/Factory/Fixture'
         public: true
 
+    # Used by behat to store and retrieve objects created during behat steps
     App\Service\FixtureStorageService:
       class: 'App\Service\FixtureStorageService'
       autowire: true

@@ -3,7 +3,7 @@
 namespace App\Context;
 
 use App\Entity\User;
-use App\Factory\Entity\UserGroupFactory;
+use App\Factory\Fixture\UserGroupFactory;
 use App\Repository\UserRepository;
 use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;

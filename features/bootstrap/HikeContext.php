@@ -4,7 +4,7 @@ namespace App\Context;
 
 use App\Entity\Event;
 use App\Entity\Hike;
-use App\Factory\Entity\HikeFactory;
+use App\Factory\Fixture\HikeFactory;
 use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 

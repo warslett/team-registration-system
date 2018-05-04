@@ -5,7 +5,7 @@ namespace App\Context;
 use App\Entity\Hike;
 use App\Entity\Team;
 use App\Entity\User;
-use App\Factory\Entity\TeamFactory;
+use App\Factory\Fixture\TeamFactory;
 use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 

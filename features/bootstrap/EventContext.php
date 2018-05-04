@@ -3,7 +3,7 @@
 namespace App\Context;
 
 use App\Entity\Event;
-use App\Factory\Entity\EventFactory;
+use App\Factory\Fixture\EventFactory;
 use App\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 

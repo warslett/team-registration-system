@@ -3,19 +3,19 @@ default:
         default:
             contexts:
                 - App\Context\UserContext:
-                    userFactory: '@App\Factory\Entity\UserFactory'
+                    userFactory: '@App\Factory\Fixture\UserFactory'
                     fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\UserGroupContext:
-                    userGroupFactory: '@App\Factory\Entity\UserGroupFactory'
+                    userGroupFactory: '@App\Factory\Fixture\UserGroupFactory'
                     fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\EventContext:
-                    eventFactory: '@App\Factory\Entity\EventFactory'
+                    eventFactory: '@App\Factory\Fixture\EventFactory'
                     fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\HikeContext:
-                    hikeFactory: '@App\Factory\Entity\HikeFactory'
+                    hikeFactory: '@App\Factory\Fixture\HikeFactory'
                     fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\TeamContext:
-                    teamFactory: '@App\Factory\Entity\TeamFactory'
+                    teamFactory: '@App\Factory\Fixture\TeamFactory'
                     fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\APIContext:
                     guzzle: '@GuzzleHttp\ClientInterface'
