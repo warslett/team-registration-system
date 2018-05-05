@@ -66,3 +66,117 @@ App\Entity\Team:
       name: "<sentence(3)>"
       user: "@user_*"
       hike: "@classic_hike_*"
+
+App\Entity\Walker:
+
+    scout_walker_A_{1..80}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    scout_walker_B_{1..80}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    scout_walker_C_{1..80}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    scout_walker_D_{1..40}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    junket_team_A_{1..30}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    junket_team_B_{1..30}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    junket_team_C_{1..30}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    junket_team_D_{1..15}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    explorer_team_A_{1..25}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    explorer_team_B_{1..25}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    explorer_team_C_{1..25}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    explorer_team_D_{1..12}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    classic_team_A_{1..12}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"
+
+    classic_team_B_{1..12}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"
+
+    classic_team_C_{1..12}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"
+
+    classic_team_D_{1..6}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"

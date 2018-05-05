@@ -37,32 +37,22 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Team Members</h5>
-                        <table class="table">
+                        <h5 class="card-title">Walkers</h5>
+                        <table id="walkers" class="table walkers-table">
                             <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Contact</th>
-                                <th scope="col">Actions</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>#{{ team.id }}A</td>
-                                <td>Mark Otto</td>
-                                <td>07792058629</td>
-                            </tr>
-                            <tr>
-                                <td>#{{ team.id }}B</td>
-                                <td>Jacob Thornton</td>
-                                <td>07792058629</td>
-                            </tr>
-                            <tr>
-                                <td>#{{ team.id }}C</td>
-                                <td>Larry the Bird</td>
-                                <td>07792058629</td>
-                            </tr>
+                                {% for walker in team.walkers %}
+                                    <tr class="walkers-table__walker">
+                                        <td class="walkers-table__reference">#{{ walker.reference }}</td>
+                                        <td class="walkers-table__name">{{ walker.foreName }} {{ walker.surName }}</td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                         <a href="#" class="text-success text-uppercase">Add team member</a>

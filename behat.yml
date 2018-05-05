@@ -17,6 +17,9 @@ default:
                 - App\Context\TeamContext:
                     teamFactory: '@App\Factory\Fixture\TeamFactory'
                     fixtureStorage: '@App\Service\FixtureStorageService'
+                - App\Context\WalkerContext:
+                    walkerFactory: '@App\Factory\Fixture\WalkerFactory'
+                    fixtureStorage: '@App\Service\FixtureStorageService'
                 - App\Context\APIContext:
                     guzzle: '@GuzzleHttp\ClientInterface'
                     fixtureStorage: '@App\Service\FixtureStorageService'

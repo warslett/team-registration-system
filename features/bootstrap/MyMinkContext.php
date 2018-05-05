@@ -4,6 +4,8 @@ namespace App\Context;
 
 use App\Entity\Team;
 use App\Service\FixtureStorageService;
+use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Behat\MinkExtension\Context\MinkContext as BehatMinkContext;
 use PHPUnit\Framework\Assert;
@@ -124,5 +126,26 @@ class MyMinkContext extends BehatMinkContext
         $dropDown = $this->getSession()->getPage()->findField($dropDownLocator);
         $option = $dropDown->find('named', ['option', $optionLocator]);
         return $option;
+    }
+
+    /**
+     * @Then /^the following Walkers are listed on the page:$/
+     */
+    public function theFollowingWalkersAreListedOnThePage(TableNode $table)
+    {
+        $walkerTable = $this->getSession()->getPage()->find('css', '#walkers');
+        $walkerRows = $walkerTable->findAll('css', '.walkers-table__walker');
+        $expectedRows = $table->getColumnsHash();
+        Assert::assertEquals(
+            count($expectedRows),
+            count($walkerRows),
+            "Failed asserting that expected and actual num Walkers the same length"
+        );
+        foreach ($expectedRows as $key => $row) {
+            /** @var NodeElement $walkerRow */
+            $walkerRow = $walkerRows[$key];
+            $nameCell = $walkerRow->find('css', '.walkers-table__name');
+            Assert::assertEquals($row['Name'], $nameCell->getText());
+        }
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation as ApiPlatform;
@@ -45,6 +47,17 @@ class Team
      * @ORM\ManyToOne(targetEntity="User", inversedBy="teams")
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Walker", mappedBy="team")
+     * @var Collection|Walker[]
+     */
+    private $walkers;
+
+    public function __construct()
+    {
+        $this->walkers = new ArrayCollection();
+    }
 
     /**
      * @Groups({"team"})
@@ -111,6 +124,14 @@ class Team
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return Walker[]|Collection
+     */
+    public function getWalkers()
+    {
+        return $this->walkers;
     }
 
     /**
