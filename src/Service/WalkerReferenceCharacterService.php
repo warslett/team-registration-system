@@ -3,13 +3,12 @@
 
 namespace App\Service;
 
-
 use App\Entity\Team;
 
 class WalkerReferenceCharacterService
 {
 
-    const CHARACTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    const CHARACTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
     /**
      * @param Team $team
@@ -29,7 +28,6 @@ class WalkerReferenceCharacterService
             if (!$alreadyAssigned) {
                 return $character;
             }
-
         }
         throw new \Exception('Unable to assign character reference');
     }

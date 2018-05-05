@@ -36,8 +36,8 @@ class WalkerFactory
         string $surName,
         string $referenceCharacter,
         string $emergencyContactNumber,
-        Team $team): Walker
-    {
+        Team $team
+    ): Walker {
         $walker = new Walker();
         $walker->setForeName($foreName);
         $walker->setSurName($surName);
