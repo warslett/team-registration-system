@@ -28,7 +28,7 @@ class TeamCreateFormManagerTest extends TestCase
         $formFactory->shouldHaveReceived('create')->with(
             TeamCreateType::class,
             m::type(Team::class)
-        );
+        )->once();
     }
 
     public function testCreate_ReturnsForm()

@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}New Walker &raquo; {{ team }} &raquo; {{ team.hike }} &raquo; {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Add a new walker to {{ team.name }}</h1>
+        {% include 'includes/messages.html.twig' %}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                {{ form_row(form.foreName) }}
+                {{ form_row(form.surName) }}
+                {{ form_row(form.emergencyContactNumber) }}
+
+                <button type="submit" class="btn btn-primary btn-raised">Save</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

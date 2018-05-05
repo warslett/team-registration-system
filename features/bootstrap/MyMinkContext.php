@@ -85,13 +85,22 @@ class MyMinkContext extends BehatMinkContext
     }
 
     /**
-     * @Given /^I go to the Team page for "([^"]*)"$/
+     * @When /^I go to the Team page for "([^"]*)"$/
      * @throws \Exception
      */
     public function iGoToTheTeamPageFor($teamReference)
     {
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
         $this->visit(sprintf('/teams/%d', $team->getId()));
+    }
+
+    /**
+     * @When /^I go to the Create Walker page for "([^"]*)"$/
+     */
+    public function iGoToTheCreateWalkerPageFor($teamReference)
+    {
+        $team = $this->fixtureStorage->get(Team::class, $teamReference);
+        $this->visit(sprintf('/teams/%d/walkers/create', $team->getId()));
     }
 
     /**

@@ -59,9 +59,9 @@ class Walker
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getForeName(): string
+    public function getForeName(): ?string
     {
         return $this->foreName;
     }
@@ -123,9 +123,9 @@ class Walker
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReferenceCharacter(): string
+    public function getReferenceCharacter(): ?string
     {
         return $this->referenceCharacter;
     }
@@ -138,8 +138,19 @@ class Walker
         $this->referenceCharacter = $referenceCharacter;
     }
 
+    /**
+     * @return string
+     */
     public function getReference(): string
     {
         return $this->team->getId() . $this->referenceCharacter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->foreName . ' ' . $this->surName;
     }
 }

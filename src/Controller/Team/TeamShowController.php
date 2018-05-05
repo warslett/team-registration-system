@@ -40,6 +40,6 @@ class TeamShowController
     public function __invoke(Request $request)
     {
         $team = $this->teamResolver->resolveById($request->get('team_id'));
-        return $this->responseFactory->createTemplateResponse('team/show.html.twig', ['team' => $team]);
+        return $this->responseFactory->createTemplateResponse('teams/show.html.twig', ['team' => $team]);
     }
 }

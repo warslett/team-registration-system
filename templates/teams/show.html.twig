@@ -55,7 +55,7 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        <a href="#" class="text-success text-uppercase">Add team member</a>
+                        <a href="{{ path('walker_create', {'team_id': team.id}) }}" class="text-success text-uppercase">Add team member</a>
                     </div>
                 </div>
             </div>

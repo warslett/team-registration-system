@@ -25,5 +25,9 @@ team_show:
     path: /teams/{team_id}
     controller: App\Controller\Team\TeamShowController
 
+walker_create:
+    path: /teams/{team_id}/walkers/create
+    controller: App\Controller\Walker\WalkerCreateController
+
 api_login:
     path: /api/login

@@ -37,7 +37,7 @@ class TeamListController
      */
     public function __invoke(Request $request): Response
     {
-        return $this->responseFactory->createTemplateResponse('team/list.html.twig', [
+        return $this->responseFactory->createTemplateResponse('teams/list.html.twig', [
             'teams' => $this->currentUserService->getCurrentUser()->getTeams()
         ]);
     }

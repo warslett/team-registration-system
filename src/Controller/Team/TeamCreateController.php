@@ -81,7 +81,7 @@ class TeamCreateController
                 $this->flashBag->add('danger', "There were some problems with the information you provided");
             }
 
-            return $this->responseFactory->createTemplateResponse('team/create.html.twig', [
+            return $this->responseFactory->createTemplateResponse('teams/create.html.twig', [
                 'form' => $form->createView()
             ]);
         } else {

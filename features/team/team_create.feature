@@ -1,5 +1,4 @@
-Feature: Team Creation
-
+Feature: Team Create
   In order for my team to be able to participate in an event
   I need to be able to register their details on the system
 
