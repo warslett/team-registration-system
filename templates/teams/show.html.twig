@@ -13,8 +13,8 @@
         </nav>
         {% include 'includes/messages.html.twig' %}
         <div class="row">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-5">
+                <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">Basic info</h5>
                         <div class="card-text">
@@ -29,15 +29,21 @@
                                 <dd>{{ team.hike.event.name }} ({{ team.hike.event.date.format('F jS, Y') }})</dd>
                             </dl>
                         </div>
-                        <a href="#" class="text-primary text-uppercase mr-3">Edit basic info</a>
-                        <a href="#" class="text-danger text-uppercase">Drop team</a>
+                        <a
+                                href="{{ path('team_update', {'team_id': team.id}) }}"
+                                class="text-primary text-uppercase mr-3"
+                        >Update basic info</a>
+                        <a
+                                href="{{ path('team_drop', {'team_id': team.id}) }}"
+                                class="text-danger text-uppercase">Drop team</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-7">
+                <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">Walkers</h5>
+                        {% if team.walkers %}
                         <table id="walkers" class="table walkers-table">
                             <thead>
                                 <tr>
@@ -48,13 +54,20 @@
                             </thead>
                             <tbody>
                                 {% for walker in team.walkers %}
-                                    <tr class="walkers-table__walker">
-                                        <td class="walkers-table__reference">#{{ walker.reference }}</td>
-                                        <td class="walkers-table__name">{{ walker.foreName }} {{ walker.surName }}</td>
-                                    </tr>
+                                <tr class="walkers-table__walker">
+                                    <td class="walkers-table__reference">#{{ walker.reference }}</td>
+                                    <td class="walkers-table__name">{{ walker.name }}</td>
+                                    <td class="walkers-table__actions">
+                                        <a href="{{ path('walker_update', {'walker_id': walker.id}) }}">Update</a>
+                                        <a href="{{ path('walker_delete', {'walker_id': walker.id}) }}">Delete</a>
+                                    </td>
+                                </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
+                        {% else %}
+                            <p>This team doesn't have any walkers.</p>
+                        {% endif %}
                         <a href="{{ path('walker_create', {'team_id': team.id}) }}" class="text-success text-uppercase">Add team member</a>
                     </div>
                 </div>

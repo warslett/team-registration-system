@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
         <title>{% block title %}Team Registration System{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
@@ -20,13 +21,13 @@
                                 <a class="nav-link " href="{{ path('team_list') }}">Your Teams</a>
                             </li>
                         </ul>
+                        {% if app.user %}
+                            <div class="title-bar__user">
+                                Welcome, <span id="current-user">{{ app.user.email }}</span>.
+                                <a href="{{ path('user_logout') }}" class="logout-link">Log out</a>
+                            </div>
+                        {% endif %}
                     </div>
-                    {% if app.user %}
-                        <div class="title-bar__user">
-                            Welcome, <span id="current-user">{{ app.user.email }}</span>.
-                            <a href="{{ path('user_logout') }}" class="logout-link">Log out</a>
-                        </div>
-                    {% endif %}
                 </div>
             </nav>
         {% endblock %}

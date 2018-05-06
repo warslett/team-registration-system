@@ -5,6 +5,13 @@
 {% block body %}
     <div class="container">
         <h1>Add a new walker to {{ team.name }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': team.id}) }}">{{ team }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add new walker</li>
+            </ol>
+        </nav>
         {% include 'includes/messages.html.twig' %}
         <div class="row">
             <div class="col-md-6">

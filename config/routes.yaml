@@ -13,6 +13,13 @@ user_login:
 user_logout:
     path: /user/logout
 
+team_root:
+   path: /teams
+   controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+   defaults:
+       path: /teams/list
+       permanent: true
+
 team_list:
     path: /teams/list
     controller: App\Controller\Team\TeamListController
@@ -25,9 +32,25 @@ team_show:
     path: /teams/{team_id}
     controller: App\Controller\Team\TeamShowController
 
+team_update:
+    path: /teams/{team_id}/update
+    controller: App\Controller\Team\TeamUpdateController
+
+team_drop:
+    path: /teams/{team_id}/drop
+    controller: App\Controller\Team\TeamDropController
+
 walker_create:
     path: /teams/{team_id}/walkers/create
     controller: App\Controller\Walker\WalkerCreateController
+
+walker_update:
+    path: /walkers/{walker_id}/update
+    controller: App\Controller\Walker\WalkerUpdateController
+
+walker_delete:
+    path: /walkers/{walker_id}/delete
+    controller: App\Controller\Walker\WalkerDeleteController
 
 api_login:
     path: /api/login
