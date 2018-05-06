@@ -24,7 +24,7 @@
                             <div class="mb-1 text-muted">Team #{{ team.id }}</div>
                             <p class="card-text mb-auto">
                                 {% for walker in team.walkers %}
-                                    {{ walker.name }},
+                                    <span class="badge badge-dark">{{ walker.name }}</span>
                                 {% endfor %}
                             </p>
                             <a href="{{ path('team_show', {'team_id': team.id}) }}">Manage Team</a>

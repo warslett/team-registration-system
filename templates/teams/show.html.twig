@@ -43,7 +43,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">Walkers</h5>
-                        {% if team.walkers %}
+                        {% if team.walkers is not empty %}
                         <table id="walkers" class="table walkers-table">
                             <thead>
                                 <tr>

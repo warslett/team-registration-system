@@ -1,10 +1,10 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Login &raquo; {{ parent() }}{% endblock %}
+{% block title %}Log in &raquo; {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Login</h1>
+        <h1>Log in</h1>
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
@@ -12,26 +12,30 @@
 
         <div class="row">
             <div class="col-md-6">
-            {% if app.user %}
-                <p>You are already logged in as <strong>{{ app.user.email }}</strong>. Click <a href="{{ path('user_logout') }}">here</a> to logout.</p>
-            {% else %}
-                <form action="{{ path('user_login') }}" method="post">
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="text" class="form-control" id="email" name="_username" value="{{ last_username }}" />
+                <div class="card">
+                    <div class="card-body">
+                        {% if app.user %}
+                        <p>You are already logged in as <strong>{{ app.user.email }}</strong>. Click <a href="{{ path('user_logout') }}">here</a> to logout.</p>
+                        {% else %}
+                        <form action="{{ path('user_login') }}" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="email" name="_username" placeholder="Email" value="{{ last_username }}" />
+                                <label for="email">Email</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="_password" placeholder="Password" />
+                                <label for="password">Password</label>
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+                            <p>Don't have an account? Click <a href="{{ path('user_register') }}">here</a> to register.</p>
+
+                            <button type="submit" class="btn btn-primary btn-raised">Log in</button>
+                        </form>
+                        {% endif %}
                     </div>
-
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="_password" />
-                    </div>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-
-                    <p>Don't have an account? Click <a href="{{ path('user_register') }}">here</a> to register.</p>
-
-                    <button type="submit" class="btn btn-primary btn-raised">Log in</button>
-                </form>
-            {% endif %}
+                </div>
             </div>
         </div>
     </div>

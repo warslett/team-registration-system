@@ -35,3 +35,47 @@ a:hover {
     color: darken(white, 20%);
   }
 }
+
+.form-group {
+  position:relative;
+}
+
+.custom-file-control, .form-control {
+  min-height: 50px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+
+  &:not(select) {
+    padding-bottom: 10px;
+  }
+
+  &+label {
+    margin-bottom: 0;
+    color: grey;
+    margin-top: 21px;
+    position:absolute;
+    top:0;
+    transition: margin-top 200ms ease, font-size 200ms ease;
+  }
+
+  &:not(:placeholder-shown)+label {
+    margin-top: 0;
+    font-size: 0.8rem;
+  }
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &.is-invalid:focus {
+    box-shadow: none;
+  }
+}
+
+.invalid-feedback {
+  text-align: right;
+  position: absolute;
+  top: 0;
+  font-size: 0.8rem;
+  margin-top: -0.35em;
+}
