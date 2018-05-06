@@ -8,7 +8,7 @@ Feature:
     And I fill in "Password" with "Password1!"
     And I fill in "Repeat Password" with "Password1!"
     And I press "Register"
-    Then the title should be "Login » Team Registration System"
+    Then the title should be "Log in » Team Registration System"
     And there is an alert with the message "Successfully registered john@acme.co"
     When I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"

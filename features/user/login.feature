@@ -16,7 +16,7 @@ Feature:
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
     And I press "Log in"
-    Then the title should be "Login » Team Registration System"
+    Then the title should be "Log in » Team Registration System"
     And there is an alert with the message "Invalid credentials."
 
   Scenario: I cannot login with the wrong password
@@ -25,5 +25,5 @@ Feature:
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "wRonGpASSwOrd"
     And I press "Log in"
-    Then the title should be "Login » Team Registration System"
+    Then the title should be "Log in » Team Registration System"
     And there is an alert with the message "Invalid credentials."
