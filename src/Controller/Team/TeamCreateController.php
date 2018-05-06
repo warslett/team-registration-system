@@ -21,7 +21,7 @@ class TeamCreateController
     /**
      * @var TeamCreateFormManager
      */
-    private $userCreateFormManager;
+    private $teamCreateFormManager;
 
     /**
      * @var ResponseFactory
@@ -35,18 +35,18 @@ class TeamCreateController
 
     /**
      * @param FlashBagInterface $flashBag
-     * @param TeamCreateFormManager $userCreateFormManager
+     * @param TeamCreateFormManager $teamCreateFormManager
      * @param ResponseFactory $responseFactory
      * @param HikeRepository $hikeRepository
      */
     public function __construct(
         FlashBagInterface $flashBag,
-        TeamCreateFormManager $userCreateFormManager,
+        TeamCreateFormManager $teamCreateFormManager,
         ResponseFactory $responseFactory,
         HikeRepository $hikeRepository
     ) {
         $this->flashBag = $flashBag;
-        $this->userCreateFormManager = $userCreateFormManager;
+        $this->teamCreateFormManager = $teamCreateFormManager;
         $this->responseFactory = $responseFactory;
         $this->hikeRepository = $hikeRepository;
     }
@@ -59,13 +59,13 @@ class TeamCreateController
     public function __invoke(Request $request)
     {
         if ($this->hikeRepository->hasHikesOpenToRegistration()) {
-            $form = $this->userCreateFormManager->createForm();
+            $form = $this->teamCreateFormManager->createForm();
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
                 if ($form->isValid()) {
-                    $team = $this->userCreateFormManager->processForm($form);
+                    $team = $this->teamCreateFormManager->processForm($form);
 
                     $this->flashBag->add('success', sprintf(
                         "Team \"%s\" successfully created for \"%s\"",
