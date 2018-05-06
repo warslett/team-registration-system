@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <title>{% block title %}Team Registration System{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
         {% endblock %}
     </head>
     <body>
@@ -16,16 +16,25 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
+                        {% if app.user %}
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a class="nav-link " href="{{ path('team_list') }}">Your Teams</a>
                             </li>
                         </ul>
-                        {% if app.user %}
-                            <div class="title-bar__user">
-                                Welcome, <span id="current-user">{{ app.user.email }}</span>.
-                                <a href="{{ path('user_logout') }}" class="logout-link">Log out</a>
-                            </div>
+                        <div class="title-bar__user">
+                            Welcome, <span id="current-user">{{ app.user.email }}</span>.
+                            <a href="{{ path('user_logout') }}" class="logout-link">Log out</a>
+                        </div>
+                        {% else %}
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{ path('user_login') }}">Log in</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{ path('user_register') }}">Register</a>
+                                </li>
+                            </ul>
                         {% endif %}
                     </div>
                 </div>
@@ -33,7 +42,7 @@
         {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('build/js/app.js') }}"></script>
+        <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}
     </body>
 </html>
