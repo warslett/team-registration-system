@@ -1,4 +1,4 @@
-Feature:
+Feature: User Register
   In order to login to the system,
   I need to be able to register an account
 

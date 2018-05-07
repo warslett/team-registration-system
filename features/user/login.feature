@@ -1,4 +1,4 @@
-Feature:
+Feature: User Login
   In order to use the functionality of the system
   I need to be able to log in as a User.
 
