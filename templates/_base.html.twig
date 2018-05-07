@@ -9,7 +9,7 @@
         {% endblock %}
     </head>
     <body>
-        {% block titlebar %}
+        {% block navbar %}
             <nav class="navbar navbar-expand-md navbar-dark bg-primary">
                 <div class="container">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,30 @@
                 </div>
             </nav>
         {% endblock %}
-        {% block body %}{% endblock %}
+
+        {% block header %}
+            <div class="header d-flex">
+                <div class="container d-flex">
+                    <h1 class="mt-auto mb-auto">{% block header_h1 %}{% endblock %}</h1>
+                    {% block header_btn %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+
+        <div class="container">
+            {% block breadcrumb %}{% endblock %}
+            {% block messages %}
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
+            {% block body %}{% endblock %}
+        </div>
+
         {% block javascripts %}
         <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}

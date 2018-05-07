@@ -1,32 +1,25 @@
-{% extends "base.html.twig" %}
+{% extends "_simple_form.html.twig" %}
 
 {% block title %}New Walker &raquo; {{ team }} &raquo; {{ team.hike }} &raquo; {{ parent() }}{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <h1>Add a new walker to {{ team.name }}</h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
-                <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': team.id}) }}">{{ team }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add new walker</li>
-            </ol>
-        </nav>
-        {% include 'includes/messages.html.twig' %}
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        {{ form_start(form) }}
-                        {{ form_row(form.foreName) }}
-                        {{ form_row(form.surName) }}
-                        {{ form_row(form.emergencyContactNumber) }}
+{% block header_h1 %}Add new walker{% endblock %}
 
-                        <button type="submit" class="btn btn-primary btn-raised">Save</button>
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': team.id}) }}">{{ team }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add new walker</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.foreName) }}
+    {{ form_row(form.surName) }}
+    {{ form_row(form.emergencyContactNumber) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Save</button>
+    {{ form_end(form) }}
 {% endblock %}

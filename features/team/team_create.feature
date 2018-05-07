@@ -49,7 +49,7 @@ Feature: Team Create
     When I fill in "Name" with "Alpha Team"
     And I select "Scout Hike » Upcoming Three Towers" from "Hike"
     And I press "Save"
-    Then the title should be "New Team » Team Registration System"
+    Then the title should be "Register team » Team Registration System"
     And there is an alert with the message 'There were some problems with the information you provided'
 
   Scenario: I can create a team if the team name is already in use but on a separate event

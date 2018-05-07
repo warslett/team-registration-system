@@ -1,12 +1,16 @@
 @import "colors";
 @import '~bootstrap-material-design/scss/bootstrap-material-design';
+@import "typography";
 
 body {
   color: $gray-dark;
 }
 
-h1 {
-  line-height: 80px;
+.header {
+  background-color: $brand-blue;
+  color: white;
+  min-height: 80px;
+  margin-bottom: 20px;
 }
 
 a:hover {
@@ -17,14 +21,13 @@ a:hover {
   padding: 6px 12px;
 }
 
-.btn-add {
-  float:right;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.btn-header {
+  margin: auto 0 auto auto;
 }
 
 .title-bar__user {
   color: white;
+  font-size: 0.8rem;
 }
 
 .logout-link {

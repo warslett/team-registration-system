@@ -1,25 +1,15 @@
-{% extends "base.html.twig" %}
+{% extends "_simple_form.html.twig" %}
 
 {% block title %}Register &raquo; {{ parent() }}{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <h1>Register a new user</h1>
-        {% include 'includes/messages.html.twig' %}
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        {{ form_start(form) }}
-                        {{ form_row(form.email) }}
-                        {{ form_row(form.plainPassword.first) }}
-                        {{ form_row(form.plainPassword.second) }}
+{% block header_h1 %}Register{% endblock %}
 
-                        <button type="submit" class="btn btn-primary btn-raised">Register</button>
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Register</button>
+    {{ form_end(form) }}
 {% endblock %}

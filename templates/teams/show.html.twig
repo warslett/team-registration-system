@@ -1,75 +1,76 @@
-{% extends "base.html.twig" %}
+{% extends "_base.html.twig" %}
 
 {% block title %}{{ team.name }} &raquo; {{ team.hike }} &raquo; {{ parent() }}{% endblock %}
 
+{% block header_h1 %}{{ team.name }}{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ team.name }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
 {% block body %}
-    <div class="container">
-        <h1>{{ team.name }}</h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ team }}</li>
-            </ol>
-        </nav>
-        {% include 'includes/messages.html.twig' %}
-        <div class="row">
-            <div class="col-md-5">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Basic info</h5>
-                        <div class="card-text">
-                            <dl class="dl">
-                                <dt>Team Name</dt>
-                                <dd>{{ team.name }}</dd>
-                                <dt>Team Number</dt>
-                                <dd>#{{ team.id }}</dd>
-                                <dt>Hike</dt>
-                                <dd>{{ team.hike.name }}</dd>
-                                <dt>Event</dt>
-                                <dd>{{ team.hike.event.name }} ({{ team.hike.event.date.format('F jS, Y') }})</dd>
-                            </dl>
-                        </div>
-                        <a
-                                href="{{ path('team_update', {'team_id': team.id}) }}"
-                                class="text-primary text-uppercase mr-3"
-                        >Update basic info</a>
-                        <a
-                                href="{{ path('team_drop', {'team_id': team.id}) }}"
-                                class="text-danger text-uppercase">Drop team</a>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Basic info</h5>
+                    <div class="card-text">
+                        <dl class="dl">
+                            <dt>Team Name</dt>
+                            <dd>{{ team.name }}</dd>
+                            <dt>Team Number</dt>
+                            <dd>#{{ team.id }}</dd>
+                            <dt>Hike</dt>
+                            <dd>{{ team.hike.name }}</dd>
+                            <dt>Event</dt>
+                            <dd>{{ team.hike.event.name }} ({{ team.hike.event.date.format('F jS, Y') }})</dd>
+                        </dl>
                     </div>
+                    <a
+                            href="{{ path('team_update', {'team_id': team.id}) }}"
+                            class="text-primary text-uppercase mr-3"
+                    >Update basic info</a>
+                    <a
+                            href="{{ path('team_drop', {'team_id': team.id}) }}"
+                            class="text-danger text-uppercase">Drop team</a>
                 </div>
             </div>
-            <div class="col-md-7">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Walkers</h5>
-                        {% if team.walkers is not empty %}
-                        <table id="walkers" class="table walkers-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for walker in team.walkers %}
-                                <tr class="walkers-table__walker">
-                                    <td class="walkers-table__reference">#{{ walker.reference }}</td>
-                                    <td class="walkers-table__name">{{ walker.name }}</td>
-                                    <td class="walkers-table__actions">
-                                        <a href="{{ path('walker_update', {'walker_id': walker.id}) }}">Update</a>
-                                        <a href="{{ path('walker_delete', {'walker_id': walker.id}) }}">Delete</a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% else %}
-                            <p>This team doesn't have any walkers.</p>
-                        {% endif %}
-                        <a href="{{ path('walker_create', {'team_id': team.id}) }}" class="text-success text-uppercase">Add team member</a>
-                    </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Walkers</h5>
+                    {% if team.walkers is not empty %}
+                    <table id="walkers" class="table walkers-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for walker in team.walkers %}
+                            <tr class="walkers-table__walker">
+                                <td class="walkers-table__reference">#{{ walker.reference }}</td>
+                                <td class="walkers-table__name">{{ walker.name }}</td>
+                                <td class="walkers-table__actions">
+                                    <a href="{{ path('walker_update', {'walker_id': walker.id}) }}">Update</a>
+                                    <a href="{{ path('walker_delete', {'walker_id': walker.id}) }}">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>This team doesn't have any walkers.</p>
+                    {% endif %}
+                    <a href="{{ path('walker_create', {'team_id': team.id}) }}" class="text-success text-uppercase">Add team member</a>
                 </div>
             </div>
         </div>

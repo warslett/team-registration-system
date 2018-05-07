@@ -1,24 +1,23 @@
-{% extends "base.html.twig" %}
+{% extends "_simple_form.html.twig" %}
 
-{% block title %}New Team &raquo; {{ parent() }}{% endblock %}
+{% block title %}Register team &raquo; {{ parent() }}{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <h1>Register a new team</h1>
-        {% include 'includes/messages.html.twig' %}
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        {{ form_start(form) }}
-                        {{ form_row(form.name) }}
-                        {{ form_row(form.hike) }}
+{% block header_h1 %}Register team{% endblock %}
 
-                        <button type="submit" class="btn btn-primary btn-raised">Save</button>
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Register team</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.hike) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Save</button>
+    {{ form_end(form) }}
 {% endblock %}
