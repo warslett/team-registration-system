@@ -51,7 +51,6 @@
         {% endblock %}
 
         <div class="container">
-            {% block breadcrumb %}{% endblock %}
             {% block messages %}
                 {% for type, messages in app.flashes %}
                     {% for message in messages %}
@@ -61,6 +60,7 @@
                     {% endfor %}
                 {% endfor %}
             {% endblock %}
+            {% block breadcrumb %}{% endblock %}
             {% block body %}{% endblock %}
         </div>
 
