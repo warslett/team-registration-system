@@ -23,7 +23,7 @@ Feature: Walker Create
     Given that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Alpha Team"
-    And I follow "Add team member"
+    And I follow "Add walker"
     And I fill in "Forename" with "John"
     And I fill in "Surname" with "Smith"
     And I fill in "Emergency Contact Number" with "0123456789"
