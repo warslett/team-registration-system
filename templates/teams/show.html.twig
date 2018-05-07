@@ -33,11 +33,12 @@
                     </div>
                     <a
                             href="{{ path('team_update', {'team_id': team.id}) }}"
-                            class="text-primary text-uppercase mr-3"
+                            class="text-primary text-uppercase font-brand mr-3"
                     >Update basic info</a>
                     <a
                             href="{{ path('team_drop', {'team_id': team.id}) }}"
-                            class="text-danger text-uppercase">Drop team</a>
+                            class="text-danger text-uppercase font-brand"
+                    >Drop team</a>
                 </div>
             </div>
         </div>
@@ -70,7 +71,10 @@
                     {% else %}
                         <p>This team doesn't have any walkers.</p>
                     {% endif %}
-                    <a href="{{ path('walker_create', {'team_id': team.id}) }}" class="text-success text-uppercase">Add team member</a>
+                    <a
+                            href="{{ path('walker_create', {'team_id': team.id}) }}"
+                            class="text-success text-uppercase font-brand"
+                    >Add walker</a>
                 </div>
             </div>
         </div>
