@@ -5,6 +5,10 @@ root:
 user_register:
     path: /user/register
     controller: App\Controller\User\UserRegisterController
+
+user_update:
+    path: /user/update
+    controller: App\Controller\User\UserUpdateController
     
 user_login:
     path: /user/login

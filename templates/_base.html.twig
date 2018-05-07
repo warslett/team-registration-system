@@ -21,6 +21,9 @@
                             <li class="nav-item">
                                 <a class="nav-link " href="{{ path('team_list') }}">Your Teams</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="{{ path('user_update') }}">Your Account</a>
+                            </li>
                         </ul>
                         <div class="title-bar__user">
                             Welcome, <span id="current-user">{{ app.user.email }}</span>.
@@ -63,6 +66,18 @@
             {% block breadcrumb %}{% endblock %}
             {% block body %}{% endblock %}
         </div>
+
+        <footer>
+            <div class="container">
+                Registration System built by <a href="mailto:will@arslett.uk">William Arslett</a>.<br />
+                <a href="https://github.com/warslett/team-registration-system" target="_blank">
+                    Source code.
+                </a>
+                <a href="https://circleci.com/gh/warslett/team-registration-system" target="_blank">
+                    <img class="shield-badge" src="https://circleci.com/gh/warslett/team-registration-system.png?style=shield">
+                </a>
+            </div>
+        </footer>
 
         {% block javascripts %}
         <script src="{{ asset('build/js/app.js') }}"></script>

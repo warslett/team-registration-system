@@ -1,6 +1,8 @@
 @import "colors";
 @import '~bootstrap-material-design/scss/bootstrap-material-design';
 @import "typography";
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
 
 body {
   color: $gray-dark;
@@ -81,4 +83,15 @@ a:hover {
   top: 0;
   font-size: 0.8rem;
   margin-top: -0.35em;
+}
+
+footer {
+  padding: 2rem 0;
+  text-align: right;
+  font-size: 0.8rem;
+  line-height: 24px;
+
+  .shield-badge {
+    margin-top: -2px;
+  }
 }
