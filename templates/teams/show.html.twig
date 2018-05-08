@@ -15,7 +15,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-4 d-flex">
+        <div class="col-lg-4 col-md-5 d-flex">
             <div class="card mb-4 w-100">
                 <div class="card-body">
                     <h5 class="card-title">Basic info</h5>
@@ -42,8 +42,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 d-flex">
-            <div class="card mb-4 fill-column w-100">
+        <div class="col-lg-5 col-md-7 d-flex">
+            <div class="card mb-4 w-100">
                 <div class="card-body">
                     <h5 class="card-title">Walkers</h5>
                     {% if team.walkers is not empty %}
@@ -78,17 +78,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 d-flex">
-            <div class="card bg-primary text-white mb-4 fill-column w-100">
-                <div class="card-body">
+        <div class="col-lg-3 d-flex">
+            <div class="card bg-primary text-white mb-4 w-100">
+                <div class="card-body d-flex flex-column align-items-start">
                     <h5 class="card-title">Checklist</h5>
                     <ol class="mb-4">
-                        <li>Register team <i class="fa fa-check"></i></li>
-                        <li>Add walkers</li>
-                        <li>Pay fees</li>
+                        <li>
+                            Register team <i class="fa fa-check"></i>
+                        </li>
+                        <li>
+                            Add walkers
+                        </li>
+                        <li>
+                            Pay fees
+                            <em>3x Scout Walkers</em>
+                        </li>
                     </ol>
-                    <div class="cta">
-                        <a href="#" class="btn btn-raised btn-light text-dark mx-auto">Pay fees</a>
+                    <div class="m-auto">
+                        <a href="#" class="btn btn-lg btn-raised btn-light text-dark mx-auto">Pay £36</a>
                     </div>
                 </div>
             </div>
