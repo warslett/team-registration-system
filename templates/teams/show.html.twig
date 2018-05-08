@@ -15,8 +15,8 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-5">
-            <div class="card mb-4">
+        <div class="col-md-4 d-flex">
+            <div class="card mb-4 w-100">
                 <div class="card-body">
                     <h5 class="card-title">Basic info</h5>
                     <div class="card-text">
@@ -42,12 +42,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-7">
-            <div class="card mb-4">
+        <div class="col-md-5 d-flex">
+            <div class="card mb-4 fill-column w-100">
                 <div class="card-body">
                     <h5 class="card-title">Walkers</h5>
                     {% if team.walkers is not empty %}
-                    <table id="walkers" class="table walkers-table">
+                    <table id="walkers" class="table table-sm walkers-table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -75,6 +75,21 @@
                             href="{{ path('walker_create', {'team_id': team.id}) }}"
                             class="text-success text-uppercase font-brand"
                     >Add walker</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="card bg-primary text-white mb-4 fill-column w-100">
+                <div class="card-body">
+                    <h5 class="card-title">Checklist</h5>
+                    <ol class="mb-4">
+                        <li>Register team <i class="fa fa-check"></i></li>
+                        <li>Add walkers</li>
+                        <li>Pay fees</li>
+                    </ol>
+                    <div class="cta">
+                        <a href="#" class="btn btn-raised btn-light text-dark mx-auto">Pay fees</a>
+                    </div>
                 </div>
             </div>
         </div>

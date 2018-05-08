@@ -1,4 +1,5 @@
 @import "colors";
+$grid-gutter-width: 20px;
 @import '~bootstrap-material-design/scss/bootstrap-material-design';
 @import "typography";
 $fa-font-path: "~font-awesome/fonts";
@@ -87,11 +88,14 @@ a:hover {
 
 footer {
   padding: 2rem 0;
-  text-align: right;
   font-size: 0.8rem;
   line-height: 24px;
 
   .shield-badge {
     margin-top: -2px;
   }
+}
+
+.cta {
+  text-align: center;
 }
