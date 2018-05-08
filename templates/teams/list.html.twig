@@ -33,7 +33,10 @@
                                 {{ walker.name }}{{ key+1!=team.walkers|length?',':'' }}
                             {% endfor %}
                         </p>
-                        <a href="{{ path('team_show', {'team_id': team.id}) }}" class="font-brand">Manage Team</a>
+                        <a
+                                href="{{ path('team_show', {'team_id': team.id}) }}"
+                                class="font-brand text-uppercase"
+                        >Manage Team</a>
                     </div>
                 </div>
             </div>

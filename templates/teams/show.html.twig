@@ -17,9 +17,9 @@
     <div class="row">
         <div class="col-lg-4 col-md-5 d-flex">
             <div class="card mb-4 w-100">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column align-items-start">
                     <h5 class="card-title">Basic info</h5>
-                    <div class="card-text">
+                    <div class="card-text mb-auto">
                         <dl class="dl">
                             <dt>Team Name</dt>
                             <dd>{{ team.name }}</dd>
@@ -31,23 +31,25 @@
                             <dd>{{ team.hike.event.name }} ({{ team.hike.event.date.format('F jS, Y') }})</dd>
                         </dl>
                     </div>
-                    <a
-                            href="{{ path('team_update', {'team_id': team.id}) }}"
-                            class="text-primary text-uppercase font-brand mr-3"
-                    >Update basic info</a>
-                    <a
-                            href="{{ path('team_drop', {'team_id': team.id}) }}"
-                            class="text-danger text-uppercase font-brand"
-                    >Drop team</a>
+                    <div class="card-btns">
+                        <a
+                                href="{{ path('team_update', {'team_id': team.id}) }}"
+                                class="text-primary text-uppercase font-brand mr-3"
+                        >Update basic info</a>
+                        <a
+                                href="{{ path('team_drop', {'team_id': team.id}) }}"
+                                class="text-danger text-uppercase font-brand"
+                        >Drop team</a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-5 col-md-7 d-flex">
             <div class="card mb-4 w-100">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column align-items-start">
                     <h5 class="card-title">Walkers</h5>
                     {% if team.walkers is not empty %}
-                    <table id="walkers" class="table table-sm walkers-table">
+                    <table id="walkers" class="table table-sm walkers-table mb-auto">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -69,12 +71,14 @@
                         </tbody>
                     </table>
                     {% else %}
-                        <p>This team doesn't have any walkers.</p>
+                        <p class="mb-auto">This team doesn't have any walkers.</p>
                     {% endif %}
-                    <a
-                            href="{{ path('walker_create', {'team_id': team.id}) }}"
-                            class="text-success text-uppercase font-brand"
-                    >Add walker</a>
+                    <div class="card-btns">
+                        <a
+                                href="{{ path('walker_create', {'team_id': team.id}) }}"
+                                class="text-success text-uppercase font-brand"
+                        >Add walker</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,16 +87,9 @@
                 <div class="card-body d-flex flex-column align-items-start">
                     <h5 class="card-title">Checklist</h5>
                     <ol class="mb-4">
-                        <li>
-                            Register team <i class="fa fa-check"></i>
-                        </li>
-                        <li>
-                            Add walkers
-                        </li>
-                        <li>
-                            Pay fees
-                            <em>3x Scout Walkers</em>
-                        </li>
+                        <li>Register team <i class="fa fa-check"></i></li>
+                        <li>Add walkers</li>
+                        <li>Pay fees</li>
                     </ol>
                     <div class="m-auto">
                         <a href="#" class="btn btn-lg btn-raised btn-light text-dark mx-auto">Pay £36</a>
