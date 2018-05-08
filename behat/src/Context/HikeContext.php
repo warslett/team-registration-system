@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\Event;
 use App\Entity\Hike;
-use App\Factory\Fixture\HikeFactory;
-use App\Service\FixtureStorageService;
+use App\Behat\FixtureFactory\HikeFactory;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 
 class HikeContext implements Context

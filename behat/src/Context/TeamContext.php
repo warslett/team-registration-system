@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\Hike;
 use App\Entity\Team;
 use App\Entity\User;
-use App\Factory\Fixture\TeamFactory;
-use App\Service\FixtureStorageService;
+use App\Behat\FixtureFactory\TeamFactory;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 
 class TeamContext implements Context

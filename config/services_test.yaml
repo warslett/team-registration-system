@@ -8,15 +8,11 @@ services:
         public: true
 
     # Factories are used by behat which needs them to be public so it can use them
-    App\Factory\Fixture\:
-        resource: '../src/Factory/Fixture'
+    App\Behat\:
+        resource: '../behat/src'
+        autowire: true
+        autoconfigure: true
         public: true
-
-    # Used by behat to store and retrieve objects created during behat steps
-    App\Service\FixtureStorageService:
-      class: 'App\Service\FixtureStorageService'
-      autowire: true
-      public: true
 
     # Also used by behat so that database can be "purged" before each test run
     Doctrine\Common\DataFixtures\Purger\ORMPurger:

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\User;
-use App\Factory\Fixture\UserFactory;
-use App\Service\FixtureStorageService;
+use App\Behat\FixtureFactory\UserFactory;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 
 class UserContext implements Context

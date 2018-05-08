@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\Team;
-use App\Service\FixtureStorageService;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Service;
+namespace App\Behat\Service;
 
 /**
  * Used for registering and retrieving fixtures for tests

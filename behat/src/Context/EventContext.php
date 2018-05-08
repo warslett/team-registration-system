@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\Event;
-use App\Factory\Fixture\EventFactory;
-use App\Service\FixtureStorageService;
+use App\Behat\FixtureFactory\EventFactory;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
-use function GuzzleHttp\Psr7\str;
 
 class EventContext implements Context
 {

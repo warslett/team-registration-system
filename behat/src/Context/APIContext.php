@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\Event;
 use App\Entity\Hike;
 use App\Entity\Team;
-use App\Service\FixtureStorageService;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use GuzzleHttp\ClientInterface;
@@ -174,22 +174,6 @@ class APIContext implements Context
     public function jsonResponseShouldContainTheFollowingData(TableNode $table)
     {
         $this->assertTableDataInAssocArray($table, $this->responseData());
-    }
-
-    /**
-     * @Then /^the JSON node "([^"]*)" is a link to the Event called "([^"]*)"$/
-     */
-    public function theJSONNodeIsALinkToTheEventCalled($node, $eventName)
-    {
-        $event = $this->eventRepository->findOneByName($eventName);
-        Assert::assertNotNull($event, sprintf("No event found with name %s", $eventName));
-
-        $expected = sprintf("/api/events/%d", $event->getId());
-        $data = $this->responseData();
-        $actual = $data[$node];
-        Assert::assertNotNull($actual, sprintf("No node with key %s found in response", $node));
-
-        Assert::assertEquals($expected, $actual);
     }
 
     /**

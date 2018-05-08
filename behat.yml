@@ -1,38 +1,40 @@
 default:
     suites:
         default:
+            paths:
+                features: behat/features
             contexts:
-                - App\Context\UserContext:
-                    userFactory: '@App\Factory\Fixture\UserFactory'
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\UserGroupContext:
-                    userGroupFactory: '@App\Factory\Fixture\UserGroupFactory'
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\EventContext:
-                    eventFactory: '@App\Factory\Fixture\EventFactory'
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\HikeContext:
-                    hikeFactory: '@App\Factory\Fixture\HikeFactory'
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\TeamContext:
-                    teamFactory: '@App\Factory\Fixture\TeamFactory'
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\WalkerContext:
-                    walkerFactory: '@App\Factory\Fixture\WalkerFactory'
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\APIContext:
+                - App\Behat\Context\UserContext:
+                    userFactory: '@App\Behat\FixtureFactory\UserFactory'
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\UserGroupContext:
+                    userGroupFactory: '@App\Behat\FixtureFactory\UserGroupFactory'
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\EventContext:
+                    eventFactory: '@App\Behat\FixtureFactory\EventFactory'
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\HikeContext:
+                    hikeFactory: '@App\Behat\FixtureFactory\HikeFactory'
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\TeamContext:
+                    teamFactory: '@App\Behat\FixtureFactory\TeamFactory'
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\WalkerContext:
+                    walkerFactory: '@App\Behat\FixtureFactory\WalkerFactory'
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\APIContext:
                     guzzle: '@GuzzleHttp\ClientInterface'
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\MyMinkContext:
-                    fixtureStorage: '@App\Service\FixtureStorageService'
-                - App\Context\CleanSlateContext:
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\MyMinkContext:
+                    fixtureStorage: '@App\Behat\Service\FixtureStorageService'
+                - App\Behat\Context\CleanSlateContext:
                     purger: '@Doctrine\Common\DataFixtures\Purger\ORMPurger'
 
     extensions:
 
         Behat\Symfony2Extension:
             kernel:
-                bootstrap: features/bootstrap/bootstrap.php
+                bootstrap: behat/bootstrap.php
                 class: App\Kernel
 
         Behat\MinkExtension:

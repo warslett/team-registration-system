@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\Team;
-use App\Factory\Fixture\WalkerFactory;
-use App\Service\FixtureStorageService;
+use App\Behat\FixtureFactory\WalkerFactory;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 
 class WalkerContext implements Context

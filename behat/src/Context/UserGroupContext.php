@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Context;
+namespace App\Behat\Context;
 
 use App\Entity\User;
-use App\Factory\Fixture\UserGroupFactory;
+use App\Behat\FixtureFactory\UserGroupFactory;
 use App\Repository\UserRepository;
-use App\Service\FixtureStorageService;
+use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 
