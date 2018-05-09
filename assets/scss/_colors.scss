@@ -1,8 +1,19 @@
 @import '~bootstrap-material-design/scss/variables/colors';
 
+$brand-yellow: #FFCD00;
+$brand-orange: #ED7703;
+$brand-red: #BA0C2F;
+$brand-brown: #7C3A2D;
+$brand-pink: #AD1AAC;
 $brand-purple: #4d2177;
-$brand-green: #84a40b;
-$brand-blue: #006990;
+$brand-blue: #003DA5;
+$brand-darkblue: #002855;
+$brand-lightblue: #0095C8;
+$brand-darkteal: #004851;
+$brand-teal: #00594F;
+$brand-turquoise: #009A44;
+$brand-green: #84A40B;
+$brand-grey: #8C857B;
 
 $brand-primary: $brand-purple;
 $brand-secondary: $brand-green;
@@ -11,9 +22,9 @@ $theme-colors: (
   primary: $brand-primary,
   secondary: $brand-secondary,
   success: $brand-green,
-  info: $light-blue,
-  warning: $deep-orange,
-  danger: $red,
+  info: $brand-blue,
+  warning: $brand-orange,
+  danger: $brand-red,
   light: $grey-100,
   dark: $grey-800
 );
