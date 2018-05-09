@@ -15,18 +15,18 @@ Feature: GET Hikes Collection
     And the JSON node "hydra:member" from the API response should be an empty array
 
   Scenario: One Hike
-    Given that "the event" is an Event called "Three Towers" taking place on "31st March 2999"
+    Given that "the event" is an Event
     And that "the hike" is a Hike called "Scout Hike" for "the event"
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to "/api/hikes"
     Then the response code from the API response should be 200
     And the JSON node "hydra:member" from the API response should be an array of size 1
     And item 0 in the array at JSON node "hydra:member" should contain the following data:
-      | Key  | Value      |
-      | name | Scout Hike |
+      | Property | Value      |
+      | name     | Scout Hike |
 
   Scenario: Many Hikes
-    Given that "the event" is an Event called "Three Towers" taking place on "31st March 2999"
+    Given that "the event" is an Event
     And that "the first hike" is a Hike called "Scout Hike" for "the event"
     And that "the second hike" is a Hike called "Explorer Hike" for "the event"
     When I authenticate with the api using email "api@example.com" and password "development"

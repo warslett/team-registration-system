@@ -9,19 +9,23 @@ Feature: GET Event
       | the api user    |
 
   Scenario: Event exists
-    Given that "the event" is an Event called "Three Towers" taking place on "31st March 2999" and taking registrations from "30th September 2998" until "28th February 2999"
+    Given that "the event" is an Event with the following data:
+      | name               | Three Towers |
+      | date               | 2999-03-31   |
+      | registrationOpens  | 2998-09-30   |
+      | registrationCloses | 2999-02-28   |
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Event URI for "the event"
     Then the response code from the API response should be 200
     And JSON response should contain the following data:
-      | Key                | Value                     |
+      | Property           | Value                     |
       | name               | Three Towers              |
       | date               | 2999-03-31T00:00:00+00:00 |
       | registrationOpens  | 2998-09-30T00:00:00+00:00 |
       | registrationCloses | 2999-02-28T00:00:00+00:00 |
 
   Scenario: Event exists with Hikes
-    Given that "the event" is an Event called "Three Towers" taking place on "31st March 2999"
+    Given that "the event" is an Event
     And that "the hike" is a Hike called "Scout Hike" for "the event"
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Event URI for "the event"

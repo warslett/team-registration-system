@@ -4,7 +4,8 @@ Feature: Walker Create
 
   Background:
     Given that "the user" is a User with email "john@acme.co" and password "Password1!"
-    And that "the event" is an Event called "Upcoming Three Towers" taking place "+6 months" from now
+    Given that "the event" is an Event with the following data:
+      | name | Upcoming Three Towers |
     And that "the hike" is a Hike called "Scout Hike" for "the event"
 
   Scenario: I cannot add a walker to another user's team

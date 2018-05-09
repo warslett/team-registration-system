@@ -25,3 +25,7 @@ services:
 
     GuzzleHttp\ClientInterface:
         alias: 'GuzzleHttp\Client'
+
+    Faker\Generator:
+        class: 'Faker\Generator'
+        factory: ['Faker\Factory', 'create']

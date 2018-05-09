@@ -15,21 +15,25 @@ Feature: GET Events Collection
     And the JSON node "hydra:member" from the API response should be an empty array
 
   Scenario: One Event
-    Given that "the event" is an Event called "Three Towers" taking place on "31st March 2999" and taking registrations from "30th September 2998" until "28th February 2999"
+    Given that "the event" is an Event with the following data:
+      | name               | Three Towers |
+      | date               | 2999-03-31   |
+      | registrationOpens  | 2998-09-30   |
+      | registrationCloses | 2999-02-28   |
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to "/api/events"
     Then the response code from the API response should be 200
     And the JSON node "hydra:member" from the API response should be an array of size 1
     And item 0 in the array at JSON node "hydra:member" should contain the following data:
-      | Key                | Value                     |
+      | Property           | Value                     |
       | name               | Three Towers              |
       | date               | 2999-03-31T00:00:00+00:00 |
       | registrationOpens  | 2998-09-30T00:00:00+00:00 |
       | registrationCloses | 2999-02-28T00:00:00+00:00 |
 
   Scenario: Many Events
-    Given that "the first event" is an Event called "Three Towers" taking place on "31st March 2999"
-    And that "the second event" is an Event called "Previous Three Towers" taking place on "31st March 2000"
+    Given that "the first event" is an Event
+    And that "the second event" is an Event
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to "/api/events"
     Then the response code from the API response should be 200

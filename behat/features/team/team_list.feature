@@ -3,7 +3,7 @@ Feature: Team List
   As a User, I can see a list of all my teams when I login
 
   Background:
-    Given that "the event" is an Event called "Upcoming Three Towers" taking place "+6 months" from now
+    Given that "the event" is an Event
     And that "the hike" is a Hike called "Scout Hike" for "the event"
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
 

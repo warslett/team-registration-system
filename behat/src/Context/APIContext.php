@@ -246,7 +246,7 @@ class APIContext implements Context
     private function assertTableDataInAssocArray(TableNode $table, array $item): void
     {
         foreach ($table->getColumnsHash() as $property) {
-            Assert::assertEquals($property['Value'], $item[$property['Key']]);
+            Assert::assertEquals($property['Value'], $item[$property['Property']]);
         }
     }
 

@@ -3,7 +3,8 @@ Feature: Team Show
   As a User, I can visit my Team's page when I login
 
   Background:
-    Given that "the event" is an Event called "Upcoming Three Towers" taking place "+6 months" from now
+    Given that "the event" is an Event with the following data:
+      | name | Upcoming Three Towers |
     And that "the hike" is a Hike called "Scout Hike" for "the event"
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
 

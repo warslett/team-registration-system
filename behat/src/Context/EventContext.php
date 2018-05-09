@@ -6,6 +6,8 @@ use App\Entity\Event;
 use App\Behat\FixtureFactory\EventFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Gherkin\Node\TableNode;
 
 class EventContext implements Context
 {
@@ -32,58 +34,16 @@ class EventContext implements Context
     }
 
     /**
-     * @Given /^that "([^"]*)" is an Event called "([^"]*)" taking place on "([^"]*)"$/
-     * @Given /^that "([^"]*)" is an Event called "([^"]*)" taking place "([^"]*)" from now$/
+     * @Given /^that "([^"]*)" is an Event with the following data:$/
+     * @Given /^that "([^"]*)" is an Event$/
      * @param string $eventReference
-     * @param string $eventName
-     * @param string $dateString
+     * @param TableNode|null $table
      * @throws \Exception
      */
-    public function thatIsAnEventCalledTakingPlaceOn(
-        string $eventReference,
-        string $eventName,
-        string $dateString
-    ) {
-        $date = new \DateTime();
-        $date->setTimestamp(strtotime($dateString));
-
-        $registrationOpenDate = clone $date;
-        $registrationOpenDate->sub(\DateInterval::createFromDateString("6 months"));
-
-        $registrationCloseDate = clone $date;
-        $registrationCloseDate->sub(\DateInterval::createFromDateString("1 months"));
-
-        $event = $this->eventFactory->createEvent($eventName, $date, $registrationOpenDate, $registrationCloseDate);
-        $this->fixtureStorage->set(Event::class, $eventReference, $event);
-    }
-
-    /**
-     * @Given that :eventReference is an Event called :eventName taking place on :dateString and taking registrations from :registrationOpenDateString until :registrationCloseDateString
-     * @Given that :eventReference is an Event called :eventName taking place :dateString from now and taking registrations from :registrationOpenDateString from now until :registrationCloseDateString from now
-     * @param string $eventReference
-     * @param string $eventName
-     * @param string $dateString
-     * @param string $registrationOpenDateString
-     * @param string $registrationCloseDateString
-     * @throws \Exception
-     */
-    public function thatIsAnEventCalledTakingPlaceOnAndTakingRegistrationsFromUntil(
-        string $eventReference,
-        string $eventName,
-        string $dateString,
-        string $registrationOpenDateString,
-        string $registrationCloseDateString
-    ) {
-        $date = new \DateTime();
-        $date->setTimestamp(strtotime($dateString));
-
-        $registrationOpenDate = new \DateTime();
-        $registrationOpenDate->setTimestamp(strtotime($registrationOpenDateString));
-
-        $registrationCloseDate = new \DateTime();
-        $registrationCloseDate->setTimestamp(strtotime($registrationCloseDateString));
-
-        $event = $this->eventFactory->createEvent($eventName, $date, $registrationOpenDate, $registrationCloseDate);
+    public function thatIsAnEventWithTheFollowingData(string $eventReference, TableNode $table = null)
+    {
+        $properties=is_null($table)?[]:$table->getRowsHash();
+        $event = $this->eventFactory->createEvent($properties);
         $this->fixtureStorage->set(Event::class, $eventReference, $event);
     }
 }

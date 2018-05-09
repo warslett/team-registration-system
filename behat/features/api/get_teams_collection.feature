@@ -15,7 +15,7 @@ Feature: GET Teams Collection
     And the JSON node "hydra:member" from the API response should be an empty array
 
   Scenario: One Team
-    Given that "the event" is an Event called "Three Towers" taking place "+6 months" from now
+    Given that "the event" is an Event
     And that "the hike" is a Hike called "Scout Hike" for "the event"
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
     And that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
@@ -24,11 +24,11 @@ Feature: GET Teams Collection
     Then the response code from the API response should be 200
     And the JSON node "hydra:member" from the API response should be an array of size 1
     And item 0 in the array at JSON node "hydra:member" should contain the following data:
-      | Key  | Value      |
-      | name | Alpha Team |
+      | Property | Value      |
+      | name     | Alpha Team |
 
   Scenario: Many Teams
-    Given that "the event" is an Event called "Three Towers" taking place "+6 months" from now
+    Given that "the event" is an Event
     And that "the hike" is a Hike called "Scout Hike" for "the event"
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
     And that "the first team" is a Team called "Alpha Team" for "the hike" registered by "the user"
