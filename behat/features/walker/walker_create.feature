@@ -11,9 +11,10 @@ Feature: Walker Create
 
   Scenario: I cannot add a walker to another user's team
     Given that "the other user" is a User with email "jane@acme.com" and password "Password1!"
-    And that "the other user's team" is a Team called "Alpha Team" for "the hike" registered by "the other user"
+    And that "the team" is a Team for "the hike" registered by "the other user" with the following properties:
+      | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
-    And I go to the Create Walker page for "the other user's team"
+    And I go to the Create Walker page for "the team"
     Then the response status code should be 403
 
   Scenario: I cannot add a walker to a team that does not exist
@@ -22,7 +23,8 @@ Feature: Walker Create
     Then the response status code should be 404
 
   Scenario: I can add a walker to my team
-    Given that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
+    And that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Alpha Team"
     And I follow "Add walker"

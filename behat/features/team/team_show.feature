@@ -10,15 +10,17 @@ Feature: Team Show
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
 
   Scenario: I can visit my Team's page
-    Given that "my team" is a Team called "Alpha Team" for "the hike" registered by "the user"
+    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Alpha Team"
     Then the response status code should be 200
     And the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
 
   Scenario: My Team's Walkers are listed on the page
-    Given that "my team" is a Team called "Alpha Team" for "the hike" registered by "the user"
-    And that "my team" has the following Walkers:
+    And that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
+    And that "the team" has the following Walkers:
       | Forename | Surname | Reference Character | Emergency Contact Number |
       | John     | Smith   | A                   | 123456789                |
       | Paul     | Smith   | B                   | 123456789                |
@@ -35,7 +37,7 @@ Feature: Team Show
 
   Scenario: I cannot visit a Team page for a Team I did not register
     Given that "the other user" is a User with email "jane@acme.co" and password "Password1!"
-    And that "the other user's team" is a Team called "Alpha Team" for "the hike" registered by "the other user"
+    And that "the team" is a Team for "the hike" registered by "the other user"
     When I log in with email "john@acme.co" and password "Password1!"
-    And I go to the Team page for "the other user's team"
+    And I go to the Team page for "the team"
     Then the response status code should be 403

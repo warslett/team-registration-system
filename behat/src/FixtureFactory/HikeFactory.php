@@ -14,6 +14,7 @@ class HikeFactory
      * @var EntityManagerInterface
      */
     private $entityManager;
+
     /**
      * @var Generator
      */
@@ -34,7 +35,7 @@ class HikeFactory
      * @param array $properties
      * @return Hike
      */
-    public function createHike(Event $event, array $properties): Hike
+    public function createHike(Event $event, array $properties = []): Hike
     {
         $hike = new Hike();
         $hike->setName($properties['name'] ?? ucfirst(implode(' ', $this->faker->words)));

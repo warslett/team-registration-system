@@ -12,7 +12,8 @@ Feature: GET Team
     Given that "the user" is a User with email "john@acme.co" and password "Password1!"
     And that "the event" is an Event
     And that "the hike" is a Hike for "the event"
-    And that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
+    And that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Team URI for "the team"
     Then the response code from the API response should be 200

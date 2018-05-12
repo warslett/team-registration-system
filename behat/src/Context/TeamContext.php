@@ -8,6 +8,8 @@ use App\Entity\User;
 use App\Behat\FixtureFactory\TeamFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Gherkin\Node\TableNode;
 
 class TeamContext implements Context
 {
@@ -35,22 +37,23 @@ class TeamContext implements Context
     }
 
     /**
-     * @Given /^that "([^"]*)" is a Team called "([^"]*)" for "([^"]*)" registered by "([^"]*)"$/
+     * @Given that :teamReference is a Team for :hikeReference registered by :userReference with the following properties:
+     * @Given that :teamReference is a Team for :hikeReference registered by :userReference
      * @param string $teamReference
-     * @param string $teamName
      * @param string $hikeReference
      * @param string $userReference
-     * @throws \Exception
+     * @param TableNode|null $table
      */
-    public function thatIsATeamCalledForRegisteredBy(
+    public function thatIsATeamForRegisteredByWithTheFollowingProperties(
         string $teamReference,
-        string $teamName,
         string $hikeReference,
-        string $userReference
+        string $userReference,
+        TableNode $table = null
     ) {
+        $properties=is_null($table)?[]:$table->getRowsHash();
         $hike = $this->fixtureStorage->get(Hike::class, $hikeReference);
         $user = $this->fixtureStorage->get(User::class, $userReference);
-        $team = $this->teamFactory->createTeam($teamName, $hike, $user);
+        $team = $this->teamFactory->createTeam($hike, $user, $properties);
         $this->fixtureStorage->set(Team::class, $teamReference, $team);
     }
 }

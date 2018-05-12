@@ -60,7 +60,8 @@ Feature: Team Create
       | name | Upcoming Three Towers |
     And that "the hike" is a Hike for "the event" with the following properties:
       | name | Scout Hike |
-    And that "the existing team" is a Team called "Alpha Team" for "the hike" registered by "the user"
+    And that "the existing team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Register Team"
     When I fill in "Name" with "Alpha Team"
@@ -77,7 +78,8 @@ Feature: Team Create
     Given that "the other event" is an Event
     And that "the other hike" is a Hike for "the other event" with the following properties:
       | name | Scout Hike |
-    And that "the other team" is a Team called "Alpha Team" for "the other hike" registered by "the user"
+    And that "the other team" is a Team for "the other hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Register Team"
     And I fill in "Name" with "Alpha Team"

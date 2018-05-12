@@ -41,7 +41,7 @@ class EventFactory
      * @param array $properties
      * @return Event
      */
-    public function createEvent(array $properties): Event
+    public function createEvent(array $properties = []): Event
     {
         $event = new Event();
         $event->setName($properties['name'] ?? ucfirst(implode(' ', $this->faker->words)));
