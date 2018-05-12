@@ -44,6 +44,12 @@ class Hike
     private $event;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    private $maxWalkers;
+
+    /**
      * @ORM\OneToMany(targetEntity="Team", mappedBy="hike")
      * @var Collection
      */
@@ -112,5 +118,22 @@ class Hike
     public function setEvent(Event $event): void
     {
         $this->event = $event;
+    }
+
+    /**
+     * @Groups({"hike"})
+     * @return int|null
+     */
+    public function getMaxWalkers(): ?int
+    {
+        return $this->maxWalkers;
+    }
+
+    /**
+     * @param int $maxWalkers
+     */
+    public function setMaxWalkers(int $maxWalkers)
+    {
+        $this->maxWalkers = $maxWalkers;
     }
 }

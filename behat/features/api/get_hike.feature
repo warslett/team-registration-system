@@ -7,19 +7,21 @@ Feature: GET Hike
       | email    | api@example.com |
       | password | development     |
     And that there is a User Group with the role "ROLE_API_USER" with the following members:
-      | Reference       |
-      | the api user    |
+      | Reference    |
+      | the api user |
 
   Scenario: Hike exists
     Given that "the event" is an Event
     And that "the hike" is a Hike for "the event" with the following properties:
-      | name | Scout Hike |
+      | name       | Scout Hike |
+      | maxWalkers | 4          |
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Hike URI for "the hike"
     Then the response code from the API response should be 200
     And JSON response should contain the following data:
-      | Property | Value      |
-      | name     | Scout Hike |
+      | Property   | Value      |
+      | name       | Scout Hike |
+      | maxWalkers | 4          |
     And the JSON node "event" is an Event link to "the event"
 
   Scenario: Hike exists with Teams

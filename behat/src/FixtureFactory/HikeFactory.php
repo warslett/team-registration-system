@@ -9,6 +9,7 @@ use Faker\Generator;
 
 class HikeFactory
 {
+    const DEFAULT_MAX_WALKERS = 4;
 
     /**
      * @var EntityManagerInterface
@@ -39,6 +40,7 @@ class HikeFactory
     {
         $hike = new Hike();
         $hike->setName($properties['name'] ?? ucfirst(implode(' ', $this->faker->words)));
+        $hike->setMaxWalkers($properties['maxWalkers'] ?? HikeFactory::DEFAULT_MAX_WALKERS);
         $hike->setEvent($event);
         $this->entityManager->persist($hike);
         $this->entityManager->flush();

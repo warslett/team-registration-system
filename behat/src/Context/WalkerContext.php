@@ -6,6 +6,7 @@ use App\Entity\Team;
 use App\Behat\FixtureFactory\WalkerFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 
 class WalkerContext implements Context
@@ -43,6 +44,17 @@ class WalkerContext implements Context
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
         foreach ($table->getColumnsHash() as $properties) {
             $this->walkerFactory->createTeam($team, $properties);
+        }
+    }
+
+    /**
+     * @Given that :teamReference has :numWalkers walkers
+     */
+    public function thatHasWalkers($teamReference, $numWalkers)
+    {
+        $team = $this->fixtureStorage->get(Team::class, $teamReference);
+        for ($i = 0; $i < $numWalkers; $i++) {
+            $this->walkerFactory->createTeam($team);
         }
     }
 }

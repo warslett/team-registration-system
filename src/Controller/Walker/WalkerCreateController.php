@@ -57,6 +57,15 @@ class WalkerCreateController
     public function __invoke(Request $request): Response
     {
         $team = $this->teamResolver->resolveById($request->get('team_id'));
+
+        if ($team->hasMaxWalkers()) {
+            $this->flashBag->add('danger', "This team already has the maximum number of allowed walkers");
+
+            return $this->responseFactory->createRedirectResponse('team_show', [
+                'team_id' => $team->getId()
+            ]);
+        }
+
         $form = $this->walkerCreateFormManager->createForm();
 
         $form->handleRequest($request);

@@ -135,6 +135,14 @@ class Team
     }
 
     /**
+     * @return bool
+     */
+    public function hasMaxWalkers(): bool
+    {
+        return $this->walkers->count() >= $this->hike->getMaxWalkers();
+    }
+
+    /**
      * @return string
      */
     public function __toString()

@@ -9,7 +9,8 @@ Feature: Walker Create
     And that "the event" is an Event with the following properties:
       | name | Upcoming Three Towers |
     And that "the hike" is a Hike for "the event" with the following properties:
-      | name | Scout Hike |
+      | name       | Scout Hike |
+      | maxWalkers | 4          |
 
   Scenario: I cannot add a walker to another user's team
     Given that "the other user" is a User
@@ -18,6 +19,16 @@ Feature: Walker Create
     When I log in with email "john@acme.co" and password "Password1!"
     And I go to the Create Walker page for "the team"
     Then the response status code should be 403
+
+  Scenario: I cannot add a walker to a team that has the maximum number of walkers
+    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
+    And that "the team" has 4 walkers
+    When I log in with email "john@acme.co" and password "Password1!"
+    And I follow "Alpha Team"
+    And I follow "Add walker"
+    Then the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
+    And there is an alert with the message "This team already has the maximum number of allowed walkers"
 
   Scenario: I cannot add a walker to a team that does not exist
     When I log in with email "john@acme.co" and password "Password1!"
