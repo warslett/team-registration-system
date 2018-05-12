@@ -6,7 +6,6 @@ use App\Entity\Event;
 use App\Behat\FixtureFactory\EventFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 
 class EventContext implements Context

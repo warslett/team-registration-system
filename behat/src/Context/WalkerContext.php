@@ -6,6 +6,7 @@ use App\Entity\Team;
 use App\Behat\FixtureFactory\WalkerFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
+use Behat\Gherkin\Node\TableNode;
 
 class WalkerContext implements Context
 {
@@ -33,19 +34,15 @@ class WalkerContext implements Context
     }
 
     /**
-     * @Given /^that "([^"]*)" has the following Walkers:$/
+     * @Given that :teamReference has the following Walkers:
+     * @param $teamReference
+     * @param TableNode $table
      */
-    public function thatHasTheFollowingWalkers($teamReference, \Behat\Gherkin\Node\TableNode $table)
+    public function thatHasTheFollowingWalkers($teamReference, TableNode $table)
     {
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
-        foreach ($table->getColumnsHash() as $row) {
-            $this->walkerFactory->createTeam(
-                $row['Forename'],
-                $row['Surname'],
-                $row['Reference Character'],
-                $row['Emergency Contact Number'],
-                $team
-            );
+        foreach ($table->getColumnsHash() as $properties) {
+            $this->walkerFactory->createTeam($team, $properties);
         }
     }
 }

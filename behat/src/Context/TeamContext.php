@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Behat\FixtureFactory\TeamFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 
 class TeamContext implements Context

@@ -21,11 +21,11 @@ Feature: Team Show
     And that "the team" is a Team for "the hike" registered by "the user" with the following properties:
       | name | Alpha Team |
     And that "the team" has the following Walkers:
-      | Forename | Surname | Reference Character | Emergency Contact Number |
-      | John     | Smith   | A                   | 123456789                |
-      | Paul     | Smith   | B                   | 123456789                |
-      | George   | Smith   | C                   | 123456789                |
-      | Ringo    | Smith   | D                   | 123456789                |
+      | foreName | surName |
+      | John     | Smith   |
+      | Paul     | Smith   |
+      | George   | Smith   |
+      | Ringo    | Smith   |
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Alpha Team"
     Then the following Walkers are listed on the page:
