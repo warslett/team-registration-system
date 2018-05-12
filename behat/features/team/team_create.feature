@@ -3,7 +3,9 @@ Feature: Team Create
   I need to be able to register their details on the system
 
   Background:
-    Given that "the user" is a User with email "john@acme.co" and password "Password1!"
+    Given that "the user" is a User with the following properties:
+      | email    | john@acme.co |
+      | password | Password1!   |
 
   Scenario: I cannot add a team if there are no Events
     When I log in with email "john@acme.co" and password "Password1!"
@@ -64,7 +66,7 @@ Feature: Team Create
       | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Register Team"
-    When I fill in "Name" with "Alpha Team"
+    And I fill in "Name" with "Alpha Team"
     And I select "Scout Hike » Upcoming Three Towers" from "Hike"
     And I press "Save"
     Then the title should be "Register team » Team Registration System"
@@ -75,7 +77,7 @@ Feature: Team Create
       | name | Upcoming Three Towers |
     And that "the hike" is a Hike for "the event" with the following properties:
       | name | Scout Hike |
-    Given that "the other event" is an Event
+    And that "the other event" is an Event
     And that "the other hike" is a Hike for "the other event" with the following properties:
       | name | Scout Hike |
     And that "the other team" is a Team for "the other hike" registered by "the user" with the following properties:

@@ -3,7 +3,9 @@ Feature: GET Teams Collection
   As an API User I need to be able to fetch a list of Teams in a structured format
 
   Background:
-    Given that "the api user" is a User with email "api@example.com" and password "development"
+    Given that "the api user" is a User with the following properties:
+      | email    | api@example.com |
+      | password | development     |
     And that there is a User Group with the role "ROLE_API_USER" with the following members:
       | Reference       |
       | the api user    |
@@ -17,7 +19,7 @@ Feature: GET Teams Collection
   Scenario: One Team
     Given that "the event" is an Event
     And that "the hike" is a Hike for "the event"
-    And that "the user" is a User with email "john@acme.co" and password "Password1!"
+    And that "the user" is a User
     And that "the team" is a Team for "the hike" registered by "the user" with the following properties:
       | name | Alpha Team |
     When I authenticate with the api using email "api@example.com" and password "development"
@@ -31,7 +33,7 @@ Feature: GET Teams Collection
   Scenario: Many Teams
     Given that "the event" is an Event
     And that "the hike" is a Hike for "the event"
-    And that "the user" is a User with email "john@acme.co" and password "Password1!"
+    And that "the user" is a User
     And that "the first team" is a Team for "the hike" registered by "the user"
     And that "the second team" is a Team for "the hike" registered by "the user"
     When I authenticate with the api using email "api@example.com" and password "development"

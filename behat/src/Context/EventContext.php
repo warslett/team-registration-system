@@ -41,7 +41,7 @@ class EventContext implements Context
      */
     public function thatIsAnEventWithTheFollowingProperties(string $eventReference, TableNode $table = null)
     {
-        $properties=is_null($table)?[]:$table->getRowsHash();
+        $properties = is_null($table)?[]:$table->getRowsHash();
         $event = $this->eventFactory->createEvent($properties);
         $this->fixtureStorage->set(Event::class, $eventReference, $event);
     }

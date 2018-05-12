@@ -3,11 +3,13 @@ Feature: Team Show
   As a User, I can visit my Team's page when I login
 
   Background:
-    Given that "the event" is an Event with the following properties:
+    Given that "the user" is a User with the following properties:
+      | email    | john@acme.co |
+      | password | Password1!   |
+    And that "the event" is an Event with the following properties:
       | name | Upcoming Three Towers |
     And that "the hike" is a Hike for "the event" with the following properties:
       | name | Scout Hike |
-    And that "the user" is a User with email "john@acme.co" and password "Password1!"
 
   Scenario: I can visit my Team's page
     Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
@@ -18,7 +20,7 @@ Feature: Team Show
     And the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
 
   Scenario: My Team's Walkers are listed on the page
-    And that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
       | name | Alpha Team |
     And that "the team" has the following Walkers:
       | foreName | surName |
@@ -36,7 +38,7 @@ Feature: Team Show
       | Ringo Smith  |
 
   Scenario: I cannot visit a Team page for a Team I did not register
-    Given that "the other user" is a User with email "jane@acme.co" and password "Password1!"
+    Given that "the other user" is a User
     And that "the team" is a Team for "the hike" registered by "the other user"
     When I log in with email "john@acme.co" and password "Password1!"
     And I go to the Team page for "the team"

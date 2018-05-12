@@ -3,7 +3,9 @@ Feature: GET Hikes Collection
   As an API User I need to be able to fetch a list of Hikes in a structured format
 
   Background:
-    Given that "the api user" is a User with email "api@example.com" and password "development"
+    Given that "the api user" is a User with the following properties:
+      | email    | api@example.com |
+      | password | development     |
     And that there is a User Group with the role "ROLE_API_USER" with the following members:
       | Reference       |
       | the api user    |

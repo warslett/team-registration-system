@@ -4,10 +4,13 @@ namespace App\Behat\FixtureFactory;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker\Generator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFactory
 {
+
+    public const DEFAULT_PASSWORD = 'development';
 
     /**
      * @var EntityManagerInterface
@@ -20,23 +23,40 @@ class UserFactory
     private $passwordEncoder;
 
     /**
+     * @var Generator
+     */
+    private $faker;
+
+    /**
      * UserFactory constructor.
      * @param EntityManagerInterface $entityManager
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param Generator $faker
      */
-    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UserPasswordEncoderInterface $passwordEncoder,
+        Generator $faker
+    ) {
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->faker = $faker;
     }
 
-    public function createUser(string $email, string $password): User
+    /**
+     * @param array $properties
+     * @return User
+     */
+    public function createUser(array $properties = []): User
     {
         $user = new User();
-        $user->setEmail($email);
-        $user->setPlainPassword($password);
-        $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
-        $user->setPassword($password);
+        $user->setEmail($properties['email'] ?? $this->faker->email);
+        $user->setPassword(
+            $this->passwordEncoder->encodePassword(
+                $user,
+                $properties['password'] ?? UserFactory::DEFAULT_PASSWORD
+            )
+        );
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         return $user;

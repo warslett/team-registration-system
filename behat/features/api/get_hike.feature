@@ -3,7 +3,9 @@ Feature: GET Hike
   As an API User I need to be able to fetch a single Hike in a structured format
 
   Background:
-    Given that "the api user" is a User with email "api@example.com" and password "development"
+    Given that "the api user" is a User with the following properties:
+      | email    | api@example.com |
+      | password | development     |
     And that there is a User Group with the role "ROLE_API_USER" with the following members:
       | Reference       |
       | the api user    |
@@ -21,7 +23,7 @@ Feature: GET Hike
     And the JSON node "event" is an Event link to "the event"
 
   Scenario: Hike exists with Teams
-    Given that "the user" is a User with email "john@acme.co" and password "Password1!"
+    Given that "the user" is a User
     And that "the event" is an Event
     And that "the hike" is a Hike for "the event"
     And that "the team" is a Team for "the hike" registered by "the user"

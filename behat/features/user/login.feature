@@ -3,7 +3,9 @@ Feature: User Login
   I need to be able to log in as a User.
 
   Scenario: I can login as a user
-    Given that "the user" is a User with email "john@acme.co" and password "Password1!"
+    Given that "the user" is a User with the following properties:
+      | email    | john@acme.co |
+      | password | Password1!   |
     When I go to "/user/login"
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
@@ -20,7 +22,9 @@ Feature: User Login
     And there is an alert with the message "Invalid credentials."
 
   Scenario: I cannot login with the wrong password
-    Given that "the user" is a User with email "john@acme.co" and password "Password1!"
+    Given that "the user" is a User with the following properties:
+      | email    | john@acme.co |
+      | password | Password1!   |
     When I go to "/user/login"
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "wRonGpASSwOrd"

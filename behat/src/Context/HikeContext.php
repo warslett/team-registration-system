@@ -36,7 +36,7 @@ class HikeContext implements Context
      */
     public function thatIsAHikeForWithTheFollowingProperties($hikeReference, $eventReference, TableNode $table = null)
     {
-        $properties=is_null($table)?[]:$table->getRowsHash();
+        $properties = is_null($table)?[]:$table->getRowsHash();
         $event = $this->fixtureStorage->get(Event::class, $eventReference);
         $hike = $this->hikeFactory->createHike($event, $properties);
         $this->fixtureStorage->set(Hike::class, $hikeReference, $hike);

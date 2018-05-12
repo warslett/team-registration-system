@@ -26,7 +26,8 @@ Feature: User Register
     And there is an alert with the message "There were some problems with the information you provided"
 
   Scenario: I cannot register an account with an email that already exists in the system
-    Given that "the existing user" is a User with email "john@acme.co" and password "Password1!"
+    Given that "the user" is a User with the following properties:
+      | email    | john@acme.co |
     When I go to "/user/register"
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"

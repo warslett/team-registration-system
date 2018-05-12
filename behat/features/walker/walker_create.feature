@@ -3,14 +3,16 @@ Feature: Walker Create
   I need to be able to add each of my walkers to my team
 
   Background:
-    Given that "the user" is a User with email "john@acme.co" and password "Password1!"
-    Given that "the event" is an Event with the following properties:
+    Given that "the user" is a User with the following properties:
+      | email    | john@acme.co |
+      | password | Password1!   |
+    And that "the event" is an Event with the following properties:
       | name | Upcoming Three Towers |
     And that "the hike" is a Hike for "the event" with the following properties:
       | name | Scout Hike |
 
   Scenario: I cannot add a walker to another user's team
-    Given that "the other user" is a User with email "jane@acme.com" and password "Password1!"
+    Given that "the other user" is a User
     And that "the team" is a Team for "the hike" registered by "the other user" with the following properties:
       | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
@@ -23,7 +25,7 @@ Feature: Walker Create
     Then the response status code should be 404
 
   Scenario: I can add a walker to my team
-    And that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
       | name | Alpha Team |
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Alpha Team"

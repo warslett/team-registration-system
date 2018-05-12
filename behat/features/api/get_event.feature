@@ -3,10 +3,12 @@ Feature: GET Event
   As an API User I need to be able to fetch a single Event in a structured format
 
   Background:
-    Given that "the api user" is a User with email "api@example.com" and password "development"
+    Given that "the api user" is a User with the following properties:
+      | email    | api@example.com |
+      | password | development     |
     And that there is a User Group with the role "ROLE_API_USER" with the following members:
-      | Reference       |
-      | the api user    |
+      | Reference    |
+      | the api user |
 
   Scenario: Event exists
     Given that "the event" is an Event with the following properties:

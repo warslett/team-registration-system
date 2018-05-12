@@ -49,7 +49,7 @@ class TeamContext implements Context
         string $userReference,
         TableNode $table = null
     ) {
-        $properties=is_null($table)?[]:$table->getRowsHash();
+        $properties = is_null($table)?[]:$table->getRowsHash();
         $hike = $this->fixtureStorage->get(Hike::class, $hikeReference);
         $user = $this->fixtureStorage->get(User::class, $userReference);
         $team = $this->teamFactory->createTeam($hike, $user, $properties);
