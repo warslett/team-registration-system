@@ -47,7 +47,19 @@ class Hike
      * @var int
      * @ORM\Column(type="integer")
      */
+    private $minWalkers;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
     private $maxWalkers;
+
+    /**
+     * @var float
+     * @ORM\Column(type="decimal", precision=5, scale=2)
+     */
+    private $feePerWalker;
 
     /**
      * @ORM\OneToMany(targetEntity="Team", mappedBy="hike")
@@ -124,6 +136,23 @@ class Hike
      * @Groups({"hike"})
      * @return int|null
      */
+    public function getMinWalkers(): ?int
+    {
+        return $this->minWalkers;
+    }
+
+    /**
+     * @param int $minWalkers
+     */
+    public function setMinWalkers(int $minWalkers)
+    {
+        $this->minWalkers = $minWalkers;
+    }
+
+    /**
+     * @Groups({"hike"})
+     * @return int|null
+     */
     public function getMaxWalkers(): ?int
     {
         return $this->maxWalkers;
@@ -135,5 +164,22 @@ class Hike
     public function setMaxWalkers(int $maxWalkers)
     {
         $this->maxWalkers = $maxWalkers;
+    }
+
+    /**
+     * @Groups({"hike"})
+     * @return float|null
+     */
+    public function getFeePerWalker(): ?float
+    {
+        return $this->feePerWalker;
+    }
+
+    /**
+     * @param float $feePerWalker
+     */
+    public function setFeePerWalker(float $feePerWalker): void
+    {
+        $this->feePerWalker = $feePerWalker;
     }
 }

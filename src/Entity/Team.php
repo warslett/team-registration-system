@@ -143,6 +143,22 @@ class Team
     }
 
     /**
+     * @return bool
+     */
+    public function hasEnoughWalkers(): bool
+    {
+        return $this->walkers->count() >= $this->hike->getMinWalkers();
+    }
+
+    /**
+     * @return float
+     */
+    public function getFeesDue(): float
+    {
+        return $this->walkers->count()*$this->hike->getFeePerWalker();
+    }
+
+    /**
      * @return string
      */
     public function __toString()

@@ -32,18 +32,30 @@ App\Entity\Hike:
     scout_hike_{1..2}:
         name: "Scout Hike"
         event: "@event_<current()>"
+        minWalkers: 3
+        maxWalkers: 4
+        feePerWalker: 12.00
 
     junket_hike_{1..2}:
         name: "Junket Hike"
         event: "@event_<current()>"
+        minWalkers: 3
+        maxWalkers: 4
+        feePerWalker: 10.00
 
     explorer_hike_{1..2}:
         name: "Explorer Hike"
         event: "@event_<current()>"
+        minWalkers: 3
+        maxWalkers: 4
+        feePerWalker: 14.00
 
     classic_hike_{1..2}:
         name: "Classic Hike"
         event: "@event_<current()>"
+        minWalkers: 3
+        maxWalkers: 4
+        feePerWalker: 16.00
 
 App\Entity\Team:
 

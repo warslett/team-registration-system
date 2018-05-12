@@ -87,13 +87,28 @@
                 <div class="card-body d-flex flex-column align-items-start">
                     <h5 class="card-title">Checklist</h5>
                     <ol class="mb-4">
-                        <li>Register team <i class="fa fa-check"></i></li>
-                        <li>Add walkers</li>
-                        <li>Pay fees</li>
+                        <li>
+                            Register team
+                            <i class="fa fa-check"></i>
+                        </li>
+                        <li>
+                            Add {{ team.hike.minWalkers }} - {{ team.hike.maxWalkers }} walkers
+                            {% if team.hasEnoughWalkers %}<i class="fa fa-check"></i>{% endif %}
+                        </li>
+                        <li>
+                            Pay fees
+                            <br /><small><em>£{{ team.hike.feePerWalker }}/walker</em></small>
+                        </li>
                     </ol>
+                    {% if team.hasEnoughWalkers %}
                     <div class="m-auto">
-                        <a href="#" class="btn btn-lg btn-raised btn-light text-dark mx-auto">Pay £36</a>
+                        <a
+                                href="{{ path('team_pay', {'team_id': team.id}) }}"
+                                class="btn btn-lg btn-raised btn-light text-dark mx-auto"
+                                id="payment-btn"
+                        >Pay £{{ team.feesDue }}</a>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

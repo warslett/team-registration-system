@@ -9,6 +9,8 @@ use Faker\Generator;
 
 class HikeFactory
 {
+
+    const DEFAULT_MIN_WALKERS = 3;
     const DEFAULT_MAX_WALKERS = 4;
 
     /**
@@ -40,7 +42,11 @@ class HikeFactory
     {
         $hike = new Hike();
         $hike->setName($properties['name'] ?? ucfirst(implode(' ', $this->faker->words)));
+        $hike->setMinWalkers($properties['minWalkers'] ?? HikeFactory::DEFAULT_MIN_WALKERS);
         $hike->setMaxWalkers($properties['maxWalkers'] ?? HikeFactory::DEFAULT_MAX_WALKERS);
+        $hike->setFeePerWalker(
+            $properties['feePerWalker'] ?? $this->faker->randomFloat(2, 10, $max = 16)
+        );
         $hike->setEvent($event);
         $this->entityManager->persist($hike);
         $this->entityManager->flush();

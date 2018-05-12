@@ -44,6 +44,10 @@ team_drop:
     path: /teams/{team_id}/drop
     controller: App\Controller\Team\TeamDropController
 
+team_pay:
+    path: /teams/{team_id}/pay
+    controller: App\Controller\Team\TeamPayController
+
 walker_create:
     path: /teams/{team_id}/walkers/create
     controller: App\Controller\Walker\WalkerCreateController

@@ -13,15 +13,19 @@ Feature: GET Hike
   Scenario: Hike exists
     Given that "the event" is an Event
     And that "the hike" is a Hike for "the event" with the following properties:
-      | name       | Scout Hike |
-      | maxWalkers | 4          |
+      | name         | Scout Hike |
+      | minWalkers   | 3          |
+      | maxWalkers   | 4          |
+      | feePerWalker | 12.00      |
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Hike URI for "the hike"
     Then the response code from the API response should be 200
     And JSON response should contain the following data:
-      | Property   | Value      |
-      | name       | Scout Hike |
-      | maxWalkers | 4          |
+      | Property     | Value      |
+      | name         | Scout Hike |
+      | minWalkers   | 3          |
+      | maxWalkers   | 4          |
+      | feePerWalker | 12.00      |
     And the JSON node "event" is an Event link to "the event"
 
   Scenario: Hike exists with Teams

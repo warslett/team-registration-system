@@ -9,7 +9,9 @@ Feature: Team Show
     And that "the event" is an Event with the following properties:
       | name | Upcoming Three Towers |
     And that "the hike" is a Hike for "the event" with the following properties:
-      | name | Scout Hike |
+      | name         | Scout Hike |
+      | minWalkers   | 3          |
+      | feePerWalker | 12         |
 
   Scenario: I can visit my Team's page
     Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
@@ -36,6 +38,26 @@ Feature: Team Show
       | Paul Smith   |
       | George Smith |
       | Ringo Smith  |
+
+  Scenario: I cannot see the payment button until my team has the minimum number of walkers
+    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
+    And that "the team" has 2 walkers
+    When I log in with email "john@acme.co" and password "Password1!"
+    And I follow "Alpha Team"
+    Then I should not see a "#payment-btn" element
+
+  Scenario Outline: I cannot see the payment button with the correct value to pay when my team has enough walkers
+    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+      | name | Alpha Team |
+    And that "the team" has "<Number of Walkers>" walkers
+    When I log in with email "john@acme.co" and password "Password1!"
+    And I follow "Alpha Team"
+    Then the "#payment-btn" element should contain "<Fee Due>"
+    Examples:
+      | Number of Walkers | Fee Due |
+      | 3                 | £36     |
+      | 4                 | £48     |
 
   Scenario: I cannot visit a Team page for a Team I did not register
     Given that "the other user" is a User
