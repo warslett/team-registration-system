@@ -9,7 +9,7 @@ Feature: GET Event
       | the api user    |
 
   Scenario: Event exists
-    Given that "the event" is an Event with the following data:
+    Given that "the event" is an Event with the following properties:
       | name               | Three Towers |
       | date               | 2999-03-31   |
       | registrationOpens  | 2998-09-30   |
@@ -26,7 +26,7 @@ Feature: GET Event
 
   Scenario: Event exists with Hikes
     Given that "the event" is an Event
-    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the hike" is a Hike for "the event"
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Event URI for "the event"
     Then the JSON node "hikes" is an array containing a Hike link to "the hike"

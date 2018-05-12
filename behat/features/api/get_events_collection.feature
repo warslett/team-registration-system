@@ -15,7 +15,7 @@ Feature: GET Events Collection
     And the JSON node "hydra:member" from the API response should be an empty array
 
   Scenario: One Event
-    Given that "the event" is an Event with the following data:
+    Given that "the event" is an Event with the following properties:
       | name               | Three Towers |
       | date               | 2999-03-31   |
       | registrationOpens  | 2998-09-30   |

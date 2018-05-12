@@ -11,7 +11,7 @@ Feature: GET Team
   Scenario: Team exists
     Given that "the user" is a User with email "john@acme.co" and password "Password1!"
     And that "the event" is an Event
-    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the hike" is a Hike for "the event"
     And that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Team URI for "the team"

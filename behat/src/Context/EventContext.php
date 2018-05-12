@@ -34,13 +34,13 @@ class EventContext implements Context
     }
 
     /**
-     * @Given /^that "([^"]*)" is an Event with the following data:$/
-     * @Given /^that "([^"]*)" is an Event$/
+     * @Given that :eventReference is an Event with the following properties:
+     * @Given that :eventReference is an Event
      * @param string $eventReference
      * @param TableNode|null $table
      * @throws \Exception
      */
-    public function thatIsAnEventWithTheFollowingData(string $eventReference, TableNode $table = null)
+    public function thatIsAnEventWithTheFollowingProperties(string $eventReference, TableNode $table = null)
     {
         $properties=is_null($table)?[]:$table->getRowsHash();
         $event = $this->eventFactory->createEvent($properties);

@@ -10,7 +10,8 @@ Feature: GET Hike
 
   Scenario: Hike exists
     Given that "the event" is an Event
-    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the hike" is a Hike for "the event" with the following properties:
+      | name | Scout Hike |
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Hike URI for "the hike"
     Then the response code from the API response should be 200
@@ -22,7 +23,7 @@ Feature: GET Hike
   Scenario: Hike exists with Teams
     Given that "the user" is a User with email "john@acme.co" and password "Password1!"
     And that "the event" is an Event
-    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the hike" is a Hike for "the event"
     And that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
     When I authenticate with the api using email "api@example.com" and password "development"
     And I send a get request to the Hike URI for "the hike"

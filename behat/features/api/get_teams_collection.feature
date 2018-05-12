@@ -16,7 +16,7 @@ Feature: GET Teams Collection
 
   Scenario: One Team
     Given that "the event" is an Event
-    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the hike" is a Hike for "the event"
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
     And that "the team" is a Team called "Alpha Team" for "the hike" registered by "the user"
     When I authenticate with the api using email "api@example.com" and password "development"
@@ -29,7 +29,7 @@ Feature: GET Teams Collection
 
   Scenario: Many Teams
     Given that "the event" is an Event
-    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the hike" is a Hike for "the event"
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
     And that "the first team" is a Team called "Alpha Team" for "the hike" registered by "the user"
     And that "the second team" is a Team called "Bravo Team" for "the hike" registered by "the user"

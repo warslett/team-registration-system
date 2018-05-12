@@ -7,6 +7,8 @@ use App\Entity\Hike;
 use App\Behat\FixtureFactory\HikeFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Gherkin\Node\TableNode;
 
 class HikeContext implements Context
 {
@@ -30,16 +32,14 @@ class HikeContext implements Context
     }
 
     /**
-     * @Given /^that "([^"]*)" is a Hike called "([^"]*)" for "([^"]*)"$/
-     * @param string $hikeReference
-     * @param string $hikeName
-     * @param string $eventReference
-     * @throws \Exception
+     * @Given that :hikeReference is a Hike for :eventReference with the following properties:
+     * @Given that :hikeReference is a Hike for :eventReference
      */
-    public function thatIsAHikeCalledFor(string $hikeReference, string $hikeName, string $eventReference)
+    public function thatIsAHikeForWithTheFollowingProperties($hikeReference, $eventReference, TableNode $table = null)
     {
+        $properties=is_null($table)?[]:$table->getRowsHash();
         $event = $this->fixtureStorage->get(Event::class, $eventReference);
-        $hike = $this->hikeFactory->createHike($hikeName, $event);
+        $hike = $this->hikeFactory->createHike($event, $properties);
         $this->fixtureStorage->set(Hike::class, $hikeReference, $hike);
     }
 }

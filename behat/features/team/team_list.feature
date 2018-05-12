@@ -4,7 +4,7 @@ Feature: Team List
 
   Background:
     Given that "the event" is an Event
-    And that "the hike" is a Hike called "Scout Hike" for "the event"
+    And that "the hike" is a Hike for "the event"
     And that "the user" is a User with email "john@acme.co" and password "Password1!"
 
   Scenario: I can see my team when I log in

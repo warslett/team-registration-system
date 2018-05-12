@@ -5,6 +5,7 @@ namespace App\Behat\FixtureFactory;
 use App\Entity\Event;
 use App\Entity\Hike;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker\Generator;
 
 class HikeFactory
 {
@@ -13,19 +14,30 @@ class HikeFactory
      * @var EntityManagerInterface
      */
     private $entityManager;
+    /**
+     * @var Generator
+     */
+    private $faker;
 
     /**
      * @param EntityManagerInterface $entityManager
+     * @param Generator $faker
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, Generator $faker)
     {
         $this->entityManager = $entityManager;
+        $this->faker = $faker;
     }
 
-    public function createHike(string $hikeName, Event $event): Hike
+    /**
+     * @param Event $event
+     * @param array $properties
+     * @return Hike
+     */
+    public function createHike(Event $event, array $properties): Hike
     {
         $hike = new Hike();
-        $hike->setName($hikeName);
+        $hike->setName($properties['name'] ?? ucfirst(implode(' ', $this->faker->words)));
         $hike->setEvent($event);
         $this->entityManager->persist($hike);
         $this->entityManager->flush();
