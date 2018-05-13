@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UserGroupRepository")
  */
 class UserGroup
 {
@@ -18,12 +18,6 @@ class UserGroup
      * @ORM\Id
      */
     private $role;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=100)
-     */
-    private $name;
 
     /**
      * @var Collection|User[]
@@ -38,7 +32,6 @@ class UserGroup
     {
         $this->users = new ArrayCollection();
         $this->role = $role;
-        $this->name = $role;
     }
 
     /**
@@ -55,22 +48,6 @@ class UserGroup
     public function getUsers(): Collection
     {
         return $this->users;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
     }
 
     /**
