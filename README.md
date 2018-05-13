@@ -21,6 +21,17 @@ For development, you can populate the database with fake data by running this co
 `docker-compose exec php bin/console hautelook:fixtures:load` All users created have the password "development"
 For testing the API, use the email address "api@example.com"
 
+## User Groups
+Roles on the system are managed with User Groups. The following roles have elevated privileges:
+
+**ROLE_ADMIN** should be granted to any user that needs to perform administrative tasks on the application including
+managing events and users.
+
+**ROLE_API_USER** should be granted to any user that needs access to the API
+
+To add the user "john@acme.co" to the User Group with the role ROLE_ADMIN
+`docker-compose exec php bin/console app:user:grant john@acme.co ROLE_ADMIN`
+
 ## API
 
 ### Generating SSL keys
