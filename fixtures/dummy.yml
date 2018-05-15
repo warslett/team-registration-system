@@ -3,7 +3,6 @@ App\Entity\UserGroup:
     api_users:
         __construct:
           role: "ROLE_API_USER"
-        name: "API Users"
 
 App\Entity\User:
 
