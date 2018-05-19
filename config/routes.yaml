@@ -1,6 +1,9 @@
 root:
    path: /
-   controller: App\Controller\DefaultController
+   controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+   defaults:
+       path: /teams/list
+       permanent: true
 
 user_register:
     path: /user/register
@@ -59,6 +62,37 @@ walker_update:
 walker_delete:
     path: /walkers/{walker_id}/delete
     controller: App\Controller\Walker\WalkerDeleteController
+
+event_root:
+    path: /events
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+       path: /events/list
+       permanent: true
+
+event_list:
+    path: /events/list
+    controller: App\Controller\Event\EventListController
+
+event_create:
+    path: /events/create
+    controller: App\Controller\Event\EventCreateController
+
+event_show:
+    path: /events/{event_id}/show
+    controller: App\Controller\Event\EventShowController
+
+event_update:
+    path: /events/{event_id}/update
+    controller: App\Controller\Event\EventUpdateController
+
+event_duplicate:
+    path: /events/{event_id}/duplicate
+    controller: App\Controller\Event\EventDuplicateController
+
+event_delete:
+    path: /events/{event_id}/delete
+    controller: App\Controller\Event\EventDeleteController
 
 api_login:
     path: /api/login

@@ -1,0 +1,61 @@
+{% extends "_base.html.twig" %}
+
+{% block title %}Events &raquo; {{ parent() }}{% endblock %}
+
+{% block header_h1 %}Events{% endblock %}
+
+{% block header_btn %}
+    <a class="btn btn-light text-dark btn-raised btn-header" href="{{ path('event_create') }}">Create Event</a>
+{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Events</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div id="events" class="card">
+        {% if events is empty %}
+        No Events
+        {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td>{{ event.date.format('F jS, Y') }}</td>
+                <td>
+                    <a
+                            href="{{ path('event_show', {'event_id': event.id}) }}"
+                            class="btn btn-raised btn-sm btn-primary"
+                    >
+                        <i class="fa fa-cogs"></i> Manage
+                    </a>
+                    <a
+                            href="{{ path('event_duplicate', {'event_id': event.id}) }}"
+                            class="btn btn-raised btn-sm btn-primary"
+                    >
+                        <i class="fa fa-copy"></i> Duplicate
+                    </a>
+                    <a
+                            href="{{ path('event_delete', {'event_id': event.id}) }}"
+                            class="btn btn-raised btn-sm btn-danger"
+                    >
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+{% endblock %}
