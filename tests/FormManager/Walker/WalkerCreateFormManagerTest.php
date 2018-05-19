@@ -21,13 +21,16 @@ class WalkerCreateFormManagerTest extends TestCase
         $formFactory = $this->mockFormFactory($this->mockForm());
         $walkerReferenceCharacterService = $this->mockWalkerReferenceCharacterService();
         $formManager = new WalkerCreateFormManager($em, $formFactory, $walkerReferenceCharacterService);
+        $team = $this->mockTeam();
 
-        $formManager->createForm();
+        $formManager->createForm($team);
 
-        $formFactory->shouldHaveReceived('create')->with(
-            WalkerCreateType::class,
-            m::type(Walker::class)
-        )->once();
+        $formFactory->shouldHaveReceived('create')->withArgs(function($type, $walker) use ($team) {
+            $this->assertEquals(WalkerCreateType::class, $type);
+            $this->assertInstanceOf(Walker::class, $walker);
+            $this->assertEquals($team, $walker->getTeam());
+            return true;
+        })->once();
     }
 
     public function testCreate_ReturnsForm()
@@ -38,26 +41,8 @@ class WalkerCreateFormManagerTest extends TestCase
         $walkerReferenceCharacterService = $this->mockWalkerReferenceCharacterService();
         $formManager = new WalkerCreateFormManager($em, $formFactory, $walkerReferenceCharacterService);
 
-        $actual = $formManager->createForm();
+        $actual = $formManager->createForm($this->mockTeam());
         $this->assertEquals($form, $actual);
-    }
-
-    public function testProcess_SetsTeamOnWalker()
-    {
-        $em = $this->mockEntityManager();
-
-        $walker = $this->mockWalker();
-        $form = $this->mockForm($walker);
-        $formFactory = $this->mockFormFactory($form);
-
-        $team = $this->mockTeam();
-
-        $walkerReferenceCharacterService = $this->mockWalkerReferenceCharacterService();
-        $formManager = new WalkerCreateFormManager($em, $formFactory, $walkerReferenceCharacterService);
-
-        $formManager->processForm($team, $form);
-
-        $walker->shouldHaveReceived('setTeam')->with($team)->once();
     }
 
     public function testProcess_SetsReferenceCharacterOnWalker()
@@ -65,16 +50,15 @@ class WalkerCreateFormManagerTest extends TestCase
         $em = $this->mockEntityManager();
         $nextReferenceCharacter = 'B';
 
-        $walker = $this->mockWalker();
+        $team = $this->mockTeam();
+        $walker = $this->mockWalker($team);
         $form = $this->mockForm($walker);
         $formFactory = $this->mockFormFactory($form);
-
-        $team = $this->mockTeam();
 
         $walkerReferenceCharacterService = $this->mockWalkerReferenceCharacterService($nextReferenceCharacter);
         $formManager = new WalkerCreateFormManager($em, $formFactory, $walkerReferenceCharacterService);
 
-        $formManager->processForm($team, $form);
+        $formManager->processForm($form);
 
         $walker->shouldHaveReceived('setReferenceCharacter')->with($nextReferenceCharacter)->once();
     }
@@ -83,16 +67,15 @@ class WalkerCreateFormManagerTest extends TestCase
     {
         $em = $this->mockEntityManager();
 
-        $walker = $this->mockWalker();
+        $team = $this->mockTeam();
+        $walker = $this->mockWalker($team);
         $form = $this->mockForm($walker);
         $formFactory = $this->mockFormFactory($form);
-
-        $team = $this->mockTeam();
 
         $walkerReferenceCharacterService = $this->mockWalkerReferenceCharacterService();
         $formManager = new WalkerCreateFormManager($em, $formFactory, $walkerReferenceCharacterService);
 
-        $formManager->processForm($team, $form);
+        $formManager->processForm($form);
 
         $em->shouldHaveReceived('persist')->with($walker)->once();
     }
@@ -101,16 +84,15 @@ class WalkerCreateFormManagerTest extends TestCase
     {
         $em = $this->mockEntityManager();
 
-        $walker = $this->mockWalker();
+        $team = $this->mockTeam();
+        $walker = $this->mockWalker($team);
         $form = $this->mockForm($walker);
         $formFactory = $this->mockFormFactory($form);
-
-        $team = $this->mockTeam();
 
         $walkerReferenceCharacterService = $this->mockWalkerReferenceCharacterService();
         $formManager = new WalkerCreateFormManager($em, $formFactory, $walkerReferenceCharacterService);
 
-        $formManager->processForm($team, $form);
+        $formManager->processForm($form);
 
         $em->shouldHaveReceived('flush')->once();
     }
@@ -147,13 +129,14 @@ class WalkerCreateFormManagerTest extends TestCase
     }
 
     /**
-     * @return Walker|m\Mock
+     * @param Team $team
+     * @return Walker
      */
-    private function mockWalker(): Walker
+    private function mockWalker(Team $team): Walker
     {
         $walker = m::mock(Walker::class);
-        $walker->shouldReceive('setTeam');
         $walker->shouldReceive('setReferenceCharacter');
+        $walker->shouldReceive('getTeam')->andReturn($team);
         return $walker;
     }
 

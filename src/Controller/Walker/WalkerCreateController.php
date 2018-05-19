@@ -66,13 +66,13 @@ class WalkerCreateController
             ]);
         }
 
-        $form = $this->walkerCreateFormManager->createForm();
+        $form = $this->walkerCreateFormManager->createForm($team);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $walker = $this->walkerCreateFormManager->processForm($team, $form);
+                $walker = $this->walkerCreateFormManager->processForm($form);
 
                 $this->flashBag->add('success', sprintf(
                     "Walker \"%s\" successfully added to team \"%s\"",

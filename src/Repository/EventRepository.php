@@ -13,13 +13,4 @@ class EventRepository extends EntityRepository
     {
         parent::__construct($em, $em->getClassMetadata(Event::class));
     }
-
-    /**
-     * @param string $eventName
-     * @return Event|null
-     */
-    public function findOneByName(string $eventName): ?Event
-    {
-        return $this->findOneBy(['name' => $eventName]);
-    }
 }

@@ -44,25 +44,26 @@ class WalkerCreateFormManager
     }
 
     /**
+     * @param Team $team
      * @return FormInterface
      */
-    public function createForm(): FormInterface
+    public function createForm(Team $team): FormInterface
     {
-        return $this->formFactory->create(WalkerCreateType::class, new Walker());
+        $walker = new Walker();
+        $walker->setTeam($team);
+        return $this->formFactory->create(WalkerCreateType::class, $walker);
     }
 
     /**
-     * @param Team $team
      * @param FormInterface $form
      * @return Walker
      */
-    public function processForm(Team $team, FormInterface $form): Walker
+    public function processForm(FormInterface $form): Walker
     {
         /** @var Walker $walker */
         $walker = $form->getData();
-        $walker->setTeam($team);
         $walker->setReferenceCharacter(
-            $this->walkerReferenceCharacterService->getNextAvailable($team)
+            $this->walkerReferenceCharacterService->getNextAvailable($walker->getTeam())
         );
         $this->entityManager->persist($walker);
         $this->entityManager->flush();
