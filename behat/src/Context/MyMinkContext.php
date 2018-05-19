@@ -157,4 +157,23 @@ class MyMinkContext extends BehatMinkContext
             Assert::assertEquals($row['Name'], $nameCell->getText());
         }
     }
+
+    /**
+     * @Then /^the events table lists "([^"]*)" in row (\d+)$/
+     */
+    public function theEventsTableListsInRow($eventName, $position)
+    {
+        $rows = $this->getSession()->getPage()->findAll('css', '#events table tbody tr');
+        /** @var NodeElement $row */
+        $row = $rows[$position-1];
+        Assert::assertNotNull($row, sprintf("No row at position %d", $position));
+        $content = $row->getOuterHtml();
+        if (strpos($content, $eventName) === false) {
+            throw new \Exception(sprintf(
+                "Event %s not found at position %d in the events table",
+                $eventName,
+                $position
+            ));
+        }
+    }
 }

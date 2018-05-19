@@ -13,4 +13,13 @@ class EventRepository extends EntityRepository
     {
         parent::__construct($em, $em->getClassMetadata(Event::class));
     }
+
+    public function findAllOrderedByDate(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.date', 'desc')
+            ->getQuery()
+            ->execute()
+        ;
+    }
 }

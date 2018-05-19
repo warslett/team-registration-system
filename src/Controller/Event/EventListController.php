@@ -32,7 +32,7 @@ class EventListController
 
     public function __invoke(Request $request): Response
     {
-        $events = $this->eventRepository->findAll();
+        $events = $this->eventRepository->findAllOrderedByDate();
         return $this->responseFactory->createTemplateResponse('events/list.html.twig', ['events' => $events]);
     }
 }
