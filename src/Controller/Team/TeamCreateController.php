@@ -58,36 +58,36 @@ class TeamCreateController
      */
     public function __invoke(Request $request)
     {
-        if ($this->hikeRepository->hasHikesOpenToRegistration()) {
-            $form = $this->teamCreateFormManager->createForm();
-
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted()) {
-                if ($form->isValid()) {
-                    $team = $this->teamCreateFormManager->processForm($form);
-
-                    $this->flashBag->add('success', sprintf(
-                        "Team \"%s\" successfully created for \"%s\"",
-                        $team->getName(),
-                        $team->getHike()->__toString()
-                    ));
-
-                    return $this->responseFactory->createRedirectResponse('team_show', [
-                        'team_id' => $team->getId()
-                    ]);
-                }
-
-                $this->flashBag->add('danger', "There were some problems with the information you provided");
-            }
-
-            return $this->responseFactory->createTemplateResponse('teams/create.html.twig', [
-                'form' => $form->createView()
-            ]);
-        } else {
+        if (!$this->hikeRepository->hasHikesOpenToRegistration()) {
             $this->flashBag->add('warning', "There are currently no events open for registration");
 
             return $this->responseFactory->createRedirectResponse('team_list');
         }
+
+        $form = $this->teamCreateFormManager->createForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $team = $this->teamCreateFormManager->processForm($form);
+
+                $this->flashBag->add('success', sprintf(
+                    "Team \"%s\" successfully created for \"%s\"",
+                    $team->getName(),
+                    $team->getHike()->__toString()
+                ));
+
+                return $this->responseFactory->createRedirectResponse('team_show', [
+                    'team_id' => $team->getId()
+                ]);
+            }
+
+            $this->flashBag->add('danger', "There were some problems with the information you provided");
+        }
+
+        return $this->responseFactory->createTemplateResponse('teams/create.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

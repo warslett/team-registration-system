@@ -2,6 +2,7 @@
 
 namespace App\Behat\Context;
 
+use App\Entity\Event;
 use App\Entity\Team;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Tester\Exception\PendingException;
@@ -174,6 +175,39 @@ class MyMinkContext extends BehatMinkContext
                 $eventName,
                 $position
             ));
+        }
+    }
+
+    /**
+     * @When /^I go to the Event page for "([^"]*)"$/
+     * @param string $eventReference
+     */
+    public function iGoToTheEventPageFor(string $eventReference)
+    {
+        $event = $this->fixtureStorage->get(Event::class, $eventReference);
+        $this->visit(sprintf('/events/%d/show', $event->getId()));
+    }
+
+    /**
+     * @Then /^the following Hikes are listed on the page:$/
+     */
+    public function theFollowingHikesAreListedOnThePage(TableNode $table)
+    {
+        $hikeTable = $this->getSession()->getPage()->find('css', '#hikes');
+        $hikeRows = $hikeTable->findAll('css', '.hikes-table__hike');
+        $expectedRows = $table->getColumnsHash();
+        Assert::assertEquals(
+            count($expectedRows),
+            count($hikeRows),
+            "Failed asserting that expected and actual num Hikes the same length"
+        );
+        foreach ($expectedRows as $key => $row) {
+            /** @var NodeElement $hikeRow */
+            $hikeRow = $hikeRows[$key];
+            $nameCell = $hikeRow->find('css', '.hikes-table__name');
+            Assert::assertEquals($row['Name'], $nameCell->getText());
+            $teamsCell = $hikeRow->find('css', '.hikes-table__teams');
+            Assert::assertEquals($row['Teams'], $teamsCell->getText());
         }
     }
 }

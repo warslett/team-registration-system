@@ -93,6 +93,18 @@ event_duplicate:
 event_delete:
     path: /events/{event_id}/delete
     controller: App\Controller\Event\EventDeleteController
+    
+hike_create:
+    path: /events/{event_id}/hikes/create
+    controller: App\Controller\Hike\HikeCreateController
+
+hike_update:
+    path: /hikes/{hike_id}/update
+    controller: App\Controller\Hike\HikeUpdateController
+
+hike_delete:
+    path: /hikes/{hike_id}/delete
+    controller: App\Controller\Hike\HikeDeleteController
 
 api_login:
     path: /api/login

@@ -7,6 +7,7 @@ use App\Entity\Hike;
 use App\Behat\FixtureFactory\HikeFactory;
 use App\Behat\Service\FixtureStorageService;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 
 class HikeContext implements Context
@@ -40,5 +41,16 @@ class HikeContext implements Context
         $event = $this->fixtureStorage->get(Event::class, $eventReference);
         $hike = $this->hikeFactory->createHike($event, $properties);
         $this->fixtureStorage->set(Hike::class, $hikeReference, $hike);
+    }
+
+    /**
+     * @Given /^that "([^"]*)" has the following Hikes:$/
+     */
+    public function thatHasTheFollowingHikes(string $eventReference, TableNode $table)
+    {
+        $event = $this->fixtureStorage->get(Event::class, $eventReference);
+        foreach ($table->getColumnsHash() as $properties) {
+            $this->hikeFactory->createHike($event, $properties);
+        }
     }
 }

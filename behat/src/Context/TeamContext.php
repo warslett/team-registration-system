@@ -7,7 +7,9 @@ use App\Entity\Team;
 use App\Entity\User;
 use App\Behat\FixtureFactory\TeamFactory;
 use App\Behat\Service\FixtureStorageService;
+use App\Resolver\UserGroupResolver;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 
 class TeamContext implements Context
@@ -54,5 +56,20 @@ class TeamContext implements Context
         $user = $this->fixtureStorage->get(User::class, $userReference);
         $team = $this->teamFactory->createTeam($hike, $user, $properties);
         $this->fixtureStorage->set(Team::class, $teamReference, $team);
+    }
+
+    /**
+     * @Given /^that "([^"]*)" has (\d+) teams registered by "([^"]*)"$/
+     * @param string $hikeReference
+     * @param int $numTeams
+     * @param $userReference
+     */
+    public function thatHasTeamsRegisteredBy(string $hikeReference, int $numTeams, string $userReference)
+    {
+        $user = $this->fixtureStorage->get(User::class, $userReference);
+        $hike = $this->fixtureStorage->get(Hike::class, $hikeReference);
+        for ($i = 0; $i < $numTeams; $i++) {
+            $this->teamFactory->createTeam($hike, $user);
+        }
     }
 }
