@@ -210,4 +210,14 @@ class MyMinkContext extends BehatMinkContext
             Assert::assertEquals($row['Teams'], $teamsCell->getText());
         }
     }
+
+    /**
+     * @When /^I go to the Create Hike page for "([^"]*)"$/
+     * @param string $eventReference
+     */
+    public function iGoToTheCreateHikePageFor(string $eventReference)
+    {
+        $event = $this->fixtureStorage->get(Event::class, $eventReference);
+        $this->visit(sprintf('/events/%d/hikes/create', $event->getId()));
+    }
 }

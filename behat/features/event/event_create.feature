@@ -1,6 +1,6 @@
 Feature: Event Create
-  In order for teams to be able to register for an event
-  I need to be able to create the event in the system
+  In order for teams to be able to register for a hike
+  I need to be able to create events in the system
 
   Background:
     Given that "the user" is a User with the following properties:

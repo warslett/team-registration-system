@@ -1,0 +1,25 @@
+{% extends "_simple_form.html.twig" %}
+
+{% block title %}New Hike &raquo; {{ event }} &raquo; {{ parent() }}{% endblock %}
+
+{% block header_h1 %}Add new hike{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('event_list') }}">Events</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('event_show', {'event_id': event.id}) }}">{{ event }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add new hike</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.minWalkers) }}
+    {{ form_row(form.maxWalkers) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Save</button>
+    {{ form_end(form) }}
+{% endblock %}
