@@ -148,7 +148,8 @@ class TeamCreateFormManagerTest extends TestCase
     }
 
     /**
-     * @return FormInterface|m\Mock
+     * @param Team|null $team
+     * @return FormInterface
      */
     private function mockForm(?Team $team = null): FormInterface
     {
@@ -167,6 +168,9 @@ class TeamCreateFormManagerTest extends TestCase
         return $team;
     }
 
+    /**
+     * @return User|m\Mock
+     */
     private function mockUser(): User
     {
         $user = m::mock(User::class);

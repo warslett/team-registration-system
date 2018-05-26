@@ -128,9 +128,9 @@ class Event
 
     /**
      * @Groups({"event"})
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getRegistrationOpens(): \DateTime
+    public function getRegistrationOpens(): ?\DateTime
     {
         return $this->registrationOpens;
     }
@@ -145,9 +145,9 @@ class Event
 
     /**
      * @Groups({"event"})
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getRegistrationCloses(): \DateTime
+    public function getRegistrationCloses(): ?\DateTime
     {
         return $this->registrationCloses;
     }

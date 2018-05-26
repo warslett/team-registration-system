@@ -4,6 +4,7 @@ $grid-gutter-width: 20px;
 @import "typography";
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
 
 body {
   color: $gray-dark;
@@ -94,4 +95,10 @@ footer {
   .shield-badge {
     margin-top: -2px;
   }
+}
+
+.datepicker-dropdown {
+  opacity: 1;
+  transform: scale(1);
+  padding: 10px;
 }
