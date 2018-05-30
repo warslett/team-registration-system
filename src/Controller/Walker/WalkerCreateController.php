@@ -53,6 +53,7 @@ class WalkerCreateController
     /**
      * @param Request $request
      * @return Response
+     * @throws \Twig_Error
      */
     public function __invoke(Request $request): Response
     {
