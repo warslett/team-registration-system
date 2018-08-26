@@ -18,7 +18,7 @@ Low level functionality is unit tested with PHPUnit. To run phpunit use this com
 `docker-compose exec php vendor/bin/phpunit`
 ## Dev Fixtures (Dummy Data)
 For development, you can populate the database with fake data by running this command 
-`docker-compose exec php bin/console hautelook:fixtures:load` All users created have the password "development"
+`bin/console hautelook:fixtures:load` All users created have the password "development"
 For testing the API, use the email address "api@example.com"
 
 ## User Groups
@@ -30,7 +30,7 @@ managing events and users.
 **ROLE_API_USER** should be granted to any user that needs access to the API
 
 To add the user "john@acme.co" to the User Group with the role ROLE_ADMIN
-`docker-compose exec php bin/console app:user:grant john@acme.co ROLE_ADMIN`
+`bin/console app:user:grant john@acme.co ROLE_ADMIN`
 
 ## API
 

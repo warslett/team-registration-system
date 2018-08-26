@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+args=$@
+docker run --env-file=.env -it --rm -v $PWD:/usr/src/app -w /usr/src/app node:9.11.1 sh -c "yarn $args"

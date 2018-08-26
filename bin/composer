@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+args=$@
+docker-compose run -T --rm php sh -c "composer $args" \
