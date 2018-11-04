@@ -68,6 +68,11 @@ class User implements UserInterface, \Serializable
         $this->userGroups = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getUsername(): ?string
     {
         return $this->email;

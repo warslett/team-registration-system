@@ -97,13 +97,13 @@
                         </li>
                         <li>
                             Pay fees
-                            <br /><small><em>£{{ team.hike.feePerWalker }}/walker</em></small>
+                            {% if team.hasEnoughWalkers and not team.hasDueFees %}<i class="fa fa-check"></i>{% endif %}
                         </li>
                     </ol>
-                    {% if team.hasEnoughWalkers %}
+                    {% if team.hasEnoughWalkers and team.hasDueFees %}
                     <div class="m-auto">
                         <a
-                                href="{{ path('team_pay', {'team_id': team.id}) }}"
+                                href="{{ path('team_payment_capture', {'team_id': team.id}) }}"
                                 class="btn btn-lg btn-raised btn-light text-dark mx-auto"
                                 id="payment-btn"
                         >Pay £{{ team.feesDue }}</a>

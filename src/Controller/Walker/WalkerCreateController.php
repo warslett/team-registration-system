@@ -89,7 +89,7 @@ class WalkerCreateController
             $this->flashBag->add('danger', "There were some problems with the information you provided");
         }
 
-        return $this->responseFactory->createTemplateResponse('teams/walkers/create.html.twig', [
+        return $this->responseFactory->createTemplateResponse('walkers/create.html.twig', [
             'team' => $team,
             'form' => $form->createView()
         ]);

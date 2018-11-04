@@ -7,7 +7,7 @@ volumes:
 services:
 
   php:
-    image: php:7.2-fpm-composer-pdo-mysql-zip-xml
+    image: php:7.2-fpm-composer-pdo-mysql-zip-xml-intl
     build:
       context: docker
       dockerfile: PHPDockerfile

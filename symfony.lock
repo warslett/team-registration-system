@@ -38,6 +38,9 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "clue/stream-filter": {
+        "version": "v1.4.0"
+    },
     "container-interop/container-interop": {
         "version": "1.2.0"
     },
@@ -143,6 +146,27 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "league/uri": {
+        "version": "5.3.0"
+    },
+    "league/uri-components": {
+        "version": "1.8.1"
+    },
+    "league/uri-hostname-parser": {
+        "version": "1.1.1"
+    },
+    "league/uri-interfaces": {
+        "version": "1.1.0"
+    },
+    "league/uri-manipulations": {
+        "version": "1.5.0"
+    },
+    "league/uri-parser": {
+        "version": "1.4.0"
+    },
+    "league/uri-schemes": {
+        "version": "1.2.0"
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.3",
         "recipe": {
@@ -179,11 +203,38 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "payum/core": {
+        "version": "1.5.0"
+    },
+    "payum/iso4217": {
+        "version": "1.0.1"
+    },
+    "payum/paypal-express-checkout-nvp": {
+        "version": "1.5.0"
+    },
+    "payum/payum-bundle": {
+        "version": "2.3.1"
+    },
     "phar-io/manifest": {
         "version": "1.0.1"
     },
     "phar-io/version": {
         "version": "1.0.1"
+    },
+    "php-http/guzzle6-adapter": {
+        "version": "v1.1.1"
+    },
+    "php-http/httplug": {
+        "version": "v1.1.0"
+    },
+    "php-http/message": {
+        "version": "1.7.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "v1.0.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"

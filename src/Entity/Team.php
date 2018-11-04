@@ -54,9 +54,16 @@ class Team
      */
     private $walkers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TeamPayment", mappedBy="team")
+     * @var Collection|TeamPayment[]
+     */
+    private $payments;
+
     public function __construct()
     {
         $this->walkers = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
 
     /**
@@ -135,6 +142,14 @@ class Team
     }
 
     /**
+     * @return TeamPayment[]|Collection
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    /**
      * @return bool
      */
     public function hasMaxWalkers(): bool
@@ -155,7 +170,42 @@ class Team
      */
     public function getFeesDue(): float
     {
-        return $this->walkers->count()*$this->hike->getFeePerWalker();
+        return ($this->walkers->count()*$this->hike->getFeePerWalker()) - $this->getFeesPaid();
+    }
+
+    /**
+     * @return float
+     */
+    public function getFeesPaid(): float
+    {
+        $paid = 0.0;
+        foreach ($this->payments as $payment) {
+            if ($payment->isCompleted()) {
+                $paid += $payment->getTotalAmount()/100;
+            }
+        }
+        return $paid;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasDueFees()
+    {
+        return $this->getFeesDue() > 0;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentDescription(): string
+    {
+        return sprintf(
+            "Payment for %s (%d walkers) for %s",
+            $this->getName(),
+            $this->walkers->count(),
+            $this->hike->__toString()
+        );
     }
 
     /**

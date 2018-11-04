@@ -18,4 +18,5 @@ return [
     Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['dev' => true],
     Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['dev' => true],
     Hautelook\AliceBundle\HautelookAliceBundle::class => ['dev' => true],
+    Payum\Bundle\PayumBundle\PayumBundle::class => ['all' => true],
 ];
