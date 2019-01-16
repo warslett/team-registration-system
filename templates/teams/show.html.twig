@@ -68,6 +68,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Age on Hike</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -76,6 +77,7 @@
                             <tr class="walkers-table__walker">
                                 <td class="walkers-table__reference">#{{ walker.reference }}</td>
                                 <td class="walkers-table__name">{{ walker.name }}</td>
+                                <td class="walkers-table__age">{{ walker.readableAgeOnHike }}</td>
                                 <td class="walkers-table__actions">
                                     <a href="{{ path('walker_update', {'walker_id': walker.id}) }}">Update</a>
                                     <a href="{{ path('walker_delete', {'walker_id': walker.id}) }}">Delete</a>

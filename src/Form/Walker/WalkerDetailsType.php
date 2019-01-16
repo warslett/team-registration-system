@@ -4,6 +4,7 @@ namespace App\Form\Walker;
 
 use App\Entity\Walker;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +21,12 @@ class WalkerDetailsType extends AbstractType
         $builder
             ->add('foreName', TextType::class, ['label' => 'Forename'])
             ->add('surName', TextType::class, ['label' => 'Surname'])
+            ->add('dateOfBirth', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+                'html5' => false,
+                'format' => 'dd/MM/yyyy'
+            ])
             ->add('emergencyContactNumber', TextType::class, ['label' => 'Emergency Contact Number'])
         ;
     }

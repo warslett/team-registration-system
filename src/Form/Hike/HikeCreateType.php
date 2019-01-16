@@ -23,6 +23,8 @@ class HikeCreateType extends AbstractType
             ->add('name', TextType::class)
             ->add('minWalkers', IntegerType::class)
             ->add('maxWalkers', IntegerType::class)
+            ->add('minAge', NumberType::class)
+            ->add('maxAge', NumberType::class)
             ->add('feePerWalker', NumberType::class)
         ;
     }

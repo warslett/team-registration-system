@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WalkerRepository")
@@ -49,6 +51,12 @@ class Walker
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="walkers")
      */
     private $team;
+
+    /**
+     * @ORM\Column(type="date")
+     * @var \DateTime
+     */
+    private $dateOfBirth;
 
     /**
      * @return int|null
@@ -157,5 +165,66 @@ class Walker
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateOfBirth(): ?\DateTime
+    {
+        return $this->dateOfBirth;
+    }
+
+    /**
+     * @param \DateTime $dateOfBirth
+     */
+    public function setDateOfBirth(\DateTime $dateOfBirth): void
+    {
+        $this->dateOfBirth = $dateOfBirth;
+    }
+
+    /**
+     * @return null|float
+     */
+    public function getAgeOnHike(): ?float
+    {
+        if (is_null($this->dateOfBirth)) {
+            return null;
+        }
+
+        $interval = $this->dateOfBirth->diff($this->team->getHike()->getEvent()->getDate());
+        return floatval($interval->y) + floatval($interval->m)/12;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getReadableAgeOnHike(): ?string
+    {
+        if (is_null($this->dateOfBirth)) {
+            return null;
+        }
+
+        $interval = $this->dateOfBirth->diff($this->team->getHike()->getEvent()->getDate());
+        return sprintf("%d years %d months", $interval->y, $interval->m);
+    }
+
+    /**
+     * @Constraints\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if ($this->getAgeOnHike() > $this->team->getHike()->getMaxAge()) {
+            $context->buildViolation('This walker is too old to enter this event')
+                ->atPath('dateOfBirth')
+                ->addViolation();
+        }
+
+        if ($this->getAgeOnHike() < $this->team->getHike()->getMinAge()) {
+            $context->buildViolation('This walker is too young to enter this event')
+                ->atPath('dateOfBirth')
+                ->addViolation();
+        }
     }
 }

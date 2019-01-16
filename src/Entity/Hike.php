@@ -62,6 +62,18 @@ class Hike
     private $feePerWalker;
 
     /**
+     * @var float
+     * @ORM\Column(type="decimal", precision=4, scale=2)
+     */
+    private $minAge;
+
+    /**
+     * @var float
+     * @ORM\Column(type="decimal", precision=4, scale=2)
+     */
+    private $maxAge;
+
+    /**
      * @ORM\OneToMany(targetEntity="Team", mappedBy="hike")
      * @var Collection
      */
@@ -181,5 +193,37 @@ class Hike
     public function setFeePerWalker(float $feePerWalker): void
     {
         $this->feePerWalker = $feePerWalker;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getMinAge(): ?float
+    {
+        return $this->minAge;
+    }
+
+    /**
+     * @param float $minAge
+     */
+    public function setMinAge(float $minAge): void
+    {
+        $this->minAge = $minAge;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getMaxAge(): ?float
+    {
+        return $this->maxAge;
+    }
+
+    /**
+     * @param float $maxAge
+     */
+    public function setMaxAge(float $maxAge): void
+    {
+        $this->maxAge = $maxAge;
     }
 }
