@@ -3,12 +3,12 @@
 namespace App\FormManager\Walker;
 
 use App\Entity\Walker;
-use App\Form\Walker\WalkerDeleteType;
+use App\Form\Walker\WalkerDetailsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class WalkerDeleteFormManager
+class WalkerUpdateFormManager
 {
 
     /**
@@ -37,7 +37,7 @@ class WalkerDeleteFormManager
      */
     public function createForm(Walker $walker): FormInterface
     {
-        return $this->formFactory->create(WalkerDeleteType::class, $walker);
+        return $this->formFactory->create(WalkerDetailsType::class, $walker);
     }
 
     /**
@@ -47,7 +47,6 @@ class WalkerDeleteFormManager
     public function processForm(FormInterface $form): Walker
     {
         $walker = $form->getData();
-        $this->entityManager->remove($walker);
         $this->entityManager->flush();
         return $walker;
     }

@@ -4,12 +4,15 @@ namespace App\FormManager\Walker;
 
 use App\Entity\Team;
 use App\Entity\Walker;
-use App\Form\Walker\WalkerCreateType;
+use App\Form\Walker\WalkerDetailsType;
 use App\Service\WalkerReferenceCharacterService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
+/**
+ * @todo Unit tests
+ */
 class WalkerCreateFormManager
 {
 
@@ -51,7 +54,7 @@ class WalkerCreateFormManager
     {
         $walker = new Walker();
         $walker->setTeam($team);
-        return $this->formFactory->create(WalkerCreateType::class, $walker);
+        return $this->formFactory->create(WalkerDetailsType::class, $walker);
     }
 
     /**

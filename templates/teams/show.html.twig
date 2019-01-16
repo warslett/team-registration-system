@@ -25,6 +25,8 @@
                             <dd>{{ team.name }}</dd>
                             <dt>Team Number</dt>
                             <dd>#{{ team.id }}</dd>
+                            <dt>Fees Paid</dt>
+                            <dd>£{{ team.feesPaid }}</dd>
                             <dt>Hike</dt>
                             <dd>{{ team.hike.name }}</dd>
                             <dt>Event</dt>
@@ -100,14 +102,20 @@
                             {% if team.hasEnoughWalkers and not team.hasDueFees %}<i class="fa fa-check"></i>{% endif %}
                         </li>
                     </ol>
-                    {% if team.hasEnoughWalkers and team.hasDueFees %}
-                    <div class="m-auto">
-                        <a
-                                href="{{ path('team_payment_capture', {'team_id': team.id}) }}"
-                                class="btn btn-lg btn-raised btn-light text-dark mx-auto"
-                                id="payment-btn"
-                        >Pay £{{ team.feesDue }}</a>
-                    </div>
+                    {% if team.hasEnoughWalkers %}
+                        {%  if team.hasDueFees %}
+                            <div class="m-auto">
+                                <a
+                                        href="{{ path('team_payment_capture', {'team_id': team.id}) }}"
+                                        class="btn btn-lg btn-raised btn-light text-dark mx-auto"
+                                        id="payment-btn"
+                                >Pay £{{ team.feesDue }}</a>
+                            </div>
+                        {% else %}
+                            <div class="mb-0 mt-auto">
+                                Your team is now fully registered. We will contact you over email with more details.
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>

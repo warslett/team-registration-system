@@ -1,15 +1,15 @@
 {% extends "_simple_form.html.twig" %}
 
-{% block title %}New Walker &raquo; {{ team }} &raquo; {{ team.hike }} &raquo; {{ parent() }}{% endblock %}
+{% block title %}Update "{{ walker }}" &raquo; {{ walker.team }} &raquo; {{ walker.team.hike }} &raquo; {{ parent() }}{% endblock %}
 
-{% block header_h1 %}Add new walker{% endblock %}
+{% block header_h1 %}Update "{{ walker }}"{% endblock %}
 
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': team.id}) }}">{{ team }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add new walker</li>
+            <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': walker.team.id}) }}">{{ walker.team }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update "{{ walker }}"</li>
         </ol>
     </nav>
 {% endblock %}
@@ -21,6 +21,6 @@
     {{ form_row(form.emergencyContactNumber) }}
 
     <button type="submit" class="btn btn-primary btn-raised">Save</button>
-    <a href="{{ path('team_show', {'team_id': team.id}) }}" class="btn btn-default btn-raised">Cancel</a>
+    <a href="{{ path('team_show', {'team_id': walker.team.id}) }}" class="btn btn-default btn-raised">Cancel</a>
     {{ form_end(form) }}
 {% endblock %}

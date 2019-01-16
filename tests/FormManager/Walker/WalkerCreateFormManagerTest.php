@@ -4,7 +4,7 @@ namespace App\Test\FormManager\Walker;
 
 use App\Entity\Team;
 use App\Entity\Walker;
-use App\Form\Walker\WalkerCreateType;
+use App\Form\Walker\WalkerDetailsType;
 use App\FormManager\Walker\WalkerCreateFormManager;
 use App\Service\WalkerReferenceCharacterService;
 use App\Tests\TestCase;
@@ -26,7 +26,7 @@ class WalkerCreateFormManagerTest extends TestCase
         $formManager->createForm($team);
 
         $formFactory->shouldHaveReceived('create')->withArgs(function($type, $walker) use ($team) {
-            $this->assertEquals(WalkerCreateType::class, $type);
+            $this->assertEquals(WalkerDetailsType::class, $type);
             $this->assertInstanceOf(Walker::class, $walker);
             $this->assertEquals($team, $walker->getTeam());
             return true;
