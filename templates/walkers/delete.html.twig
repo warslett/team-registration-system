@@ -1,0 +1,24 @@
+{% extends "_simple_form.html.twig" %}
+
+{% block title %}Delete {{ walker }} &raquo; {{ walker.team }} &raquo; {{ walker.team.hike }} &raquo; {{ parent() }}{% endblock %}
+
+{% block header_h1 %}Delete "{{ walker }}"{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': walker.team.id}) }}">{{ walker.team }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Delete "{{ walker }}"</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    <h3>Warning!</h3>
+    <p>You are about to delete walker "{{ walker }}". This action cannot be undone. Please confirm if you wish to proceed.</p>
+    <button type="submit" class="btn btn-danger btn-raised"><i class="fa fa-trash"></i> Delete</button>
+    <a href="{{ path('team_show', {'team_id': walker.team.id}) }}" class="btn btn-default btn-raised">Cancel</a>
+    {{ form_end(form) }}
+{% endblock %}

@@ -153,4 +153,9 @@ class Walker
     {
         return $this->foreName . ' ' . $this->surName;
     }
+    
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
