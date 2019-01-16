@@ -1,0 +1,24 @@
+{% extends "_simple_form.html.twig" %}
+
+{% block title %}Update Basic Details &raquo; {{ team }} &raquo; {{ parent() }}{% endblock %}
+
+{% block header_h1 %}Update Basic Details for "{{ team }}"{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': team.id}) }}">{{ team }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update Basic Details</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Save</button>
+    <a href="{{ path('team_show', {'team_id': team.id}) }}" class="btn btn-default btn-raised">Cancel</a>
+    {{ form_end(form) }}
+{% endblock %}
