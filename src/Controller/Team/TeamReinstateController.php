@@ -4,12 +4,13 @@ namespace App\Controller\Team;
 
 use App\Factory\ResponseFactory;
 use App\FormManager\Team\TeamDropFormManager;
+use App\FormManager\Team\TeamReinstateFormManager;
 use App\Resolver\TeamResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
-class TeamDropController
+class TeamReinstateController
 {
 
     /**
@@ -18,9 +19,10 @@ class TeamDropController
     private $teamResolver;
 
     /**
-     * @var TeamDropFormManager
+     * @var TeamReinstateFormManager
      */
-    private $teamDropFormManager;
+    private $teamReinstateFormManager;
+
     /**
      * @var FlashBagInterface
      */
@@ -33,18 +35,18 @@ class TeamDropController
 
     /**
      * @param TeamResolver $teamResolver
-     * @param TeamDropFormManager $teamDropFormManager
+     * @param TeamReinstateFormManager $teamReinstateFormManager
      * @param FlashBagInterface $flashBag
      * @param ResponseFactory $responseFactory
      */
     public function __construct(
         TeamResolver $teamResolver,
-        TeamDropFormManager $teamDropFormManager,
+        TeamReinstateFormManager $teamReinstateFormManager,
         FlashBagInterface $flashBag,
         ResponseFactory $responseFactory
     ) {
         $this->teamResolver = $teamResolver;
-        $this->teamDropFormManager = $teamDropFormManager;
+        $this->teamReinstateFormManager = $teamReinstateFormManager;
         $this->flashBag = $flashBag;
         $this->responseFactory = $responseFactory;
     }
@@ -58,16 +60,16 @@ class TeamDropController
     {
         $team = $this->teamResolver->resolveById($request->get('team_id'));
 
-        $form = $this->teamDropFormManager->createForm($team);
+        $form = $this->teamReinstateFormManager->createForm($team);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $team = $this->teamDropFormManager->processForm($form);
+                $team = $this->teamReinstateFormManager->processForm($form);
 
                 $this->flashBag->add('success', sprintf(
-                    "Team \"%s\" is now marked as dropped from \"%s\"",
+                    "Team \"%s\" is now reinstate for \"%s\"",
                     $team->getName(),
                     $team->getHike()->__toString()
                 ));
@@ -80,7 +82,7 @@ class TeamDropController
             $this->flashBag->add('danger', "There were some problems with the information you provided");
         }
 
-        return $this->responseFactory->createTemplateResponse('teams/drop.html.twig', [
+        return $this->responseFactory->createTemplateResponse('teams/reinstate.html.twig', [
             'team' => $team,
             'form' => $form->createView()
         ]);

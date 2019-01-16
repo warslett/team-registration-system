@@ -60,6 +60,12 @@ class Team
      */
     private $payments;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * @var boolean
+     */
+    private $isDropped = false;
+
     public function __construct()
     {
         $this->walkers = new ArrayCollection();
@@ -209,10 +215,32 @@ class Team
     }
 
     /**
+     * @return bool
+     */
+    public function isDropped(): bool
+    {
+        return $this->isDropped;
+    }
+
+    /**
+     * @param bool $isDropped
+     */
+    public function setIsDropped(bool $isDropped): void
+    {
+        $this->isDropped = $isDropped;
+    }
+
+    /**
      * @return string
      */
     public function __toString()
     {
-        return $this->name;
+        $string = $this->name;
+
+        if ($this->isDropped) {
+            $string .= " (dropped out)";
+        }
+
+        return $string;
     }
 }

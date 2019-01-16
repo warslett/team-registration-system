@@ -1,8 +1,8 @@
 {% extends "_base.html.twig" %}
 
-{% block title %}{{ team.name }} &raquo; {{ team.hike }} &raquo; {{ parent() }}{% endblock %}
+{% block title %}{{ team.name }} &raquo; {{ parent() }}{% endblock %}
 
-{% block header_h1 %}{{ team.name }}{% endblock %}
+{% block header_h1 %}{{ team }}{% endblock %}
 
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
@@ -22,7 +22,12 @@
                     <div class="card-text mb-auto">
                         <dl class="dl">
                             <dt>Team Name</dt>
-                            <dd>{{ team.name }}</dd>
+                            <dd>
+                                {{ team.name }}
+                                {% if team.isDropped %}
+                                    <span class="badge badge-danger">Dropped out</span>
+                                {% endif %}
+                            </dd>
                             <dt>Team Number</dt>
                             <dd>#{{ team.id }}</dd>
                             <dt>Fees Paid</dt>
@@ -38,10 +43,17 @@
                                 href="{{ path('team_update', {'team_id': team.id}) }}"
                                 class="text-primary text-uppercase font-brand mr-3"
                         >Update basic info</a>
+                        {% if team.isDropped %}
+                            <a
+                                    href="{{ path('team_reinstate', {'team_id': team.id}) }}"
+                                    class="text-success text-uppercase font-brand"
+                            >Reinstate team</a>
+                        {% else %}
                         <a
                                 href="{{ path('team_drop', {'team_id': team.id}) }}"
                                 class="text-danger text-uppercase font-brand"
                         >Drop team</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -102,7 +114,7 @@
                             {% if team.hasEnoughWalkers and not team.hasDueFees %}<i class="fa fa-check"></i>{% endif %}
                         </li>
                     </ol>
-                    {% if team.hasEnoughWalkers %}
+                    {% if team.hasEnoughWalkers and not team.isDropped %}
                         {%  if team.hasDueFees %}
                             <div class="m-auto">
                                 <a

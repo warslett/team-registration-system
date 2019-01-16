@@ -47,6 +47,10 @@ team_drop:
     path: /teams/{team_id}/drop
     controller: App\Controller\Team\TeamDropController
 
+team_reinstate:
+    path: /teams/{team_id}/reinstate
+    controller: App\Controller\Team\TeamReinstateController
+
 team_payment_capture:
     path: /teams/{team_id}/payments/capture
     controller: App\Controller\Team\TeamPaymentCaptureController

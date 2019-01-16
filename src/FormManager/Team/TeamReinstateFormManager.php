@@ -2,14 +2,14 @@
 
 namespace App\FormManager\Team;
 
+
 use App\Entity\Team;
-use App\Form\Team\TeamUpdateType;
-use App\Service\CurrentUserService;
+use App\Form\Team\TeamCSRFType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class TeamUpdateFormManager
+class TeamReinstateFormManager
 {
 
     /**
@@ -40,7 +40,7 @@ class TeamUpdateFormManager
      */
     public function createForm(Team $team): FormInterface
     {
-        return $this->formFactory->create(TeamUpdateType::class, $team);
+        return $this->formFactory->create(TeamCSRFType::class, $team);
     }
 
     /**
@@ -51,6 +51,7 @@ class TeamUpdateFormManager
     {
         /** @var Team $team */
         $team = $form->getData();
+        $team->setIsDropped(false);
         $this->entityManager->flush();
 
         return $team;

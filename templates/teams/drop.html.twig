@@ -1,26 +1,24 @@
 {% extends "_simple_form.html.twig" %}
 
-{% block title %}New Walker &raquo; {{ team }} &raquo; {{ parent() }}{% endblock %}
+{% block title %}Drop {{ team }} &raquo; {{ parent() }}{% endblock %}
 
-{% block header_h1 %}Add new walker{% endblock %}
+{% block header_h1 %}Drop Team "{{ team }}"{% endblock %}
 
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('team_list') }}">Your Teams</a></li>
             <li class="breadcrumb-item"><a href="{{ path('team_show', {'team_id': team.id}) }}">{{ team }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add new walker</li>
+            <li class="breadcrumb-item active" aria-current="page">Drop Team "{{ team }}"</li>
         </ol>
     </nav>
 {% endblock %}
 
 {% block form %}
     {{ form_start(form) }}
-    {{ form_row(form.foreName) }}
-    {{ form_row(form.surName) }}
-    {{ form_row(form.emergencyContactNumber) }}
-
-    <button type="submit" class="btn btn-primary btn-raised">Save</button>
+    <h3>Warning!</h3>
+    <p>You are about to drop the team "{{ team }}" from the event. Please confirm to proceed</p>
+    <button type="submit" class="btn btn-danger btn-raised">Drop</button>
     <a href="{{ path('team_show', {'team_id': team.id}) }}" class="btn btn-default btn-raised">Cancel</a>
     {{ form_end(form) }}
 {% endblock %}
