@@ -46,7 +46,7 @@ security:
                 target: user_login
 
     access_control:
-        - { path: ^/teams,     roles: ROLE_USER }
-        - { path: ^/walkers,   roles: ROLE_USER }
-        - { path: ^/events,    roles: ROLE_ADMIN }
+        - { path: ^/registration/teams,     roles: ROLE_USER }
+        - { path: ^/registration/walkers,   roles: ROLE_USER }
+        - { path: ^/registration/events,    roles: ROLE_ADMIN }
         - { path: ^/api,       roles: ROLE_API_USER }

@@ -2,120 +2,128 @@ root:
    path: /
    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
    defaults:
-       path: /teams/list
+       path: /registration/teams/list
        permanent: true
 
+registration_root:
+  path: /registration
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /registration/teams/list
+    permanent: true
+
 user_register:
-    path: /user/register
+    path: /registration/user/register
     controller: App\Controller\User\UserRegisterController
 
 user_update:
-    path: /user/update
+    path: /registration/user/update
     controller: App\Controller\User\UserUpdateController
     
 user_login:
-    path: /user/login
+    path: /registration/user/login
     controller: App\Controller\User\UserLoginController
 
 user_logout:
-    path: /user/logout
+    path: /registration/user/logout
 
 team_root:
-   path: /teams
+   path: /registration/teams
    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
    defaults:
-       path: /teams/list
+       path: /registration/teams/list
        permanent: true
 
 team_list:
-    path: /teams/list
+    path: /registration/teams/list
     controller: App\Controller\Team\TeamListController
 
 team_create:
-    path: /teams/create
+    path: /registration/teams/create
     controller: App\Controller\Team\TeamCreateController
 
 team_show:
-    path: /teams/{team_id}
+    path: /registration/teams/{team_id}
     controller: App\Controller\Team\TeamShowController
 
 team_update:
-    path: /teams/{team_id}/update
+    path: /registration/teams/{team_id}/update
     controller: App\Controller\Team\TeamUpdateController
 
 team_drop:
-    path: /teams/{team_id}/drop
+    path: /registration/teams/{team_id}/drop
     controller: App\Controller\Team\TeamDropController
 
 team_reinstate:
-    path: /teams/{team_id}/reinstate
+    path: /registration/teams/{team_id}/reinstate
     controller: App\Controller\Team\TeamReinstateController
 
 team_payment_capture:
-    path: /teams/{team_id}/payments/capture
+    path: /registration/teams/{team_id}/payments/capture
     controller: App\Controller\Team\TeamPaymentCaptureController
 
 team_payment_verify:
-    path: /teams/payments/verify
+    path: /registration/teams/payments/verify
     controller: App\Controller\Team\TeamPaymentVerifyController
 
 walker_create:
-    path: /teams/{team_id}/walkers/create
+    path: /registration/teams/{team_id}/walkers/create
     controller: App\Controller\Walker\WalkerCreateController
 
 walker_update:
-    path: /walkers/{walker_id}/update
+    path: /registration/walkers/{walker_id}/update
     controller: App\Controller\Walker\WalkerUpdateController
 
 walker_delete:
-    path: /walkers/{walker_id}/delete
+    path: /registration/walkers/{walker_id}/delete
     controller: App\Controller\Walker\WalkerDeleteController
 
 event_root:
-    path: /events
+    path: /registration/events
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
     defaults:
-       path: /events/list
+       path: /registration/events/list
        permanent: true
 
 event_list:
-    path: /events/list
+    path: /registration/events/list
     controller: App\Controller\Event\EventListController
 
 event_create:
-    path: /events/create
+    path: /registration/events/create
     controller: App\Controller\Event\EventCreateController
 
 event_show:
-    path: /events/{event_id}/show
+    path: /registration/events/{event_id}/show
     controller: App\Controller\Event\EventShowController
 
 event_update:
-    path: /events/{event_id}/update
+    path: /registration/events/{event_id}/update
     controller: App\Controller\Event\EventUpdateController
 
 event_duplicate:
-    path: /events/{event_id}/duplicate
+    path: /registration/events/{event_id}/duplicate
     controller: App\Controller\Event\EventDuplicateController
 
 event_delete:
-    path: /events/{event_id}/delete
+    path: /registration/events/{event_id}/delete
     controller: App\Controller\Event\EventDeleteController
     
 hike_create:
-    path: /events/{event_id}/hikes/create
+    path: /registration/events/{event_id}/hikes/create
     controller: App\Controller\Hike\HikeCreateController
 
 hike_update:
-    path: /hikes/{hike_id}/update
+    path: /registration/hikes/{hike_id}/update
     controller: App\Controller\Hike\HikeUpdateController
 
 hike_delete:
-    path: /hikes/{hike_id}/delete
+    path: /registration/hikes/{hike_id}/delete
     controller: App\Controller\Hike\HikeDeleteController
 
 api_login:
-    path: /api/login
+    path: /registration/api/login
 
 payum_all:
   resource: "@PayumBundle/Resources/config/routing/all.xml"
+  prefix: /registration
