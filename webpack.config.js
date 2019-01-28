@@ -4,8 +4,8 @@ Encore
     .enableSassLoader(function(sassOptions) {}, {
         resolveUrlLoader: false
      })
-    .setOutputPath('public/build/')
-    .setPublicPath('/build')
+    .setOutputPath('public/registration/build')
+    .setPublicPath('/registration/build')
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     .addEntry('js/app', './assets/js/app.js')
