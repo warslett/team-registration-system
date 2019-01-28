@@ -39,7 +39,7 @@ security:
             form_login:
                 login_path: user_login
                 check_path: user_login
-                default_target_path: root
+                default_target_path: registration_root
                 csrf_token_generator: security.csrf.token_manager
             logout:
                 path:   user_logout

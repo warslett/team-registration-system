@@ -122,7 +122,7 @@ hike_delete:
     controller: App\Controller\Hike\HikeDeleteController
 
 api_login:
-    path: /registration/api/login
+    path: /api/login
 
 payum_all:
   resource: "@PayumBundle/Resources/config/routing/all.xml"
