@@ -49,6 +49,7 @@ class Walker
     /**
      * @var Team
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="walkers")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $team;
 

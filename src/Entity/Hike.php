@@ -40,6 +40,7 @@ class Hike
     /**
      * @var Event
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="hikes")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
 

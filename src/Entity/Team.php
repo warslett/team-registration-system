@@ -39,6 +39,7 @@ class Team
     /**
      * @var Hike
      * @ORM\ManyToOne(targetEntity="Hike", inversedBy="teams")
+     * @ORM\JoinColumn(name="hike_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $hike;
 

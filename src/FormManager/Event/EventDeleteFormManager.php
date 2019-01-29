@@ -1,14 +1,14 @@
 <?php
 
-namespace App\FormManager\Hike;
+namespace App\FormManager\Event;
 
-use App\Entity\Hike;
-use App\Form\Hike\HikeDeleteType;
+use App\Entity\Event;
+use App\Form\Event\EventDeleteType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class HikeDeleteFormManager
+class EventDeleteFormManager
 {
 
     /**
@@ -32,24 +32,23 @@ class HikeDeleteFormManager
     }
 
     /**
-     * @param Hike $hike
+     * @param Event $event
      * @return FormInterface
      */
-    public function createForm(Hike $hike): FormInterface
+    public function createForm(Event $event): FormInterface
     {
-        return $this->formFactory->create(HikeDeleteType::class, $hike);
+        return $this->formFactory->create(EventDeleteType::class, $event);
     }
 
     /**
      * @param FormInterface $form
-     * @return Hike
+     * @return Event
      */
-    public function processForm(FormInterface $form): Hike
+    public function processForm(FormInterface $form): Event
     {
-        $hike = $form->getData();
-        $this->entityManager->remove($hike);
+        $event = $form->getData();
+        $this->entityManager->remove($event);
         $this->entityManager->flush();
-        return $hike;
+        return $event;
     }
 }
-
