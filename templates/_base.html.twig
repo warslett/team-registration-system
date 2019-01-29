@@ -31,7 +31,7 @@
                             {% endif %}
                         </ul>
                         <div class="title-bar__user">
-                            Welcome, <span id="current-user">{{ app.user.email }}</span>.
+                            Welcome, <span id="current-user">{{ app.user.fullName }}</span>.
                             <a href="{{ path('user_logout') }}" class="logout-link">Log out</a>
                         </div>
                         {% else %}

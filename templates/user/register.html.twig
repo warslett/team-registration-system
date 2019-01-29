@@ -2,10 +2,12 @@
 
 {% block title %}Register &raquo; {{ parent() }}{% endblock %}
 
-{% block header_h1 %}Register{% endblock %}
+{% block header_h1 %}Register Account{% endblock %}
 
 {% block form %}
     {{ form_start(form) }}
+    {{ form_row(form.fullName) }}
+    {{ form_row(form.contactNumber) }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}

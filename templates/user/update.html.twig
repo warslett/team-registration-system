@@ -1,0 +1,15 @@
+{% extends "_simple_form.html.twig" %}
+
+{% block title %}Update Your Account &raquo; {{ parent() }}{% endblock %}
+
+{% block header_h1 %}Update Your Account{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.fullName) }}
+    {{ form_row(form.contactNumber) }}
+    {{ form_row(form.email) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Update</button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -34,6 +34,20 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=254)
+     * @Assert\NotBlank()
+     * @var string|null
+     */
+    private $fullName;
+
+    /**
+     * @ORM\Column(type="string", length=254)
+     * @Assert\NotBlank()
+     * @var string|null
+     */
+    private $contactNumber;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -56,8 +70,7 @@ class User implements UserInterface, \Serializable
     private $userGroups;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @var string
      */
     private $plainPassword;
 
@@ -190,5 +203,37 @@ class User implements UserInterface, \Serializable
     public function setUserGroups($userGroups): void
     {
         $this->userGroups = $userGroups;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * @param string $fullName
+     */
+    public function setFullName(string $fullName): void
+    {
+        $this->fullName = $fullName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getContactNumber(): ?string
+    {
+        return $this->contactNumber;
+    }
+
+    /**
+     * @param string $contactNumber
+     */
+    public function setContactNumber(string $contactNumber): void
+    {
+        $this->contactNumber = $contactNumber;
     }
 }
