@@ -18,4 +18,9 @@ class UserRepository extends EntityRepository
     {
         return $this->findOneBy(['email' => $email]);
     }
+
+    public function findOneByResetPasswordToken(string $resetPasswordToken): ?User
+    {
+        return $this->findOneBy(['resetPasswordToken' => $resetPasswordToken]);
+    }
 }

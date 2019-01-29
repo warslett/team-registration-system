@@ -19,4 +19,5 @@ return [
     Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['dev' => true],
     Hautelook\AliceBundle\HautelookAliceBundle::class => ['dev' => true],
     Payum\Bundle\PayumBundle\PayumBundle::class => ['all' => true],
+    cspoo\Swiftmailer\MailgunBundle\cspooSwiftmailerMailgunBundle::class => ['all' => true],
 ];

@@ -24,6 +24,14 @@ user_login:
     path: /registration/user/login
     controller: App\Controller\User\UserLoginController
 
+user_password_reset:
+  path: /user/password/reset
+  controller: App\Controller\User\ResetPasswordController
+
+user_forgotten_password:
+  path: /user/password/forgotten-password
+  controller: App\Controller\User\ForgottenPasswordController
+
 user_logout:
     path: /registration/user/logout
 

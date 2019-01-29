@@ -5,6 +5,7 @@
         "php": "^7.2",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",
+        "cspoo/swiftmailer-mailgun-bundle": "^1.2",
         "lexik/jwt-authentication-bundle": "^2.4",
         "payum/paypal-express-checkout-nvp": "^1.5",
         "payum/payum-bundle": "^2.3",

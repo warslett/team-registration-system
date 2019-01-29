@@ -10,6 +10,8 @@
     {{ form_row(form.contactNumber) }}
     {{ form_row(form.email) }}
 
-    <button type="submit" class="btn btn-primary btn-raised">Update</button>
+    <button type="submit" class="btn btn-primary btn-raised mb-4">Update</button>
+
+    <div>Want to update your password? Click <a href="{{ path('user_forgotten_password') }}">here</a> to request a password reset</div>
     {{ form_end(form) }}
 {% endblock %}

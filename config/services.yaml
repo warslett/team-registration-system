@@ -21,3 +21,7 @@ services:
 
     Payum\Core\Payum:
         alias: 'payum'
+
+    App\Service\ResetPasswordTokenService:
+        arguments:
+            $sender: '%env(MAILGUN_SENDER)%'

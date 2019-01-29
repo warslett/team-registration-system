@@ -59,6 +59,32 @@ class User implements UserInterface, \Serializable
     private $teams;
 
     /**
+     * @var int $resetPasswordCount
+     * @ORM\Column(type="integer")
+     */
+    private $resetPasswordCount = 0;
+
+    /**
+     * @var \DateTime|null $refreshPasswordCountDate
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $refreshPasswordCountDate;
+
+    /**
+     * @var string|null $resetPasswordToken
+     *
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $resetPasswordToken;
+
+    /**
+     * @var \DateTime|null $resetPasswordTokenExpiry
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $resetPasswordTokenExpiry;
+
+    /**
      * @var Collection|UserGroup[]
      * @ORM\ManyToMany(targetEntity="UserGroup", inversedBy="users")
      * @ORM\JoinTable(
@@ -235,5 +261,74 @@ class User implements UserInterface, \Serializable
     public function setContactNumber(string $contactNumber): void
     {
         $this->contactNumber = $contactNumber;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getResetPasswordToken(): ?string
+    {
+        return $this->resetPasswordToken;
+    }
+
+    /**
+     * @param null|string $resetPasswordToken
+     */
+    public function setResetPasswordToken(?string $resetPasswordToken): void
+    {
+        $this->resetPasswordToken = $resetPasswordToken;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getResetPasswordTokenExpiry(): ?\DateTime
+    {
+        return $this->resetPasswordTokenExpiry;
+    }
+
+    /**
+     * @param \DateTime|null $resetPasswordTokenExpiry
+     */
+    public function setResetPasswordTokenExpiry(?\DateTime $resetPasswordTokenExpiry): void
+    {
+        $this->resetPasswordTokenExpiry = $resetPasswordTokenExpiry;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResetPasswordCount(): int
+    {
+        return $this->resetPasswordCount;
+    }
+
+    /**
+     * @param int $resetPasswordCount
+     */
+    public function setResetPasswordCount(int $resetPasswordCount): void
+    {
+        $this->resetPasswordCount = $resetPasswordCount;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getRefreshPasswordCountDate(): ?\DateTime
+    {
+        return $this->refreshPasswordCountDate;
+    }
+
+    /**
+     * @param \DateTime|null $refreshPasswordCountDate
+     */
+    public function setRefreshPasswordCountDate(?\DateTime $refreshPasswordCountDate): void
+    {
+        $this->refreshPasswordCountDate = $refreshPasswordCountDate;
+    }
+
+    public function incrementResetPasswordCount(): void
+    {
+        $this->resetPasswordCount++;
     }
 }

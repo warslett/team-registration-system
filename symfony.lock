@@ -44,6 +44,9 @@
     "container-interop/container-interop": {
         "version": "1.2.0"
     },
+    "cspoo/swiftmailer-mailgun-bundle": {
+        "version": "1.2.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -188,6 +191,15 @@
             "ref": "a66e8a7b75a1825cf2414d5dd53c7ed38c8654d1"
         }
     },
+    "mailgun/mailgun-php": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.3",
+            "ref": "d3188b6cdc58f877ef2884b55ac4798640b4b9be"
+        }
+    },
     "mockery/mockery": {
         "version": "1.0"
     },
@@ -233,6 +245,12 @@
     "phar-io/version": {
         "version": "1.0.1"
     },
+    "php-http/client-common": {
+        "version": "1.9.0"
+    },
+    "php-http/discovery": {
+        "version": "1.6.0"
+    },
     "php-http/guzzle6-adapter": {
         "version": "v1.1.1"
     },
@@ -244,6 +262,9 @@
     },
     "php-http/message-factory": {
         "version": "v1.0.2"
+    },
+    "php-http/multipart-stream-builder": {
+        "version": "1.0.0"
     },
     "php-http/promise": {
         "version": "v1.0.0"

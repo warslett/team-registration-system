@@ -19,10 +19,9 @@
             <label for="password">Password</label>
         </div>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-
-        <p>Don't have an account? Click <a href="{{ path('user_register') }}">here</a> to register.</p>
-
-        <button type="submit" class="btn btn-primary btn-raised">Log in</button>
+        <button type="submit" class="btn btn-primary btn-raised mb-4">Log in</button>
+        <div>Don't have an account? Click <a href="{{ path('user_register') }}">here</a> to register.</div>
+        <div>Forgotten your password? Click <a href="{{ path('user_forgotten_password') }}">here</a> to request a password reset</div>
     </form>
     {% endif %}
 {% endblock %}

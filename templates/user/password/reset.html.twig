@@ -1,0 +1,15 @@
+{% extends "_simple_form.html.twig" %}
+
+{% block title %}Reset your password &raquo; {{ parent() }}{% endblock %}
+
+{% block header_h1 %}Reset your password{% endblock %}
+
+{% block form %}
+
+    {{ form_start(form) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Reset Password</button>
+    {{ form_end(form) }}
+{% endblock %}
