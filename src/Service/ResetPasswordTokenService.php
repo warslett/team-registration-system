@@ -12,6 +12,9 @@ use Twig\Environment;
 class ResetPasswordTokenService
 {
 
+    const PASSWORD_RESET_LIMIT = 4;
+    const PASSWORD_RESET_LIMIT_LIFETIME = "+24 hours";
+
     /**
      * @var UserRepository
      */
@@ -32,8 +35,6 @@ class ResetPasswordTokenService
      */
     private $twig;
 
-    const PASSWORD_RESET_LIMIT = 4;
-    const PASSWORD_RESET_LIMIT_LIFETIME = "+24 hours";
     /**
      * @var string
      */
@@ -114,7 +115,7 @@ class ResetPasswordTokenService
                 $user->setResetPasswordTokenExpiry($expiry);
 
                 $message = (new \Swift_Message())
-                    ->setSubject("Please provide a password for your Job Board account")
+                    ->setSubject("Please provide a password for your Three Towers account")
                     ->setTo($user->getEmail())
                     ->setFrom($this->sender)
                     ->setBody(
