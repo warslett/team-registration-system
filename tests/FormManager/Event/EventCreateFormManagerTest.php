@@ -1,7 +1,7 @@
 <?php
 
 use App\Entity\Event;
-use App\Form\Event\EventCreateType;
+use App\Form\Event\EventType;
 use App\FormManager\Event\EventCreateFormManager;
 use App\Tests\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +21,7 @@ class EventCreateFormManagerTest extends TestCase
         $formManager->createForm();
 
         $formFactory->shouldHaveReceived('create')->with(
-            EventCreateType::class,
+            EventType::class,
             m::type(Event::class)
         )->once();
     }

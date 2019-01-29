@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\FormManager\Event;
 
 use App\Entity\Event;
@@ -8,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class EventCreateFormManager
+class EventUpdateFormManager
 {
 
     /**
@@ -25,18 +26,21 @@ class EventCreateFormManager
      * @param EntityManagerInterface $entityManager
      * @param FormFactoryInterface $formFactory
      */
-    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FormFactoryInterface $formFactory
+    ) {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
     }
 
     /**
+     * @param Event $event
      * @return FormInterface
      */
-    public function createForm(): FormInterface
+    public function createForm(Event $event): FormInterface
     {
-        return $this->formFactory->create(EventType::class, new Event());
+        return $this->formFactory->create(EventType::class, $event);
     }
 
     /**
@@ -47,8 +51,8 @@ class EventCreateFormManager
     {
         /** @var Event $event */
         $event = $form->getData();
-        $this->entityManager->persist($event);
         $this->entityManager->flush();
+
         return $event;
     }
 }
