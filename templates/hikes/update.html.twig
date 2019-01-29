@@ -1,15 +1,15 @@
 {% extends "_simple_form.html.twig" %}
 
-{% block title %}New Hike &raquo; {{ event }} &raquo; {{ parent() }}{% endblock %}
+{% block title %}Update "{{ hike }}" &raquo; {{ parent() }}{% endblock %}
 
-{% block header_h1 %}Add new hike{% endblock %}
+{% block header_h1 %}Update "{{ hike }}"{% endblock %}
 
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('event_list') }}">Events</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('event_show', {'event_id': event.id}) }}">{{ event }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add new hike</li>
+            <li class="breadcrumb-item"><a href="{{ path('event_show', {'event_id': hike.event.id}) }}">{{ hike.event }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update "{{ hike }}"</li>
         </ol>
     </nav>
 {% endblock %}

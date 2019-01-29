@@ -4,7 +4,7 @@ namespace App\Text\FormManager\Hike;
 
 use App\Entity\Event;
 use App\Entity\Hike;
-use App\Form\Hike\HikeCreateType;
+use App\Form\Hike\HikeType;
 use App\FormManager\Hike\HikeCreateFormManager;
 use App\Tests\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +25,7 @@ class HikeCreateFormManagerTest extends TestCase
         $formManager->createForm($event);
 
         $formFactory->shouldHaveReceived('create')->withArgs(function($type, $hike) use ($event) {
-            $this->assertEquals(HikeCreateType::class, $type);
+            $this->assertEquals(HikeType::class, $type);
             $this->assertInstanceOf(Hike::class, $hike);
             $this->assertEquals($event, $hike->getEvent());
             return true;

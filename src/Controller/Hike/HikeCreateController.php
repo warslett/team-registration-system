@@ -78,7 +78,7 @@ class HikeCreateController
             $this->flashBag->add('danger', "There were some problems with the information you provided");
         }
 
-        return $this->responseFactory->createTemplateResponse('events/hikes/create.html.twig', [
+        return $this->responseFactory->createTemplateResponse('hikes/create.html.twig', [
             'event' => $event,
             'form' => $form->createView()
         ]);
