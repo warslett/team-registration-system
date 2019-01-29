@@ -1,14 +1,14 @@
 <?php
 
-namespace App\FormManager\Walker;
+namespace App\FormManager\Hike;
 
-use App\Entity\Walker;
-use App\Form\Walker\WalkerType;
+use App\Entity\Hike;
+use App\Form\Hike\HikeDeleteType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class WalkerUpdateFormManager
+class HikeDeleteFormManager
 {
 
     /**
@@ -32,22 +32,23 @@ class WalkerUpdateFormManager
     }
 
     /**
-     * @param Walker $walker
+     * @param Hike $hiker
      * @return FormInterface
      */
-    public function createForm(Walker $walker): FormInterface
+    public function createForm(Hike $hiker): FormInterface
     {
-        return $this->formFactory->create(WalkerType::class, $walker);
+        return $this->formFactory->create(HikeDeleteType::class, $hiker);
     }
 
     /**
      * @param FormInterface $form
-     * @return Walker
+     * @return Hike
      */
-    public function processForm(FormInterface $form): Walker
+    public function processForm(FormInterface $form): Hike
     {
-        $walker = $form->getData();
+        $hiker = $form->getData();
+        $this->entityManager->remove($hiker);
         $this->entityManager->flush();
-        return $walker;
+        return $hiker;
     }
 }
