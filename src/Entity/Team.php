@@ -200,6 +200,17 @@ class Team
         return $paid;
     }
 
+    public function getCompletedPayments(): array
+    {
+        $completed = [];
+        foreach ($this->payments as $payment) {
+            if ($payment->isCompleted()) {
+                $completed[] = $payment;
+            }
+        }
+        return $completed;
+    }
+
     /**
      * @return bool
      */

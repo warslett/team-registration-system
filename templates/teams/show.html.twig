@@ -153,7 +153,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for payment in team.payments %}
+                        {% for payment in team.completedPayments %}
                             <tr class="payments-table__payment">
                                 <td class="payments-table__">#{{ payment.id }}</td>
                                 <td class="payments-table__amount">{{ payment.totalAmount / 100 }} {{ payment.currencyCode }}</td>

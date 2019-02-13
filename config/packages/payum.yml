@@ -9,7 +9,7 @@ payum:
   gateways:
     paypal:
       factory: 'paypal_express_checkout'
-      username: 'will-facilitator_api1.arslett.uk'
-      password: 'BCJB2KHLPQU2Q6N6'
-      signature: 'AVdbhFjJS0JUTXX9up4BHnZd1w4KA.znvlSnSpwJJ8U0C8GKgIPPHrIP'
-      sandbox: true
+      username: '%env(PAYPAL_USERNAME)%'
+      password: '%env(PAYPAL_PASSWORD)%'
+      signature: '%env(PAYPAL_SIGNATURE)%'
+      sandbox: '%env(bool:PAYPAL_SANDBOX)%'
