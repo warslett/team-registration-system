@@ -92,6 +92,18 @@ class Hike
      */
     private $firstTeamStartTime;
 
+    /**
+     * @ORM\Column(type="string", length=280)
+     * @var string|null
+     */
+    private $joiningInfoURL;
+
+    /**
+     * @ORM\Column(type="string", length=280)
+     * @var string|null
+     */
+    private $kitListURL;
+
     public function __construct()
     {
         $this->teams = new ArrayCollection();
@@ -270,5 +282,37 @@ class Hike
     public function setFirstTeamStartTime(\DateTime $firstTeamStartTime): void
     {
         $this->firstTeamStartTime = $firstTeamStartTime;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getJoiningInfoURL(): ?string
+    {
+        return $this->joiningInfoURL;
+    }
+
+    /**
+     * @param string|null $joiningInfoURL
+     */
+    public function setJoiningInfoURL(?string $joiningInfoURL): void
+    {
+        $this->joiningInfoURL = $joiningInfoURL;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getKitListURL(): ?string
+    {
+        return $this->kitListURL;
+    }
+
+    /**
+     * @param string|null $kitListURL
+     */
+    public function setKitListURL(?string $kitListURL): void
+    {
+        $this->kitListURL = $kitListURL;
     }
 }

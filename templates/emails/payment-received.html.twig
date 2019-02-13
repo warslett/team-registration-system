@@ -1,7 +1,11 @@
 Dear {{ payment.team.user.fullName }},<br />
 <br />
 This is to confirm that we have received a payment of {{ (payment.totalAmount / 100) }} {{ payment.currencyCode }}
-received for team {{ payment.team }} on {{ payment.date.format('l jS F Y h:i:s A') }} to participate in the hike
-"{{ payment.team.hike.name }}" for {{ payment.team.hike.event.name }}.
+received for team "{{ payment.team }}" on {{ payment.date.format('l jS F Y h:i:s A') }} to participate in the hike
+"{{ payment.team.hike.name }}" for "{{ payment.team.hike.event.name }}".<br/>
 <br />
-<strong>The team's start time is {{ payment.team.startTime.format('h:i A') }}.</strong>
+<strong>The team's start time is {{ payment.team.startTime.format('h:i A') }}.</strong><br/>
+<br/>
+Please make sure that each team member has a copy of the <a href="{{ payment.team.hike.kitListURL }}">Kit List</a> and
+<a href="{{ payment.team.hike.joiningInfoURL }}">Joining Information</a> which they should also bring on the
+day.

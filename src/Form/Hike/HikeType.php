@@ -38,6 +38,12 @@ class HikeType extends AbstractType
                 'html5' => false,
                 'format' => 'dd/MM/yyyy HH:mm'
             ])
+            ->add('joiningInfoURL', TextType::class, [
+                'label' => 'Joining Info URL (eg. https://hike.org.uk/joining-info.pdf)'
+            ])
+            ->add('kitListURL', TextType::class, [
+                'label' => 'Kit List URL (eg. https://hike.org.uk/kitlist.pdf)'
+            ])
         ;
     }
 

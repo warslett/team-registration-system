@@ -23,6 +23,7 @@ class TeamPayment extends Payment
     /**
      * @var Team
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="payments")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $team;
 
