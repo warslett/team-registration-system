@@ -4,6 +4,7 @@ namespace App\Form\Hike;
 
 use App\Entity\Hike;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,7 +26,18 @@ class HikeType extends AbstractType
             ->add('maxWalkers', IntegerType::class)
             ->add('minAge', NumberType::class)
             ->add('maxAge', NumberType::class)
-            ->add('feePerWalker', NumberType::class)
+            ->add('feePerWalker', NumberType::class, [
+                'label' => 'Fee Per Walker (pounds)'
+            ])
+            ->add('startTimeInterval', IntegerType::class, [
+                'label' => 'Start Time Interval (minutes)'
+            ])
+            ->add('firstTeamStartTime', DateTimeType::class, [
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datetimepicker'],
+                'html5' => false,
+                'format' => 'dd/MM/yyyy HH:mm'
+            ])
         ;
     }
 

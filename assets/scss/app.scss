@@ -5,6 +5,7 @@ $grid-gutter-width: 20px;
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
 @import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
+@import "~pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.min.css";
 
 body {
   color: $gray-dark;
@@ -56,7 +57,7 @@ a:hover {
     padding-bottom: 10px;
   }
 
-  &+label {
+  &+label, &+.bootstrap-datetimepicker-widget+label {
     margin-bottom: 0;
     color: grey;
     margin-top: 21px;
@@ -65,7 +66,7 @@ a:hover {
     transition: margin-top 200ms ease, font-size 200ms ease;
   }
 
-  &:not(:placeholder-shown)+label {
+  &:not(:placeholder-shown)+label, &:not(:placeholder-shown)+.bootstrap-datetimepicker-widget+label {
     margin-top: 0;
     font-size: 0.8rem;
   }
@@ -97,7 +98,7 @@ footer {
   }
 }
 
-.datepicker-dropdown {
+.datepicker-dropdown, .bootstrap-datetimepicker-widget {
   opacity: 1;
   transform: scale(1);
   padding: 10px;

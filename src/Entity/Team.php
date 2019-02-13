@@ -67,6 +67,12 @@ class Team
      */
     private $isDropped = false;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     */
+    private $startTime;
+
     public function __construct()
     {
         $this->walkers = new ArrayCollection();
@@ -243,5 +249,21 @@ class Team
         }
 
         return $string;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getStartTime(): ?\DateTime
+    {
+        return $this->startTime;
+    }
+
+    /**
+     * @param \DateTime|null $startTime
+     */
+    public function setStartTime(?\DateTime $startTime): void
+    {
+        $this->startTime = $startTime;
     }
 }

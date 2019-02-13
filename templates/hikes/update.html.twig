@@ -1,8 +1,8 @@
 {% extends "_simple_form.html.twig" %}
 
-{% block title %}Update "{{ hike }}" &raquo; {{ parent() }}{% endblock %}
+{% block title %}Update "{{ hike.name }}" &raquo; {{ parent() }}{% endblock %}
 
-{% block header_h1 %}Update "{{ hike }}"{% endblock %}
+{% block header_h1 %}Update "{{ hike.name }}"{% endblock %}
 
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
@@ -22,6 +22,8 @@
     {{ form_row(form.minAge) }}
     {{ form_row(form.maxAge) }}
     {{ form_row(form.feePerWalker) }}
+    {{ form_row(form.startTimeInterval) }}
+    {{ form_row(form.firstTeamStartTime) }}
 
     <button type="submit" class="btn btn-primary btn-raised">Save</button>
     {{ form_end(form) }}

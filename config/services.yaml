@@ -25,3 +25,8 @@ services:
     App\Service\ResetPasswordTokenService:
         arguments:
             $sender: '%env(MAILGUN_SENDER)%'
+
+    App\Controller\Team\TeamPaymentVerifyController:
+        arguments:
+            $sender: '%env(MAILGUN_SENDER)%'
+        tags: ['controller.service_arguments']

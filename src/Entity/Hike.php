@@ -27,49 +27,49 @@ class Hike
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @var int
+     * @var int|null
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=140)
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var Event
+     * @var Event|null
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="hikes")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
 
     /**
-     * @var int
+     * @var int|null
      * @ORM\Column(type="integer")
      */
     private $minWalkers;
 
     /**
-     * @var int
+     * @var int|null
      * @ORM\Column(type="integer")
      */
     private $maxWalkers;
 
     /**
-     * @var float
+     * @var float|null
      * @ORM\Column(type="decimal", precision=5, scale=2)
      */
     private $feePerWalker;
 
     /**
-     * @var float
+     * @var float|null
      * @ORM\Column(type="decimal", precision=4, scale=2)
      */
     private $minAge;
 
     /**
-     * @var float
+     * @var float|null
      * @ORM\Column(type="decimal", precision=4, scale=2)
      */
     private $maxAge;
@@ -79,6 +79,18 @@ class Hike
      * @var Collection
      */
     private $teams;
+
+    /**
+     * @var int|null
+     * @ORM\Column(type="integer")
+     */
+    private $startTimeInterval;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime|null
+     */
+    private $firstTeamStartTime;
 
     public function __construct()
     {
@@ -226,5 +238,37 @@ class Hike
     public function setMaxAge(float $maxAge): void
     {
         $this->maxAge = $maxAge;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getStartTimeInterval(): ?int
+    {
+        return $this->startTimeInterval;
+    }
+
+    /**
+     * @param int $startTimeInterval
+     */
+    public function setStartTimeInterval(int $startTimeInterval): void
+    {
+        $this->startTimeInterval = $startTimeInterval;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getFirstTeamStartTime(): ?\DateTime
+    {
+        return $this->firstTeamStartTime;
+    }
+
+    /**
+     * @param \DateTime $firstTeamStartTime
+     */
+    public function setFirstTeamStartTime(\DateTime $firstTeamStartTime): void
+    {
+        $this->firstTeamStartTime = $firstTeamStartTime;
     }
 }

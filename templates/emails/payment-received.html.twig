@@ -1,0 +1,7 @@
+Dear {{ payment.team.user.fullName }},<br />
+<br />
+This is to confirm that we have received a payment of {{ (payment.totalAmount / 100) }} {{ payment.currencyCode }}
+received for team {{ payment.team }} on {{ payment.date.format('l jS F Y h:i:s A') }} to participate in the hike
+"{{ payment.team.hike.name }}" for {{ payment.team.hike.event.name }}.
+<br />
+<strong>The team's start time is {{ payment.team.startTime.format('h:i A') }}.</strong>

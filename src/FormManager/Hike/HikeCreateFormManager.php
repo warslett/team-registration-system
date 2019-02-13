@@ -40,6 +40,7 @@ class HikeCreateFormManager
     {
         $hike = new Hike();
         $hike->setEvent($event);
+        $hike->setFirstTeamStartTime($event->getDate());
         return $this->formFactory->create(HikeType::class, $hike);
     }
 

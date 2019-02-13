@@ -63,4 +63,17 @@ class TeamPayment extends Payment
     {
         $this->isCompleted = $isCompleted;
     }
+
+    public function getDate()
+    {
+        return new \DateTime($this->details['TIMESTAMP']);
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }
