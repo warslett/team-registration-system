@@ -44,6 +44,11 @@ security:
             logout:
                 path:   user_logout
                 target: user_login
+            switch_user: true
+
+    role_hierarchy:
+        ROLE_ADMIN:
+            - ROLE_ALLOWED_TO_SWITCH
 
     access_control:
         - { path: ^/registration/teams,     roles: ROLE_USER }
