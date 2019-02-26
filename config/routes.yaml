@@ -129,6 +129,10 @@ hike_delete:
     path: /registration/hikes/{hike_id}/delete
     controller: App\Controller\Hike\HikeDeleteController
 
+hike_teams:
+    path: /registration/hikes/{hike_id}/teams
+    controller: App\Controller\Hike\HikeTeamsController
+
 api_login:
     path: /api/login
 

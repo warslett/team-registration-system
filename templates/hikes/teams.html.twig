@@ -1,0 +1,82 @@
+{% extends "_base.html.twig" %}
+
+{% block title %}"{{ hike.name }}" Teams &raquo; {{ parent() }}{% endblock %}
+
+{% block header_h1 %}"{{ hike.name }}" Teams{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('event_list') }}">Events</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('event_show', {'event_id': hike.event.id}) }}">{{ hike.event }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">"{{ hike.name }}" Teams</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div id="teams" class="card">
+        <div class="card-body">
+            {% if teams is empty %}
+            No Events
+            {% else %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Team Name</th>
+                        <th>User</th>
+                        <th>Start Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                    <tr class="{% if team.isDropped %}table-danger{% endif %}">
+                        <td>{{ team.id }}</td>
+                        <td>{{ team.name }}</td>
+                        <td>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#TeamUserModal{{ team.id }}">
+                                {{ team.user.fullName }}
+                            </a>
+                            <div class="modal fade" id="TeamUserModal{{ team.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ team.user.fullName }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <dl class="dl">
+                                                <dt>Full Name</dt>
+                                                <dd>{{ team.user.fullName }}</dd>
+                                                <dt>Email Address</dt>
+                                                <dd>{{ team.user.email }}</dd>
+                                                <dt>Contact Number</dt>
+                                                <dd>{{ team.user.contactNumber }}</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{{ path('root', {'_switch_user': team.user.email}) }}" class="btn btn-warning">Impersonate</a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {% if team.startTime is null %}
+                                <span class="badge badge-danger">Unassigned</span>
+                            {% else %}
+                                <span class="badge badge-success">{{ team.startTime.format('h:i A') }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

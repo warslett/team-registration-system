@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 bin/yarn install \
-&& bin/encore production \
 && docker-compose up -d \
 && docker-compose exec php sh -c 'composer install $([ "$APP_ENV" = "dev" ] || echo "--no-dev")' \
 && bin/console cache:clear \

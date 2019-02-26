@@ -61,7 +61,10 @@
                             {% for hike in event.hikes %}
                                 <tr class="hikes-table__hike">
                                     <td class="hikes-table__name">{{ hike.name }}</td>
-                                    <td class="hikes-table__teams">{{ hike.teams|length }} Teams</td>
+                                    <td class="hikes-table__teams">
+                                        <a href="{{ path('hike_teams', {'hike_id': hike.id}) }}">
+                                            {{ hike.teams|length }} Teams</a>
+                                    </td>
                                     <td class="hikes-table__actions">
                                         <a href="{{ path('hike_update', {'hike_id': hike.id}) }}">Update</a>
                                         <a href="{{ path('hike_delete', {'hike_id': hike.id}) }}">Delete</a>
