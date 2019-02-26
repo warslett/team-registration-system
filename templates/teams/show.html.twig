@@ -39,6 +39,10 @@
                             <dt>Hike</dt>
                             <dd>{{ team.hike }}</dd>
                         </dl>
+                        <p class="text-small">Please make sure that each team member has a copy of the
+                            <a href="{{ team.hike.kitListURL }}">Kit List</a> and
+                            <a href="{{ team.hike.joiningInfoURL }}">Joining Information</a>
+                            which they  should also bring on the day.</p>
                     </div>
                     <div class="card-btns">
                         <a
@@ -120,12 +124,17 @@
                     </ol>
                     {% if team.hasEnoughWalkers and not team.isDropped %}
                         {%  if team.hasDueFees %}
-                            <div class="m-auto">
-                                <a
-                                        href="{{ path('team_payment_capture', {'team_id': team.id}) }}"
-                                        class="btn btn-lg btn-raised btn-light text-dark mx-auto"
-                                        id="payment-btn"
-                                >Pay £{{ team.feesDue }}</a>
+{#                            <div class="m-auto">#}
+{#                                <a#}
+{#                                        href="{{ path('team_payment_capture', {'team_id': team.id}) }}"#}
+{#                                        class="btn btn-lg btn-raised btn-light text-dark mx-auto"#}
+{#                                        id="payment-btn"#}
+{#                                >Pay £{{ team.feesDue }}</a>#}
+{#                            </div>#}
+                            <div class="mb-0 mt-auto text-small">
+                                <p>Your team now has enough walkers. Online payments are temporarily disabled due to an
+                                    ongoing technical issue. We will contact you when we have been able to resolve this
+                                    issue. We will contact you with your team's start time shortly.</p>
                             </div>
                         {% else %}
                             <div class="mb-0 mt-auto">
@@ -138,7 +147,7 @@
                 </div>
             </div>
         </div>
-        {%  if team.payments is not empty %}
+        {%  if team.completedPayments is not empty %}
         <div class="col-12 d-flex">
             <div class="card mb-4 w-100">
                 <div class="card-body d-flex flex-column align-items-start">
