@@ -18,13 +18,14 @@
     <div id="teams" class="card">
         <div class="card-body">
             {% if teams is empty %}
-            No Events
+            No Teams
             {% else %}
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Team Name</th>
+                        <th>Walkers</th>
                         <th>User</th>
                         <th>Start Time</th>
                     </tr>
@@ -34,6 +35,48 @@
                     <tr class="{% if team.isDropped %}table-danger{% endif %}">
                         <td>{{ team.id }}</td>
                         <td>{{ team.name }}</td>
+                        <td>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#TeamWalkersModal{{ team.id }}">
+                                {{ team.walkers|length }} Walkers
+                            </a>
+                            <div class="modal fade" id="TeamWalkersModal{{ team.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ team.name }} Walkers</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table id="walkers" class="table table-sm walkers-table mb-auto">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Emergency Contact Number</th>
+                                                    <th scope="col">Age on Hike</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for walker in team.walkers %}
+                                                    <tr class="walkers-table__walker">
+                                                        <td class="walkers-table__reference">#{{ walker.reference }}</td>
+                                                        <td class="walkers-table__name">{{ walker.name }}</td>
+                                                        <td class="walkers-table__name">{{ walker.emergencyContactNumber }}</td>
+                                                        <td class="walkers-table__age">{{ walker.readableAgeOnHike }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#TeamUserModal{{ team.id }}">
                                 {{ team.user.fullName }}
