@@ -132,7 +132,7 @@ class TeamAssignStartTimeController
                 $this->entityManager->flush();
 
                 $message = (new \Swift_Message())
-                    ->setSubject("Payment Received for Three Towers")
+                    ->setSubject(sprintf("Start Time Assigned for Team %s", $team->getName()))
                     ->setTo($team->getUser()->getEmail())
                     ->setFrom($this->sender)
                     ->setBody(
