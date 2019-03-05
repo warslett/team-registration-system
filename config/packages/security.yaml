@@ -53,5 +53,5 @@ security:
     access_control:
         - { path: ^/registration/teams,     roles: ROLE_USER }
         - { path: ^/registration/walkers,   roles: ROLE_USER }
-        - { path: ^/registration/events,    roles: ROLE_ADMIN }
+        - { path: ^/registration/admin,    roles: ROLE_ADMIN }
         - { path: ^/api,       roles: ROLE_API_USER }

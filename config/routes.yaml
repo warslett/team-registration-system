@@ -87,51 +87,55 @@ walker_delete:
     controller: App\Controller\Walker\WalkerDeleteController
 
 event_root:
-    path: /registration/events
+    path: /registration/admin/events
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
     defaults:
-       path: /registration/events/list
+       path: /registration/admin/events/list
        permanent: true
 
 event_list:
-    path: /registration/events/list
+    path: /registration/admin/events/list
     controller: App\Controller\Event\EventListController
 
 event_create:
-    path: /registration/events/create
+    path: /registration/admin/events/create
     controller: App\Controller\Event\EventCreateController
 
 event_show:
-    path: /registration/events/{event_id}/show
+    path: /registration/admin/events/{event_id}/show
     controller: App\Controller\Event\EventShowController
 
 event_update:
-    path: /registration/events/{event_id}/update
+    path: /registration/admin/events/{event_id}/update
     controller: App\Controller\Event\EventUpdateController
 
 event_duplicate:
-    path: /registration/events/{event_id}/duplicate
+    path: /registration/admin/events/{event_id}/duplicate
     controller: App\Controller\Event\EventDuplicateController
 
 event_delete:
-    path: /registration/events/{event_id}/delete
+    path: /registration/admin/events/{event_id}/delete
     controller: App\Controller\Event\EventDeleteController
     
 hike_create:
-    path: /registration/events/{event_id}/hikes/create
+    path: /registration/admin/events/{event_id}/hikes/create
     controller: App\Controller\Hike\HikeCreateController
 
 hike_update:
-    path: /registration/hikes/{hike_id}/update
+    path: /registration/admin/hikes/{hike_id}/update
     controller: App\Controller\Hike\HikeUpdateController
 
 hike_delete:
-    path: /registration/hikes/{hike_id}/delete
+    path: /registration/admin/hikes/{hike_id}/delete
     controller: App\Controller\Hike\HikeDeleteController
 
 hike_teams:
-    path: /registration/hikes/{hike_id}/teams
+    path: /registration/admin/hikes/{hike_id}/teams
     controller: App\Controller\Hike\HikeTeamsController
+
+team_assign_start_time:
+  path: /registration/admin/teams/{team_id}/assign-start-time
+  controller: App\Controller\Team\TeamAssignStartTimeController
 
 api_login:
     path: /api/login

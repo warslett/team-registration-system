@@ -106,14 +106,6 @@ class TeamPaymentVerifyController
             $payment->setIsCompleted(true);
             $this->payum->getStorage(TeamPayment::class)->update($payment);
 
-            if (is_null($payment->getTeam()->getStartTime())) {
-                $nextTeamStartTime = $this->nextTeamStartTimeService->getNextTeamStartTimeForHike(
-                    $payment->getTeam()->getHike()
-                );
-                $payment->getTeam()->setStartTime($nextTeamStartTime);
-                $this->entityManager->flush();
-            }
-
             $message = (new \Swift_Message())
                 ->setSubject("Payment Received for Three Towers")
                 ->setTo($payment->getTeam()->getUser()->getEmail())
@@ -129,7 +121,7 @@ class TeamPaymentVerifyController
 
             $this->mailer->send($message);
 
-            $this->flashBag->add('success', "Your payment was successful, we have emailed you further details");
+            $this->flashBag->add('success', "Your payment was successful, we have emailed you a receipt");
         } else {
             $this->flashBag->add('danger', "There was a problem with your payment");
         }
