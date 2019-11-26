@@ -129,6 +129,7 @@ class HikeCreateFormManagerTest extends TestCase
     private function mockEvent(): Event
     {
         $event = m::mock(Event::class);
+        $event->shouldReceive('getDate')->andReturn(new \DateTime("+4 Weeks"));
         return $event;
     }
 
