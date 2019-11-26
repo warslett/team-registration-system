@@ -3,7 +3,6 @@
 
 namespace App\Controller\Hike;
 
-
 use App\Factory\ResponseFactory;
 use App\Resolver\HikeResolver;
 use App\Service\CurrentUserService;

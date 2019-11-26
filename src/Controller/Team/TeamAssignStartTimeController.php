@@ -110,7 +110,6 @@ class TeamAssignStartTimeController
         }
 
         if ($team->getStartTime() !== null) {
-
             $this->flashBag->add('warning', sprintf(
                 "Team \"%s\" already assigned start time",
                 $team->getName()

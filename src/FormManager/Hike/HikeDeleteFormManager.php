@@ -52,4 +52,3 @@ class HikeDeleteFormManager
         return $hike;
     }
 }
-

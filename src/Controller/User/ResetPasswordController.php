@@ -99,7 +99,6 @@ class ResetPasswordController
 
             if ($form->isSubmitted()) {
                 if ($form->isValid()) {
-
                     $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
                     $user->setPassword($password);
 
@@ -117,12 +116,10 @@ class ResetPasswordController
                 'user' => $user,
                 'form' => $form->createView()
             ]));
-
         } catch (ResetPasswordTokenInvalidException $e) {
             $this->flashBag->add('danger', 'Your reset link has expired or is invalid');
 
             return new RedirectResponse($this->router->generate('user_login'));
-
         }
     }
 }

@@ -91,13 +91,11 @@ class ResetPasswordTokenService
      */
     public function triggerResetPassword(User $user, ?\DateTime $expiry = null)
     {
-        if ($user->getRefreshPasswordCountDate() === null || $user->getRefreshPasswordCountDate() < new \DateTime('now')) {
-
+        $now = new \DateTime('now');
+        if ($user->getRefreshPasswordCountDate() === null || $user->getRefreshPasswordCountDate() < $now) {
             $user->setResetPasswordCount(0);
             $user->setRefreshPasswordCountDate(new \DateTime(self::PASSWORD_RESET_LIMIT_LIFETIME));
-
         } elseif ($user->getResetPasswordCount() >= self::PASSWORD_RESET_LIMIT) {
-
             throw new PasswordResetLimitReachedException(
                 sprintf(
                     "The password for %s has been reset too many times. You must wait until %s to try again",
@@ -110,7 +108,6 @@ class ResetPasswordTokenService
         for ($x = 1; $x <= 10000; $x++) {
             $resetPasswordToken = $this->tokenGenerator->generateToken();
             if ($this->repository->findOneByResetPasswordToken($resetPasswordToken) === null) {
-
                 $user->setResetPasswordToken(md5($resetPasswordToken));
                 $user->setResetPasswordTokenExpiry($expiry);
 

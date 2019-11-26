@@ -3,7 +3,6 @@
 
 namespace App\Controller\User;
 
-
 use App\Exception\PasswordResetLimitReachedException;
 use App\Form\User\ForgottenPasswordType;
 use App\Repository\UserRepository;

@@ -37,8 +37,7 @@ class HikeUpdateController
         HikeUpdateFormManager $hikeUpdateFormManager,
         FlashBagInterface $flashBag,
         ResponseFactory $responseFactory
-    )
-    {
+    ) {
         $this->hikeResolver = $hikeResolver;
         $this->hikeUpdateFormManager = $hikeUpdateFormManager;
         $this->flashBag = $flashBag;
