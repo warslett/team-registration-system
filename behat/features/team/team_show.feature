@@ -19,7 +19,7 @@ Feature: Team Show
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Alpha Team"
     Then the response status code should be 200
-    And the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
+    And the title should be "Alpha Team » Team Registration System"
 
   Scenario: My Team's Walkers are listed on the page
     Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
@@ -47,17 +47,18 @@ Feature: Team Show
     And I follow "Alpha Team"
     Then I should not see a "#payment-btn" element
 
-  Scenario Outline: I cannot see the payment button with the correct value to pay when my team has enough walkers
-    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
-      | name | Alpha Team |
-    And that "the team" has "<Number of Walkers>" walkers
-    When I log in with email "john@acme.co" and password "Password1!"
-    And I follow "Alpha Team"
-    Then the "#payment-btn" element should contain "<Fee Due>"
-    Examples:
-      | Number of Walkers | Fee Due |
-      | 3                 | £36     |
-      | 4                 | £48     |
+    # Commented out while fees disabled
+#  Scenario Outline: I cannot see the payment button with the correct value to pay when my team has enough walkers
+#    Given that "the team" is a Team for "the hike" registered by "the user" with the following properties:
+#      | name | Alpha Team |
+#    And that "the team" has "<Number of Walkers>" walkers
+#    When I log in with email "john@acme.co" and password "Password1!"
+#    And I follow "Alpha Team"
+#    Then the "#payment-btn" element should contain "<Fee Due>"
+#    Examples:
+#      | Number of Walkers | Fee Due |
+#      | 3                 | £36     |
+#      | 4                 | £48     |
 
   Scenario: I cannot visit a Team page for a Team I did not register
     Given that "the other user" is a User

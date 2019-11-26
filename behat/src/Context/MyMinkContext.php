@@ -54,7 +54,7 @@ class MyMinkContext extends BehatMinkContext
      */
     public function thatIHaveLoggedInWithEmailAndPassword($email, $password)
     {
-        $this->visit('/user/login');
+        $this->visit('/registration/user/login');
         $this->fillField('Email', $email);
         $this->fillField('Password', $password);
         $this->pressButton('Log in');
@@ -92,7 +92,7 @@ class MyMinkContext extends BehatMinkContext
     public function iGoToTheTeamPageFor($teamReference)
     {
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
-        $this->visit(sprintf('/teams/%d', $team->getId()));
+        $this->visit(sprintf('/registration/teams/%d', $team->getId()));
     }
 
     /**
@@ -101,7 +101,7 @@ class MyMinkContext extends BehatMinkContext
     public function iGoToTheCreateWalkerPageFor($teamReference)
     {
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
-        $this->visit(sprintf('/teams/%d/walkers/create', $team->getId()));
+        $this->visit(sprintf('/registration/teams/%d/walkers/create', $team->getId()));
     }
 
     /**
@@ -185,7 +185,7 @@ class MyMinkContext extends BehatMinkContext
     public function iGoToTheEventPageFor(string $eventReference)
     {
         $event = $this->fixtureStorage->get(Event::class, $eventReference);
-        $this->visit(sprintf('/events/%d/show', $event->getId()));
+        $this->visit(sprintf('/registration/admin/events/%d/show', $event->getId()));
     }
 
     /**
@@ -218,6 +218,6 @@ class MyMinkContext extends BehatMinkContext
     public function iGoToTheCreateHikePageFor(string $eventReference)
     {
         $event = $this->fixtureStorage->get(Event::class, $eventReference);
-        $this->visit(sprintf('/events/%d/hikes/create', $event->getId()));
+        $this->visit(sprintf('/registration/admin/events/%d/hikes/create', $event->getId()));
     }
 }

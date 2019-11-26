@@ -4,17 +4,33 @@ App\Entity\UserGroup:
         __construct:
           role: "ROLE_API_USER"
 
+    admin_users:
+        __construct:
+          role: "ROLE_ADMIN"
+
 App\Entity\User:
 
     user_{1..100}:
+        fullName: "<name()>"
+        contactNumber: "<phoneNumber()>"
         email: "<email()>"
         plainPassword: "development"
 
     api_user:
+        fullName: "<name()>"
+        contactNumber: "<phoneNumber()>"
         email: "api@example.com"
         plainPassword: "development"
         userGroups:
           - "@api_users"
+
+    admin_user:
+        fullName: "<name()>"
+        contactNumber: "<phoneNumber()>"
+        email: "admin@example.com"
+        plainPassword: "development"
+        userGroups:
+          - "@admin_users"
 
 App\Entity\Event:
 
@@ -26,168 +42,171 @@ App\Entity\Event:
         name: "Upcoming Three Towers"
         date: "<dateTimeBetween('+1 month', '+6 months')>"
 
-App\Entity\Hike:
-
-    scout_hike_{1..2}:
-        name: "Scout Hike"
-        event: "@event_<current()>"
-        minWalkers: 3
-        maxWalkers: 4
-        feePerWalker: 12.00
-
-    junket_hike_{1..2}:
-        name: "Junket Hike"
-        event: "@event_<current()>"
-        minWalkers: 3
-        maxWalkers: 4
-        feePerWalker: 10.00
-
-    explorer_hike_{1..2}:
-        name: "Explorer Hike"
-        event: "@event_<current()>"
-        minWalkers: 3
-        maxWalkers: 4
-        feePerWalker: 14.00
-
-    classic_hike_{1..2}:
-        name: "Classic Hike"
-        event: "@event_<current()>"
-        minWalkers: 3
-        maxWalkers: 4
-        feePerWalker: 16.00
-
-App\Entity\Team:
-
-    scout_team_{1..80}:
-      name: "<sentence(3)>"
-      user: "@user_*"
-      hike: "@scout_hike_*"
-
-    junket_team_{1..30}:
-      name: "<sentence(3)>"
-      user: "@user_*"
-      hike: "@junket_hike_*"
-
-    explorer_team_{1..25}:
-      name: "<sentence(3)>"
-      user: "@user_*"
-      hike: "@explorer_hike_*"
-
-    classic_team_{1..12}:
-      name: "<sentence(3)>"
-      user: "@user_*"
-      hike: "@classic_hike_*"
-
-App\Entity\Walker:
-
-    scout_walker_A_{1..80}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'A'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@scout_team_<current()>"
-
-    scout_walker_B_{1..80}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'B'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@scout_team_<current()>"
-
-    scout_walker_C_{1..80}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'C'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@scout_team_<current()>"
-
-    scout_walker_D_{1..40}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'D'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@scout_team_<current()>"
-
-    junket_team_A_{1..30}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'A'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@junket_team_<current()>"
-
-    junket_team_B_{1..30}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'B'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@junket_team_<current()>"
-
-    junket_team_C_{1..30}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'C'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@junket_team_<current()>"
-
-    junket_team_D_{1..15}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'D'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@junket_team_<current()>"
-
-    explorer_team_A_{1..25}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'A'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@explorer_team_<current()>"
-
-    explorer_team_B_{1..25}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'B'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@explorer_team_<current()>"
-
-    explorer_team_C_{1..25}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'C'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@explorer_team_<current()>"
-
-    explorer_team_D_{1..12}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'D'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@explorer_team_<current()>"
-
-    classic_team_A_{1..12}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'A'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@classic_team_<current()>"
-
-    classic_team_B_{1..12}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'B'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@classic_team_<current()>"
-
-    classic_team_C_{1..12}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'C'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@classic_team_<current()>"
-
-    classic_team_D_{1..6}:
-      foreName: "<firstName()>"
-      surName: "<lastName()>"
-      referenceCharacter: 'D'
-      emergencyContactNumber: "<phoneNumber()>"
-      team: "@classic_team_<current()>"
+#App\Entity\Hike:
+#
+#    scout_hike_{1..2}:
+#        name: "Scout Hike"
+#        event: "@event_<current()>"
+#        minWalkers: 3
+#        maxWalkers: 4
+#        minAge: 10
+#        maxAge: 14
+#        feePerWalker: 12.00
+#        startTimeInterval: 5
+#
+#    junket_hike_{1..2}:
+#        name: "Junket Hike"
+#        event: "@event_<current()>"
+#        minWalkers: 3
+#        maxWalkers: 4
+#        feePerWalker: 10.00
+#
+#    explorer_hike_{1..2}:
+#        name: "Explorer Hike"
+#        event: "@event_<current()>"
+#        minWalkers: 3
+#        maxWalkers: 4
+#        feePerWalker: 14.00
+#
+#    classic_hike_{1..2}:
+#        name: "Classic Hike"
+#        event: "@event_<current()>"
+#        minWalkers: 3
+#        maxWalkers: 4
+#        feePerWalker: 16.00
+#
+#App\Entity\Team:
+#
+#    scout_team_{1..80}:
+#      name: "<sentence(3)>"
+#      user: "@user_*"
+#      hike: "@scout_hike_*"
+#
+#    junket_team_{1..30}:
+#      name: "<sentence(3)>"
+#      user: "@user_*"
+#      hike: "@junket_hike_*"
+#
+#    explorer_team_{1..25}:
+#      name: "<sentence(3)>"
+#      user: "@user_*"
+#      hike: "@explorer_hike_*"
+#
+#    classic_team_{1..12}:
+#      name: "<sentence(3)>"
+#      user: "@user_*"
+#      hike: "@classic_hike_*"
+#
+#App\Entity\Walker:
+#
+#    scout_walker_A_{1..80}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'A'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@scout_team_<current()>"
+#
+#    scout_walker_B_{1..80}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'B'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@scout_team_<current()>"
+#
+#    scout_walker_C_{1..80}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'C'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@scout_team_<current()>"
+#
+#    scout_walker_D_{1..40}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'D'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@scout_team_<current()>"
+#
+#    junket_team_A_{1..30}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'A'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@junket_team_<current()>"
+#
+#    junket_team_B_{1..30}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'B'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@junket_team_<current()>"
+#
+#    junket_team_C_{1..30}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'C'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@junket_team_<current()>"
+#
+#    junket_team_D_{1..15}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'D'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@junket_team_<current()>"
+#
+#    explorer_team_A_{1..25}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'A'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@explorer_team_<current()>"
+#
+#    explorer_team_B_{1..25}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'B'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@explorer_team_<current()>"
+#
+#    explorer_team_C_{1..25}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'C'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@explorer_team_<current()>"
+#
+#    explorer_team_D_{1..12}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'D'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@explorer_team_<current()>"
+#
+#    classic_team_A_{1..12}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'A'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@classic_team_<current()>"
+#
+#    classic_team_B_{1..12}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'B'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@classic_team_<current()>"
+#
+#    classic_team_C_{1..12}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'C'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@classic_team_<current()>"
+#
+#    classic_team_D_{1..6}:
+#      foreName: "<firstName()>"
+#      surName: "<lastName()>"
+#      referenceCharacter: 'D'
+#      emergencyContactNumber: "<phoneNumber()>"
+#      team: "@classic_team_<current()>"

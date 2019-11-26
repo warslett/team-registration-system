@@ -47,6 +47,12 @@ class HikeFactory
         $hike->setFeePerWalker(
             $properties['feePerWalker'] ?? $this->faker->randomFloat(2, 10, $max = 16)
         );
+        $hike->setMinAge($properties['minAge'] ?? $this->faker->numberBetween(10, 14));
+        $hike->setMaxAge($properties['maxAge'] ?? $this->faker->numberBetween(14, 18));
+        $hike->setStartTimeInterval($properties['startTimeInterval'] ?? $this->faker->numberBetween(2, 20));
+        $hike->setFirstTeamStartTime($properties['firstTeamStartTime'] ?? $event->getDate());
+        $hike->setJoiningInfoURL($properties['joiningInfoURL'] ?? $this->faker->url);
+        $hike->setKitListURL($properties['kitListURL'] ?? $this->faker->url);
         $hike->setEvent($event);
         $this->entityManager->persist($hike);
         $this->entityManager->flush();

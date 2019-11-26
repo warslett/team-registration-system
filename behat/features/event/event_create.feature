@@ -10,7 +10,7 @@ Feature: Event Create
   Scenario: I cannot visit the event create page if I am not an admin
     When I log in with email "john@acme.co" and password "Password1!"
     Then the "#navbar" element should not contain "Event Admin"
-    When I go to "/events/create"
+    When I go to "/registration/admin/events/create"
     Then the response status code should be 403
 
   Scenario: I can create an event

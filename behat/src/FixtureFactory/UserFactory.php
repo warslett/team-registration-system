@@ -57,6 +57,8 @@ class UserFactory
                 $properties['password'] ?? UserFactory::DEFAULT_PASSWORD
             )
         );
+        $user->setFullName($properties['fullName'] ?? $this->faker->name());
+        $user->setContactNumber($properties['contactNumber'] ?? $this->faker->phoneNumber);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         return $user;

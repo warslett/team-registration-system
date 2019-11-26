@@ -54,7 +54,7 @@ Feature: Team Create
     And I fill in "Name" with "Alpha Team"
     And I select "Scout Hike » Upcoming Three Towers" from "Hike"
     And I press "Save"
-    Then the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
+    Then the title should be "Alpha Team » Team Registration System"
     And there is an alert with the message 'Team "Alpha Team" successfully created for "Scout Hike » Upcoming Three Towers"'
 
   Scenario: I cannot create a team if the team name is already in use
@@ -87,5 +87,5 @@ Feature: Team Create
     And I fill in "Name" with "Alpha Team"
     And I select "Scout Hike » Upcoming Three Towers" from "Hike"
     And I press "Save"
-    Then the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
+    Then the title should be "Alpha Team » Team Registration System"
     And there is an alert with the message 'Team "Alpha Team" successfully created for "Scout Hike » Upcoming Three Towers"'

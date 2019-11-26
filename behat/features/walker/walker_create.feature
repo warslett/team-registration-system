@@ -11,6 +11,8 @@ Feature: Walker Create
     And that "the hike" is a Hike for "the event" with the following properties:
       | name       | Scout Hike |
       | maxWalkers | 4          |
+      | minAge     | 10         |
+      | maxAge     | 14         |
 
   Scenario: I cannot add a walker to another user's team
     Given that "the other user" is a User
@@ -27,7 +29,7 @@ Feature: Walker Create
     When I log in with email "john@acme.co" and password "Password1!"
     And I follow "Alpha Team"
     And I follow "Add walker"
-    Then the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
+    Then the title should be "Alpha Team » Team Registration System"
     And there is an alert with the message "This team already has the maximum number of allowed walkers"
 
   Scenario: I cannot add a walker to a team that does not exist
@@ -43,7 +45,8 @@ Feature: Walker Create
     And I follow "Add walker"
     And I fill in "Forename" with "John"
     And I fill in "Surname" with "Smith"
+    And I fill in "Date of birth" with "01/01/2007"
     And I fill in "Emergency Contact Number" with "0123456789"
     And I press "Save"
-    Then the title should be "Alpha Team » Scout Hike » Upcoming Three Towers » Team Registration System"
+    Then the title should be "Alpha Team » Team Registration System"
     And there is an alert with the message 'Walker "John Smith" successfully added to team "Alpha Team"'

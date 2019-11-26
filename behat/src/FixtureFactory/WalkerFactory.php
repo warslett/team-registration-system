@@ -47,11 +47,12 @@ class WalkerFactory
      * @param array $properties
      * @return Walker
      */
-    public function createTeam(Team $team, array $properties = []) : Walker
+    public function createWalker(Team $team, array $properties = []) : Walker
     {
         $walker = new Walker();
         $walker->setForeName($properties['foreName'] ?? $this->faker->firstName);
         $walker->setSurName($properties['surName'] ?? $this->faker->lastName);
+        $walker->setDateOfBirth($properties['dateOfBirth'] ?? $this->faker->dateTimeBetween('-14 years', '-10 years'));
         $walker->setReferenceCharacter(
             $this->walkerReferenceCharacterService->getNextAvailable($team)
         );

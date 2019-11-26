@@ -43,7 +43,7 @@ class WalkerContext implements Context
     {
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
         foreach ($table->getColumnsHash() as $properties) {
-            $this->walkerFactory->createTeam($team, $properties);
+            $this->walkerFactory->createWalker($team, $properties);
         }
     }
 
@@ -54,7 +54,7 @@ class WalkerContext implements Context
     {
         $team = $this->fixtureStorage->get(Team::class, $teamReference);
         for ($i = 0; $i < $numWalkers; $i++) {
-            $this->walkerFactory->createTeam($team);
+            $this->walkerFactory->createWalker($team);
         }
     }
 }

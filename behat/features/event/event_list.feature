@@ -10,7 +10,7 @@ Feature: Event List
   Scenario: I cannot visit the event list page if I am not an admin
     When I log in with email "john@acme.co" and password "Password1!"
     Then the "#navbar" element should not contain "Event Admin"
-    When I go to "/events/list"
+    When I go to "/registration/admin/events/list"
     Then the response status code should be 403
 
   Scenario: No Events

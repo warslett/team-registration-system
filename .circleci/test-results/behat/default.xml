@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="default">
+  <testsuite name="GET Event" tests="3" skipped="0" failures="0" errors="0" time="5">
+    <testcase name="Event exists" status="passed" time="2"></testcase>
+    <testcase name="Event exists with Hikes" status="passed" time="2"></testcase>
+    <testcase name="Event does not exist" status="passed" time="2"></testcase>
+  </testsuite>
+  <testsuite name="GET Events Collection" tests="3" skipped="0" failures="0" errors="0" time="5">
+    <testcase name="No Events" status="passed" time="2"></testcase>
+    <testcase name="One Event" status="passed" time="2"></testcase>
+    <testcase name="Many Events" status="passed" time="2"></testcase>
+  </testsuite>
+  <testsuite name="GET Hike" tests="3" skipped="0" failures="0" errors="0" time="5">
+    <testcase name="Hike exists" status="passed" time="2"></testcase>
+    <testcase name="Hike exists with Teams" status="passed" time="2"></testcase>
+    <testcase name="Hike does not exist" status="passed" time="2"></testcase>
+  </testsuite>
+  <testsuite name="GET Hikes Collection" tests="3" skipped="0" failures="0" errors="0" time="5">
+    <testcase name="No Hikes" status="passed" time="2"></testcase>
+    <testcase name="One Hike" status="passed" time="2"></testcase>
+    <testcase name="Many Hikes" status="passed" time="2"></testcase>
+  </testsuite>
+  <testsuite name="GET Team" tests="2" skipped="0" failures="0" errors="0" time="4">
+    <testcase name="Team exists" status="passed" time="2"></testcase>
+    <testcase name="Team does not exist" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="GET Teams Collection" tests="3" skipped="0" failures="0" errors="0" time="6">
+    <testcase name="No Teams" status="passed" time="2"></testcase>
+    <testcase name="One Team" status="passed" time="2"></testcase>
+    <testcase name="Many Teams" status="passed" time="2"></testcase>
+  </testsuite>
+  <testsuite name="API Security" tests="1" skipped="0" failures="0" errors="0" time="1">
+    <testcase name="Authenticating" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="Event Create" tests="3" skipped="0" failures="0" errors="0" time="4">
+    <testcase name="I cannot visit the event create page if I am not an admin" status="passed" time="1"></testcase>
+    <testcase name="I can create an event" status="passed" time="1"></testcase>
+    <testcase name="I cannot create an event if the event name is already in use" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="Event List" tests="4" skipped="0" failures="0" errors="0" time="5">
+    <testcase name="I cannot visit the event list page if I am not an admin" status="passed" time="1"></testcase>
+    <testcase name="No Events" status="passed" time="1"></testcase>
+    <testcase name="One Event" status="passed" time="1"></testcase>
+    <testcase name="Multiple Events are ordered by date" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="Event Show" tests="4" skipped="0" failures="0" errors="0" time="5">
+    <testcase name="I can visit the Event page for an Event" status="passed" time="1"></testcase>
+    <testcase name="The Event's Hikes are listed on the page" status="passed" time="1"></testcase>
+    <testcase name="The Event's Hike's Teams are counted on the page" status="passed" time="1"></testcase>
+    <testcase name="I cannot visit the Event page for an Event if I am not an admin" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="Hike Create" tests="3" skipped="0" failures="0" errors="0" time="4">
+    <testcase name="I cannot visit the hike create page if I am not an admin" status="passed" time="1"></testcase>
+    <testcase name="I cannot add a hike to an event that does not exist" status="passed" time="1"></testcase>
+    <testcase name="I can add a hiker to an event" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="Team Create" tests="6" skipped="0" failures="0" errors="0" time="8">
+    <testcase name="I cannot add a team if there are no Events" status="passed" time="1"></testcase>
+    <testcase name="I cannot add a team if none of the Events are open for registration" status="passed" time="1"></testcase>
+    <testcase name="I can only register Teams for events that are open for registration" status="passed" time="1"></testcase>
+    <testcase name="I can create a team" status="passed" time="1"></testcase>
+    <testcase name="I cannot create a team if the team name is already in use" status="passed" time="1"></testcase>
+    <testcase name="I can create a team if the team name is already in use but on a separate event" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="Team List" tests="2" skipped="0" failures="0" errors="0" time="3">
+    <testcase name="I can see my team when I log in" status="passed" time="1"></testcase>
+    <testcase name="I cannot see teams that are not mine" status="passed" time="2"></testcase>
+  </testsuite>
+  <testsuite name="Team Show" tests="4" skipped="0" failures="0" errors="0" time="6">
+    <testcase name="I can visit my Team's page" status="passed" time="1"></testcase>
+    <testcase name="My Team's Walkers are listed on the page" status="passed" time="1"></testcase>
+    <testcase name="I cannot see the payment button until my team has the minimum number of walkers" status="passed" time="1"></testcase>
+    <testcase name="I cannot visit a Team page for a Team I did not register" status="passed" time="2"></testcase>
+  </testsuite>
+  <testsuite name="User Login" tests="3" skipped="0" failures="0" errors="0" time="2">
+    <testcase name="I can login as a user" status="passed" time="1"></testcase>
+    <testcase name="I cannot login with an email that does not belong to a user in the system" status="passed" time="0"></testcase>
+    <testcase name="I cannot login with the wrong password" status="passed" time="1"></testcase>
+  </testsuite>
+  <testsuite name="User Register" tests="4" skipped="0" failures="0" errors="0" time="2">
+    <testcase name="I can register an account with valid credentials" status="passed" time="1"></testcase>
+    <testcase name="I cannot register an account with an invalid email" status="passed" time="0"></testcase>
+    <testcase name="I cannot register an account with an email that already exists in the system" status="passed" time="1"></testcase>
+    <testcase name="I cannot register an account if my passwords don't match" status="passed" time="0"></testcase>
+  </testsuite>
+  <testsuite name="Walker Create" tests="4" skipped="0" failures="0" errors="0" time="6">
+    <testcase name="I cannot add a walker to another user's team" status="passed" time="2"></testcase>
+    <testcase name="I cannot add a walker to a team that has the maximum number of walkers" status="passed" time="1"></testcase>
+    <testcase name="I cannot add a walker to a team that does not exist" status="passed" time="1"></testcase>
+    <testcase name="I can add a walker to my team" status="passed" time="1"></testcase>
+  </testsuite>
+</testsuites>

@@ -6,15 +6,14 @@ Feature: User Login
     Given that "the user" is a User with the following properties:
       | email    | john@acme.co |
       | password | Password1!   |
-    When I go to "/user/login"
+    When I go to "/registration/user/login"
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
     And I press "Log in"
     Then the title should be "Teams » Team Registration System"
-    And I should see "Welcome, john@acme.co"
 
   Scenario: I cannot login with an email that does not belong to a user in the system
-    When I go to "/user/login"
+    When I go to "/registration/user/login"
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "Password1!"
     And I press "Log in"
@@ -25,7 +24,7 @@ Feature: User Login
     Given that "the user" is a User with the following properties:
       | email    | john@acme.co |
       | password | Password1!   |
-    When I go to "/user/login"
+    When I go to "/registration/user/login"
     And I fill in "Email" with "john@acme.co"
     And I fill in "Password" with "wRonGpASSwOrd"
     And I press "Log in"
