@@ -1,0 +1,26 @@
+{% extends "_simple_form.html.twig" %}
+
+{% block title %}Create offline payment for {{ team }}{% endblock %}
+
+{% block header_h1 %}Create offline payment for {{ team }}{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('event_list') }}">Events</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('event_show', {'event_id': team.hike.event.id}) }}">{{ team.hike.event.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('hike_teams', {'hike_id': team.hike.id}) }}">{{ team.hike.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create offline payment for {{ team }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+    {{ form_row(form.totalAmount) }}
+    {{ form_row(form.date) }}
+
+    <button type="submit" class="btn btn-primary btn-raised">Save</button>
+    <a href="{{ path('hike_teams', {'hike_id': team.hike.id}) }}" class="btn btn-default btn-raised">Cancel</a>
+    {{ form_end(form) }}
+{% endblock %}

@@ -77,4 +77,11 @@ class TeamPayment extends Payment
     {
         return $this->id;
     }
+
+    public function setDate(\DateTime $date)
+    {
+        $details = $this->getDetails();
+        $details['TIMESTAMP'] = $date->format('c');
+        $this->setDetails($details);
+    }
 }

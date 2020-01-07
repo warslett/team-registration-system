@@ -137,6 +137,10 @@ team_assign_start_time:
   path: /registration/admin/teams/{team_id}/assign-start-time
   controller: App\Controller\Team\TeamAssignStartTimeController
 
+team_payment_create_offline:
+  path: /registration/admin/teams/{team_id}/payments/create-offline
+  controller: App\Controller\Team\TeamPaymentCreateOfflineController
+
 api_login:
     path: /api/login
 

@@ -124,17 +124,13 @@
                     </ol>
                     {% if team.hasEnoughWalkers and not team.isDropped %}
                         {%  if team.hasDueFees %}
-{#                            <div class="m-auto">#}
-{#                                <a#}
-{#                                        href="{{ path('team_payment_capture', {'team_id': team.id}) }}"#}
-{#                                        class="btn btn-lg btn-raised btn-light text-dark mx-auto"#}
-{#                                        id="payment-btn"#}
-{#                                >Pay £{{ team.feesDue }}</a>#}
-{#                            </div>#}
-                            <div class="mb-0 mt-auto text-small">
-                                <p>Your team now has enough walkers. Online payments are temporarily disabled due to an
-                                    ongoing technical issue. We will contact you when we have been able to resolve this
-                                    issue. We will contact you with your team's start time shortly.</p>
+                            <div class="m-auto">
+                                <button
+                                        data-toggle="modal"
+                                        data-target="#payment-modal"
+                                        class="btn btn-lg btn-raised btn-light text-dark mx-auto"
+                                        id="payment-btn"
+                                >Pay £{{ team.feesDue }}</button>
                             </div>
                         {% else %}
                             <div class="mb-0 mt-auto">
@@ -144,6 +140,27 @@
                             </div>
                         {% endif %}
                     {% endif %}
+                </div>
+            </div>
+
+            <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Pay by bank transfer...</h5>
+                            <p>details go here</p>
+                            <h5>Pay by cheque</h5>
+                            <p>details go here</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
