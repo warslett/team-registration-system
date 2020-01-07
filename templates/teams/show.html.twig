@@ -134,9 +134,14 @@
                             </div>
                         {% else %}
                             <div class="mb-0 mt-auto">
-                                Your team is now fully registered and <strong>their start time is
-                                {{ team.startTime.format('h:i A') }}</strong>. We will contact you over email with more
-                                details.
+                                {% if team.startTime %}
+                                    Your team is now fully registered and <strong>their start time is
+                                    {{ team.startTime.format('h:i A') }}</strong>. We will contact you over email with more
+                                    details.
+                                {% else %}
+                                    We have received all due payment. You will receive an email once we have assigned
+                                    you your start time.
+                                {% endif %}
                             </div>
                         {% endif %}
                     {% endif %}
