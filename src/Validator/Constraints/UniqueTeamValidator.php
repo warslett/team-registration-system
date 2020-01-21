@@ -43,7 +43,7 @@ class UniqueTeamValidator extends ConstraintValidator
             $team->getHike(),
             $team->getTeamNumber()
         );
-        if (null !== $teamWithNumber && $team !== $teamWithNumber){
+        if (null !== $teamWithNumber && $team !== $teamWithNumber) {
             $this->context->buildViolation(sprintf("That team number is taken by \"%s\"", $teamWithNumber->getName()))
                 ->atPath('teamNumber')
                 ->addViolation()
@@ -54,9 +54,10 @@ class UniqueTeamValidator extends ConstraintValidator
             $team->getHike(),
             $team->getStartTime()
         );
-        if (null !== $teamWithStartTime && $team !== $teamWithStartTime){
+        if (null !== $teamWithStartTime && $team !== $teamWithStartTime) {
             $this->context->buildViolation(sprintf(
-                "That start time is taken by \"%s\"", $teamWithStartTime->getName()
+                "That start time is taken by \"%s\"",
+                $teamWithStartTime->getName()
             ))
                 ->atPath('startTime')
                 ->addViolation()
