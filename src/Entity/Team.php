@@ -8,10 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints;
 use ApiPlatform\Core\Annotation as ApiPlatform;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Validator\Constraints as AppConstraints;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
  * @Constraints\UniqueEntity(fields={"name","hike"}, message="Team name already taken for this hike")
+ * @AppConstraints\UniqueTeam
  * @ApiPlatform\ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
@@ -27,12 +29,13 @@ class Team
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int|null
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @var string
+     * @var string|null
      */
     private $name;
 
@@ -72,6 +75,12 @@ class Team
      * @var \DateTime|null
      */
     private $startTime;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string|null
+     */
+    private $teamNumber;
 
     public function __construct()
     {
@@ -276,5 +285,21 @@ class Team
     public function setStartTime(?\DateTime $startTime): void
     {
         $this->startTime = $startTime;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTeamNumber(): ?string
+    {
+        return $this->teamNumber;
+    }
+
+    /**
+     * @param string|null $teamNumber
+     */
+    public function setTeamNumber(?string $teamNumber): void
+    {
+        $this->teamNumber = $teamNumber;
     }
 }

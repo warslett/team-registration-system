@@ -152,7 +152,10 @@ class Walker
      */
     public function getReference(): string
     {
-        return $this->team->getId() . $this->referenceCharacter;
+        if (null === $teamNumber = $this->team->getTeamNumber()) {
+            return $this->referenceCharacter;
+        }
+        return $teamNumber . $this->referenceCharacter;
     }
 
     /**

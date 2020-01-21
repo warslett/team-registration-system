@@ -28,9 +28,12 @@
                             <a class="text-dark" href="{{ path('team_show', {'team_id': team.id}) }}">{{ team.name }}</a>
                         </h3>
                         <div class="mb-1">
-                            <span class="text-muted">Team #{{ team.id }}</span>
                             {% if team.isDropped %}
-                            <span class="badge badge-danger">Dropped out</span>
+                                <span class="badge badge-danger">Dropped out</span>
+                            {% elseif team.teamNumber is not null %}
+                                <span class="text-muted">
+                                    Team #{{ team.teamNumber }} starts {{ team.startTime.format('g:ia') }}
+                                </span>
                             {% endif %}
                         </div>
                         <p class="card-text mb-auto">

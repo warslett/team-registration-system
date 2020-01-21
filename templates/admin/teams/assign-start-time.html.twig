@@ -17,6 +17,7 @@
 
 {% block form %}
     {{ form_start(form) }}
+    {{ form_row(form.teamNumber) }}
     {{ form_row(form.startTime) }}
 
     <button type="submit" class="btn btn-primary btn-raised">Save</button>

@@ -23,18 +23,17 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Team Name</th>
                         <th>Walkers</th>
                         <th>User</th>
                         <th>Payments</th>
+                        <th>Team Number</th>
                         <th>Start Time</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for team in teams %}
                     <tr class="{% if team.isDropped %}table-danger{% endif %}">
-                        <td>{{ team.id }}</td>
                         <td>{{ team.name }}</td>
                         <td>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#TeamWalkersModal{{ team.id }}">
@@ -152,13 +151,18 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            {% if team.startTime is null %}
-                                <a href="{{ path('team_assign_start_time', {'team_id': team.id}) }}">Assign Start Time</a>
-                            {% else %}
-                                <span class="badge badge-success">{{ team.startTime.format('h:i A') }}</span>
-                            {% endif %}
+                        {% if team.teamNumber is null %}
+                        <td colspan="2" class="text-center">
+                            <a href="{{ path('team_assign_start_time', {'team_id': team.id}) }}">Assign Team Number and Start Time</a>
                         </td>
+                        {% else %}
+                        <td>
+                            {{ team.teamNumber }}
+                        </td>
+                        <td>
+                            <span class="badge badge-success">{{ team.startTime.format('h:i A') }}</span>
+                        </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>

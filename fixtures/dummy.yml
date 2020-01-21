@@ -10,7 +10,7 @@ App\Entity\UserGroup:
 
 App\Entity\User:
 
-    user_{1..100}:
+    user_{1..30}:
         fullName: "<name()>"
         contactNumber: "<phoneNumber()>"
         email: "<email()>"
@@ -36,177 +36,214 @@ App\Entity\Event:
 
     event_1:
         name: "Previous Three Towers"
-        date: "<dateTimeBetween('-1 year', '-6 months')>"
+        date: "<dateTimeBetween('-9 months', '-9 months')>"
 
     event_2:
         name: "Upcoming Three Towers"
-        date: "<dateTimeBetween('+1 month', '+6 months')>"
+        date: "<dateTimeBetween('+3 months', '+3 months')>"
 
-#App\Entity\Hike:
-#
-#    scout_hike_{1..2}:
-#        name: "Scout Hike"
-#        event: "@event_<current()>"
-#        minWalkers: 3
-#        maxWalkers: 4
-#        minAge: 10
-#        maxAge: 14
-#        feePerWalker: 12.00
-#        startTimeInterval: 5
-#
-#    junket_hike_{1..2}:
-#        name: "Junket Hike"
-#        event: "@event_<current()>"
-#        minWalkers: 3
-#        maxWalkers: 4
-#        feePerWalker: 10.00
-#
-#    explorer_hike_{1..2}:
-#        name: "Explorer Hike"
-#        event: "@event_<current()>"
-#        minWalkers: 3
-#        maxWalkers: 4
-#        feePerWalker: 14.00
-#
-#    classic_hike_{1..2}:
-#        name: "Classic Hike"
-#        event: "@event_<current()>"
-#        minWalkers: 3
-#        maxWalkers: 4
-#        feePerWalker: 16.00
-#
-#App\Entity\Team:
-#
-#    scout_team_{1..80}:
-#      name: "<sentence(3)>"
-#      user: "@user_*"
-#      hike: "@scout_hike_*"
-#
-#    junket_team_{1..30}:
-#      name: "<sentence(3)>"
-#      user: "@user_*"
-#      hike: "@junket_hike_*"
-#
-#    explorer_team_{1..25}:
-#      name: "<sentence(3)>"
-#      user: "@user_*"
-#      hike: "@explorer_hike_*"
-#
-#    classic_team_{1..12}:
-#      name: "<sentence(3)>"
-#      user: "@user_*"
-#      hike: "@classic_hike_*"
-#
-#App\Entity\Walker:
-#
-#    scout_walker_A_{1..80}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'A'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@scout_team_<current()>"
-#
-#    scout_walker_B_{1..80}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'B'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@scout_team_<current()>"
-#
-#    scout_walker_C_{1..80}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'C'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@scout_team_<current()>"
-#
-#    scout_walker_D_{1..40}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'D'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@scout_team_<current()>"
-#
-#    junket_team_A_{1..30}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'A'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@junket_team_<current()>"
-#
-#    junket_team_B_{1..30}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'B'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@junket_team_<current()>"
-#
-#    junket_team_C_{1..30}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'C'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@junket_team_<current()>"
-#
-#    junket_team_D_{1..15}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'D'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@junket_team_<current()>"
-#
-#    explorer_team_A_{1..25}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'A'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@explorer_team_<current()>"
-#
-#    explorer_team_B_{1..25}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'B'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@explorer_team_<current()>"
-#
-#    explorer_team_C_{1..25}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'C'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@explorer_team_<current()>"
-#
-#    explorer_team_D_{1..12}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'D'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@explorer_team_<current()>"
-#
-#    classic_team_A_{1..12}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'A'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@classic_team_<current()>"
-#
-#    classic_team_B_{1..12}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'B'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@classic_team_<current()>"
-#
-#    classic_team_C_{1..12}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'C'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@classic_team_<current()>"
-#
-#    classic_team_D_{1..6}:
-#      foreName: "<firstName()>"
-#      surName: "<lastName()>"
-#      referenceCharacter: 'D'
-#      emergencyContactNumber: "<phoneNumber()>"
-#      team: "@classic_team_<current()>"
+App\Entity\Hike:
+
+    scout_hike_2:
+        name: "Scout Hike"
+        event: "@event_2"
+        minWalkers: 3
+        maxWalkers: 4
+        minAge: 10
+        maxAge: 14
+        feePerWalker: 12.00
+        startTimeInterval: 5
+        firstTeamStartTime: "<dateTime('+3 months', '+3 months')>"
+        joiningInfoURL: "<url()>"
+        kitListURL: "<url()>"
+
+    junket_hike_2:
+        name: "Junket Hike"
+        event: "@event_2"
+        minWalkers: 3
+        maxWalkers: 4
+        minAge: 0
+        maxAge: 90
+        feePerWalker: 10.00
+        startTimeInterval: 5
+        firstTeamStartTime: "<dateTime('+3 months', '+3 months')>"
+        joiningInfoURL: "<url()>"
+        kitListURL: "<url()>"
+
+    explorer_hike_2:
+        name: "Explorer Hike"
+        event: "@event_2"
+        minWalkers: 3
+        maxWalkers: 4
+        minAge: 14
+        maxAge: 18
+        feePerWalker: 14.00
+        startTimeInterval: 5
+        firstTeamStartTime: "<dateTime('+3 months', '+3 months')>"
+        joiningInfoURL: "<url()>"
+        kitListURL: "<url()>"
+
+    classic_hike_2:
+        name: "Classic Hike"
+        event: "@event_2"
+        minWalkers: 3
+        maxWalkers: 4
+        minAge: 18
+        maxAge: 90
+        feePerWalker: 16.00
+        startTimeInterval: 5
+        firstTeamStartTime: "<dateTime('+3 months', '+3 months')>"
+        joiningInfoURL: "<url()>"
+        kitListURL: "<url()>"
+
+App\Entity\Team:
+
+    scout_team_{1..40}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@scout_hike_*"
+
+    junket_team_{1..15}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@junket_hike_*"
+
+    explorer_team_{1..13}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@explorer_hike_*"
+
+    classic_team_{1..6}:
+      name: "<sentence(3)>"
+      user: "@user_*"
+      hike: "@classic_hike_*"
+
+App\Entity\Walker:
+
+    scout_walker_A_{1..40}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-165 months', '-117 months')>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    scout_walker_B_{1..40}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-165 months', '-117 months')>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    scout_walker_C_{1..40}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-165 months', '-117 months')>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    scout_walker_D_{1..20}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-165 months', '-117 months')>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@scout_team_<current()>"
+
+    junket_team_A_{1..15}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-69 months')>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    junket_team_B_{1..15}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-69 months')>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    junket_team_C_{1..15}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-69 months')>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    junket_team_D_{1..15}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-69 months')>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@junket_team_<current()>"
+
+    explorer_team_A_{1..13}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-213 months', '-165 months')>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    explorer_team_B_{1..13}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-213 months', '-165 months')>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    explorer_team_C_{1..13}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-213 months', '-165 months')>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    explorer_team_D_{1..7}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-213 months', '-165 months')>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@explorer_team_<current()>"
+
+    classic_team_A_{1..6}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-213 months')>"
+      referenceCharacter: 'A'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"
+
+    classic_team_B_{1..6}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-213 months')>"
+      referenceCharacter: 'B'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"
+
+    classic_team_C_{1..6}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-213 months')>"
+      referenceCharacter: 'C'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"
+
+    classic_team_D_{1..3}:
+      foreName: "<firstName()>"
+      surName: "<lastName()>"
+      dateOfBirth: "<dateTimeBetween('-717 months', '-213 months')>"
+      referenceCharacter: 'D'
+      emergencyContactNumber: "<phoneNumber()>"
+      team: "@classic_team_<current()>"

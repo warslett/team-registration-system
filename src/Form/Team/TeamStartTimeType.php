@@ -22,6 +22,7 @@ class TeamStartTimeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('teamNumber', TextType::class)
             ->add('startTime', DateTimeType::class, [
                 'widget' => 'single_text',
                 'attr' => ['class' => 'js-datetimepicker'],

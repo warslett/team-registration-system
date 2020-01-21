@@ -2,9 +2,16 @@ Dear {{ team.user.fullName }},<br />
 <br />
 This is to confirm that we have assigned a start time for your team {{ team.name }} for the Three Towers Hike<br/>
 <br />
-<strong>The team's start time is {{ team.startTime.format('h:i A') }}.</strong><br/>
+<strong>
+    The team's start time is {{ team.startTime.format('h:i A') }} and their team number is {{ team.teamNumber }}
+</strong>
+<br/>
 
 <br/>
 Please make sure that each team member has a copy of the <a href="{{ team.hike.kitListURL }}">Kit List</a> and
 <a href="{{ team.hike.joiningInfoURL }}">Joining Information</a> which they should also bring on the
 day.
+
+Kind Regards,
+Will Arslett
+Three Towers Hike

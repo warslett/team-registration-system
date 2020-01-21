@@ -35,4 +35,24 @@ class TeamRepository extends EntityRepository
     {
         return $this->findOneBy(['name' => $teamName, 'hike' => $hike]);
     }
+
+    /**
+     * @param Hike $hike
+     * @param string $teamNumber
+     * @return Team|null
+     */
+    public function findOneByTeamForHikeWithTeamNumber(Hike $hike, string $teamNumber): ?Team
+    {
+        return $this->findOneBy(['hike' => $hike, 'teamNumber' => $teamNumber]);
+    }
+
+    /**
+     * @param Hike $hike
+     * @param \DateTime $startTime
+     * @return Team|null
+     */
+    public function findOneTeamForHikeWithStartTime(Hike $hike, \DateTime $startTime): ?Team
+    {
+        return $this->findOneBy(['hike' => $hike, 'startTime' => $startTime]);
+    }
 }

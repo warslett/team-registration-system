@@ -29,11 +29,15 @@
                                 {% endif %}
                             </dd>
                             <dt>Team Number</dt>
-                            <dd>#{{ team.id }}</dd>
-                            {%  if team.startTime is not null %}
-                                <dt>Start Time</dt>
-                                <dd>{{ team.startTime.format('h:i A F jS, Y') }}</dd>
-                            {% endif %}
+                            <dd>{{ team.teamNumber ?? 'To be assigned' }}</dd>
+                            <dt>Start Time</dt>
+                            <dd>
+                                {%  if team.startTime is not null %}
+                                    {{ team.startTime.format('h:i A F jS, Y') }}
+                                {% else %}
+                                    To be assigned
+                                {% endif %}
+                            </dd>
                             <dt>Fees Paid</dt>
                             <dd>£{{ team.feesPaid }}</dd>
                             <dt>Hike</dt>
@@ -152,15 +156,28 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h4 class="modal-title">Payment Instructions</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5>Pay by bank transfer...</h5>
-                            <p>details go here</p>
+                            <p>Please pay using one of the payment methods below. We will email you to confirm that
+                            we have received payment</p>
+                            <h5>Pay by bank transfer</h5>
+                            <p>
+                                <strong>Bank:</strong> HSBC<br/>
+                                <strong>Sort Code:</strong> 40-38-04<br/>
+                                <strong>Account Number:</strong> 11508946<br/>
+                                <em>
+                                    Please use the reference 3T followed by either your group name or team name. Please
+                                    then email <a href="mailto:will@arslett.uk">will@arslett.uk</a>
+                                    to let us know you have paid and the reference you used.
+                                </em>
+                            </p>
                             <h5>Pay by cheque</h5>
-                            <p>details go here</p>
+                            <p>Please send all cheques to Ferncroft, New Lane Hill, Reading, RG30 4JN.
+                                Made payable to Three Towers Hike and clearly labelled with your team name</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
