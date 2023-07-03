@@ -6,11 +6,11 @@ ENV COMPOSER_VERSION 1.6.5
 
 RUN apt-get update \
     && apt-get install -y \
+        unzip \
         zlib1g-dev \
         libxml2-dev \
     && docker-php-ext-install pdo pdo_mysql zip xml intl \
-    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
-    && php -r "unlink('composer-setup.php');" \
-    && mv composer.phar /usr/local/bin/composer \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer2 \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer1 --1 \
+    && ln -sf /usr/local/bin/composer1 /usr/local/bin/composer \
     && rm -rf /tmp/* /tmp/.htaccess
