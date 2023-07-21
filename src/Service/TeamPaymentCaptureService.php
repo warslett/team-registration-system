@@ -48,7 +48,7 @@ class TeamPaymentCaptureService
         $storage->update($payment);
 
         return $this->payum->getTokenFactory()->createCaptureToken(
-            'paypal',
+            'stripe',
             $payment,
             'team_payment_verify',
             ['team_id' => $team->getId()]

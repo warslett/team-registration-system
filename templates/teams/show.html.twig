@@ -129,12 +129,11 @@
                     {% if team.hasEnoughWalkers and not team.isDropped %}
                         {%  if team.hasDueFees %}
                             <div class="m-auto">
-                                <button
-                                        data-toggle="modal"
-                                        data-target="#payment-modal"
-                                        class="btn btn-lg btn-raised btn-light text-dark mx-auto"
-                                        id="payment-btn"
-                                >Pay £{{ team.feesDue }}</button>
+                                <a
+                                    href="{{ path('team_payment_capture',  {'team_id': team.id}) }}"
+                                    class="btn btn-lg btn-raised btn-light text-dark mx-auto"
+                                    id="payment-btn"
+                                >Pay £{{ team.feesDue }}</a>
                             </div>
                         {% else %}
                             <div class="mb-0 mt-auto">

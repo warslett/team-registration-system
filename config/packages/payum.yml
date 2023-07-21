@@ -7,9 +7,13 @@ payum:
     App\Entity\TeamPayment: { doctrine: orm }
 
   gateways:
-    paypal:
-      factory: 'paypal_express_checkout'
-      username: '%env(PAYPAL_USERNAME)%'
-      password: '%env(PAYPAL_PASSWORD)%'
-      signature: '%env(PAYPAL_SIGNATURE)%'
-      sandbox: '%env(bool:PAYPAL_SANDBOX)%'
+    # paypal:
+    #   factory: 'paypal_express_checkout'
+    #   username: '%env(PAYPAL_USERNAME)%'
+    #   password: '%env(PAYPAL_PASSWORD)%'
+    #   signature: '%env(PAYPAL_SIGNATURE)%'
+    #   sandbox: '%env(bool:PAYPAL_SANDBOX)%'
+    stripe:
+      factory: 'stripe_checkout'
+      publishable_key: '%env(STRIPE_PUBLISHABLE_KEY)%'
+      secret_key: '%env(STRIPE_SECRET_KEY)%'

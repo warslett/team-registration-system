@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2ca212452b8d3ae5159a830b5554e08",
+    "content-hash": "e83da88196fe125f70281b56c786a069",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2930,70 +2930,6 @@
             "time": "2016-08-04T08:15:12+00:00"
         },
         {
-            "name": "payum/paypal-express-checkout-nvp",
-            "version": "1.5.1",
-            "target-dir": "Payum/Paypal/ExpressCheckout/Nvp",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Payum/PaypalExpressCheckoutNvp.git",
-                "reference": "bceca319579b5e8c593b98767ab02166f1f9a11e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PaypalExpressCheckoutNvp/zipball/bceca319579b5e8c593b98767ab02166f1f9a11e",
-                "reference": "bceca319579b5e8c593b98767ab02166f1f9a11e",
-                "shasum": ""
-            },
-            "require": {
-                "payum/core": "^1.5"
-            },
-            "require-dev": {
-                "payum/core": "^1.5",
-                "php-http/guzzle6-adapter": "^1.0",
-                "phpunit/phpunit": "^5.7",
-                "symfony/phpunit-bridge": "^3.1|^4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Payum\\Paypal\\ExpressCheckout\\Nvp": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/Payum/PaypalExpressCheckoutNvp/contributors"
-                },
-                {
-                    "name": "Kotlyar Maksim",
-                    "email": "kotlyar.maksim@gmail.com"
-                },
-                {
-                    "name": "Payum project",
-                    "homepage": "https://payum.forma-pro.com/"
-                }
-            ],
-            "description": "The Payum extension. It provides Paypal ExpressCheckout payment integration.",
-            "homepage": "https://payum.forma-pro.com/",
-            "keywords": [
-                "digital goods",
-                "express checkout",
-                "payment",
-                "paypal",
-                "recurring payment"
-            ],
-            "time": "2018-12-18T14:06:44+00:00"
-        },
-        {
             "name": "payum/payum-bundle",
             "version": "2.3.4",
             "source": {
@@ -3092,6 +3028,72 @@
                 "symfony"
             ],
             "time": "2019-11-04T13:09:01+00:00"
+        },
+        {
+            "name": "payum/stripe",
+            "version": "1.7.3",
+            "target-dir": "Payum/Stripe",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Payum/Stripe.git",
+                "reference": "4e94d9699e5b2e0fe7a3dc0d99fb05da7cc34f9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Payum/Stripe/zipball/4e94d9699e5b2e0fe7a3dc0d99fb05da7cc34f9c",
+                "reference": "4e94d9699e5b2e0fe7a3dc0d99fb05da7cc34f9c",
+                "shasum": ""
+            },
+            "require": {
+                "payum/core": "^1.5",
+                "stripe/stripe-php": "^7.0"
+            },
+            "require-dev": {
+                "payum/core": "^1.5",
+                "phpunit/phpunit": "^5.7",
+                "symfony/phpunit-bridge": "^3.1|^4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Payum\\Stripe": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kotlyar Maksim",
+                    "email": "kotlyar.maksim@gmail.com"
+                },
+                {
+                    "name": "Payum project",
+                    "homepage": "https://payum.forma-pro.com/"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Payum/Stripe/contributors"
+                }
+            ],
+            "description": "The Payum extension. It provides Stripe payment integration.",
+            "homepage": "https://payum.forma-pro.com",
+            "keywords": [
+                "checkout",
+                "direct",
+                "payment",
+                "store card",
+                "stripe",
+                "stripe.js",
+                "subscription"
+            ],
+            "time": "2021-12-03T21:21:39+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -4175,6 +4177,62 @@
             ],
             "abandoned": "Symfony",
             "time": "2019-10-16T18:54:45+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v7.128.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "c704949c49b72985c76cc61063aa26fefbd2724e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/c704949c49b72985c76cc61063aa26fefbd2724e",
+                "reference": "c704949c49b72985c76cc61063aa26fefbd2724e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "3.5.0",
+                "phpstan/phpstan": "^1.2",
+                "phpunit/phpunit": "^5.7 || ^9.0",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stripe\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "time": "2022-05-05T17:18:02+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -9243,6 +9301,70 @@
                 "test"
             ],
             "time": "2019-05-05T08:51:28+00:00"
+        },
+        {
+            "name": "payum/paypal-express-checkout-nvp",
+            "version": "1.5.1",
+            "target-dir": "Payum/Paypal/ExpressCheckout/Nvp",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Payum/PaypalExpressCheckoutNvp.git",
+                "reference": "bceca319579b5e8c593b98767ab02166f1f9a11e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Payum/PaypalExpressCheckoutNvp/zipball/bceca319579b5e8c593b98767ab02166f1f9a11e",
+                "reference": "bceca319579b5e8c593b98767ab02166f1f9a11e",
+                "shasum": ""
+            },
+            "require": {
+                "payum/core": "^1.5"
+            },
+            "require-dev": {
+                "payum/core": "^1.5",
+                "php-http/guzzle6-adapter": "^1.0",
+                "phpunit/phpunit": "^5.7",
+                "symfony/phpunit-bridge": "^3.1|^4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Payum\\Paypal\\ExpressCheckout\\Nvp": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Payum/PaypalExpressCheckoutNvp/contributors"
+                },
+                {
+                    "name": "Kotlyar Maksim",
+                    "email": "kotlyar.maksim@gmail.com"
+                },
+                {
+                    "name": "Payum project",
+                    "homepage": "https://payum.forma-pro.com/"
+                }
+            ],
+            "description": "The Payum extension. It provides Paypal ExpressCheckout payment integration.",
+            "homepage": "https://payum.forma-pro.com/",
+            "keywords": [
+                "digital goods",
+                "express checkout",
+                "payment",
+                "paypal",
+                "recurring payment"
+            ],
+            "time": "2018-12-18T14:06:44+00:00"
         },
         {
             "name": "phar-io/manifest",
