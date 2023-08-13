@@ -8,6 +8,7 @@ Feature: Walker Create
       | password | Password1!   |
     And that "the event" is an Event with the following properties:
       | name | Upcoming Three Towers |
+      | date | 2050-04-01            |
     And that "the hike" is a Hike for "the event" with the following properties:
       | name       | Scout Hike |
       | maxWalkers | 4          |
@@ -45,7 +46,7 @@ Feature: Walker Create
     And I follow "Add walker"
     And I fill in "Forename" with "John"
     And I fill in "Surname" with "Smith"
-    And I fill in "Date of birth" with "01/01/2007"
+    And I fill in "Date of birth" with "01/01/2039"
     And I fill in "Emergency Contact Number" with "0123456789"
     And I press "Save"
     Then the title should be "Alpha Team » Team Registration System"
