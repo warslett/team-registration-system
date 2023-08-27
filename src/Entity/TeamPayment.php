@@ -81,8 +81,6 @@ class TeamPayment extends Payment
 
     public function setDate(\DateTime $date)
     {
-        $details = $this->getDetails();
-        $details['created'] = $date->format('c');
-        $this->setDetails($details);
+        $this->details['created'] = $date->getTimestamp();
     }
 }

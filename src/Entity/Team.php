@@ -190,9 +190,17 @@ class Team
     /**
      * @return float
      */
+    public function getTotalFees()
+    {
+        return $this->walkers->count() * $this->hike->getFeePerWalker();
+    }
+
+    /**
+     * @return float
+     */
     public function getFeesDue(): float
     {
-        return ($this->walkers->count()*$this->hike->getFeePerWalker()) - $this->getFeesPaid();
+        return $this->getTotalFees() - $this->getFeesPaid();
     }
 
     /**

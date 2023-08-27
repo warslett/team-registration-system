@@ -36,7 +36,7 @@ class TeamPaymentCreateOfflineFormManager
     {
         $teamPayment = new TeamPayment();
         $teamPayment->setTeam($team);
-        $teamPayment->setDetails(['TIMESTAMP' => date('c')]);
+        $teamPayment->setDate(new \DateTime());
         return $this->formFactory->create(TeamPaymentCreateOfflineType::class, $teamPayment);
     }
 

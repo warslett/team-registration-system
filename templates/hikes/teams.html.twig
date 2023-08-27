@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                     {% for team in teams %}
-                    <tr class="{% if team.isDropped %}table-danger{% endif %}">
+                    <tr class="{% if team.isDropped %}table-danger{% elseif team.hasEnoughWalkers and not team.hasDueFees %}table-success{% endif %}">
                         <td>{{ team.name }}</td>
                         <td>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#TeamWalkersModal{{ team.id }}">
@@ -110,7 +110,7 @@
                         </td>
                         <td>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#TeamPaymentsModal{{ team.id }}">
-                                Paid £{{ team.feesPaid }}
+                                Paid £{{ team.feesPaid }} / £{{ team.totalFees }}
                             </a>
                             <div class="modal fade" id="TeamPaymentsModal{{ team.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
